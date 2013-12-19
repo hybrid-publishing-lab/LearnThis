@@ -1,0 +1,22 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="assets/project.css" />
+<link rel="stylesheet" type="text/css" href="assets/bootstrap-3.0.3/css/bootstrap.css">
+<script language='JavaScript' src='assets/project.js'></script>
+
+<title>Schlüsselbegriffe</title>
+</head>
+<body>
+  <div class="site-container">
+    <div class="headline"><h1><a href="index.html"> < </a>Schlüsselbegriffe</h1></div>
+    <div class="content-container">
+      <div class="content-head"></div>
+      <div class="content-body-container">
+
+      </div>
+    </div>
+  </div>
+</body>
+</html>
