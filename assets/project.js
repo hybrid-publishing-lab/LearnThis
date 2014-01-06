@@ -9,6 +9,10 @@ $(document).mouseup(function (e){
 });
 
 $(document).ready( function(){
+
+  $("#sortable").sortable({ handle: '.sort-handle' });
+  // $("#sortable").disableSelection();
+
   // autogrow textareas
   $('textarea').autogrow({onInitialize: true});
 

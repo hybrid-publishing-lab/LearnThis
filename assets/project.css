@@ -1,3 +1,7 @@
+ul {
+  list-style: none;
+}
+
 div.site-container {
   /*width:960px;*/
   margin-left: 20px;
@@ -42,10 +46,6 @@ table.documents-overview td:nth-child(4){
   padding-right: 0px;
 }
 
-/*div.content-body-container {
-  display: inline-block;
-}*/
-
 div.sidebar-menu-container {
   max-width: 200px;
 }
@@ -68,10 +68,6 @@ textarea#comment{
 
 textarea#main{
   min-height: 200px;
-}
-
-input {
-  border: none;
 }
 
 button.merge {
