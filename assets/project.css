@@ -90,3 +90,7 @@ button.delete-button {
 .dimmed {
   opacity: 0.5;
 }
+
+.show-on-focus{
+  display: none;
+}
