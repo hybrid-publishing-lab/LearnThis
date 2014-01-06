@@ -63,12 +63,12 @@ function unDimmTextElements(){
 }
 
 function removeMenues(){
-  $('.text-element').find('.show-on-focus').fadeOut();
+  $('.text-element').find('.show-on-focus').slideUp();
 }
 
 function displayMenues(element){
   var showElements = $(element).closest('.text-element').find('.show-on-focus');
-  showElements.fadeIn();
+  showElements.slideDown();
 }
 
 function enterEditMode(element){
