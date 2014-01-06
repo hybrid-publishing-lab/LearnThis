@@ -9,32 +9,33 @@
 <title>Dokumentimport</title>
 </head>
 <body>
-  <div class="site-container">
+  <div class="container">
       <ol class="breadcrumb">
           <li><a href="index.html"> < Übersicht </a></li>
       </ol>  
     <h1>Dokumentimport</h1>
-    <div class="content-container">
-      <div class="content-head"></div>
-      <div class="content-body-container">
-        <form>
-            <p>
-              <label></label>
-              <select name="top5" size="1">
-                <option>Heino</option>
-                <option>Michael Jackson</option>
-                <option>Tom Waits</option>
-                <option>Nina Hagen</option>
-                <option>Marianne Rosenberg</option>
+      <form class="form-horizontal" role="form" action="input_file.htm" method="post" enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="select-encoding" class="col-sm-2 control-label">Encoding</label>
+            <div class="col-sm-10">
+              <select name="encoding" id="select-encoding" class="form-control">
+                <option>ISO 8859-15</option>
+                <option>UTF-8</option>
               </select>
-            </p>
-            <p>
-              <label>Datei</label>
-              <input name="Datei" type="file" size="50" maxlength="100000" accept="text/*">
-            </p>
-        </form>
-      </div>
-    </div>
-  </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="select-file" class="col-sm-2 control-label">Datei</label>
+            <div class="col-sm-10">
+              <input name="Datei" id="select-file" class="form-control" type="file" accept="text/*">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <button type="submit" class="btn btn-default">Submit</button>
+            </div>
+          </div>
+      </form>
+</div>
 </body>
 </html>
