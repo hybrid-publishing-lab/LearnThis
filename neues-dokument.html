@@ -34,41 +34,56 @@
       </div>
     </div>
     <div class="content-container">
-      <div class="row">
-        <div class="col-xs-4"></div>
-        <div class="col-xs-4">
-          <button type="button" class="btn btn-default" style="width:100%">
-            <span class="glyphicon glyphicon-arrow-up"></span> Merge
-          </button>
-      </div>
-        <div class="col-xs-4"></div>
-      </div>
-      <div class="row">
+      <!-- Element -->
+      <div class="text-element">
         <div class="col-xs-2"></div>
         <div class="col-xs-8">
-          <textarea style="">
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-          </textarea>
+          <h1><input class="headline" type="text" value="Überschrift" /></h1>
         </div>
-        <div class="col-xs-2">
-          <ul class="nav nav-pills nav-stacked">
-            <li><a href="#">Move</a></li>
-            <li><a href="#">Split</a></li>
-            <li><a href="#">Delete</a></li>
-            <li><a href="#">Add Text</a></li>
-            <li><a href="#">Add H1</a></li>
-            <li><a class="comment-button" href="#">Comment</a></li>
-          </ul>
+      <div class="col-xs-2"></div>
+      </div>
+      <!-- Element -->
+      <div class="text-element">
+        <!-- Merge -->
+        <div class="row merge-top merge show-on-focus">
+          <div class="col-xs-4"></div>
+          <div class="col-xs-4">
+            <button type="button" class="btn btn-default merge">
+              <span class="glyphicon glyphicon-arrow-up"></span> Merge
+            </button>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-xs-4"></div>
-        <div class="col-xs-4">
-          <button type="button" class="btn btn-default" style="width:100%">
-            <span class="glyphicon glyphicon-arrow-down"></span> Merge
-          </button>
-      </div>
-        <div class="col-xs-4"></div>
+          <div class="col-xs-4"></div>
+        </div>
+        <!-- content -->
+        <div class="row paragraph">
+          <div class="col-xs-2">
+            <textarea class="show-on-focus" id="comment"></textarea>
+          </div>
+          <div class="col-xs-8" id="comment">
+            <textarea id="main">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</textarea>
+          </div>
+          <div class="col-xs-2">
+            <ul class="nav nav-pills nav-stacked show-on-focus">
+              <li><a href="#">Move</a></li>
+              <li><a href="#">Split</a></li>
+              <li><a href="#">Delete</a></li>
+              <li><a href="#">Add Text</a></li>
+              <li><a href="#">Add H1</a></li>
+              <li><a class="comment-button" href="#">Comment</a></li>
+            </ul>
+          </div>
+        </div>
+        <!-- Merge -->
+        <div class="row merge-bottom merge show-on-focus">
+          <div class="col-xs-4"></div>
+          <div class="col-xs-4">
+            <button type="button" class="btn btn-default merge">
+              <span class="glyphicon glyphicon-arrow-down"></span> Merge
+            </button>
+          </div>
+          <div class="col-xs-4"></div>
+        </div>
+        <!-- Merge Ende -->
       </div>
     </div>
   </div>

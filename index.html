@@ -11,38 +11,54 @@
 <body>
   <div class="site-container">
     <div class="headline"><h1>Dokumentübersicht</h1></div>
-    <div class="content-container">
+    <div class="content-container row">
       <div class="content-head"></div>
-      <div class="content-body-container">
-        <table class="documents-overview">
+      <div class="content-body-container col-xs-8">
+        <table class="documents-overview" style="width:100%">
           <tr><th>Titel</th><th>Autor</th><th>Zuletzt geändert</th><th></th></tr>
           <tr>
             <td><a href="dokument-bearbeiten.html">Graphentheorie</a></td>
             <td>Walter Soost</td>
             <td>23.06.2013 15:27</td>
-            <td><span class="glyphicon glyphicon-trash delete"></span></td>
+            <td>
+            <button type="button" class="btn btn-default delete-button">
+              <span class="glyphicon glyphicon-trash delete"></span>
+            </button>
+            </td>
           </tr>
           <tr>
             <td><a href="dokument-bearbeiten.html">Graphentheorie</a></td>
             <td>Walter Soost</td>
             <td>23.06.2013 15:27</td>
-            <td><div class="delete"></div></td>
+            <td>
+              <button type="button" class="btn btn-default delete-button">
+                <span class="glyphicon glyphicon-trash delete"></span>
+              </button>
+          </td>
           </tr>
           <tr>
             <td><a href="dokument-bearbeiten.html">Graphentheorie</a></td>
             <td>Walter Soost</td>
             <td>23.06.2013 15:27</td>
-            <td><div class="delete"></div></td>
+            <td>
+              <button type="button" class="btn btn-default delete-button">
+                <span class="glyphicon glyphicon-trash delete"></span>
+              </button>
+            </td>
           </tr>
           <tr>
             <td><a href="dokument-bearbeiten.html">Graphentheorie</a></td>
             <td>Walter Soost</td>
             <td>23.06.2013 15:27</td>
-            <td><div class="delete"></div></td>
+            <td>
+              <button type="button" class="btn btn-default delete-button">
+                <span class="glyphicon glyphicon-trash delete"></span>
+              </button>
+            </td>
           </tr>
         </table>
       </div>
-      <div class="sidebar-menu-container">
+      <div class="sidebar-menu-container col-xs-4">
         <ul class="nav nav-pills nav-stacked">
           <li><a href="neues-dokument.html">Neues Dokument</a></li>
           <li><a href="import.html">importieren</a></li>

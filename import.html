@@ -10,12 +10,16 @@
 </head>
 <body>
   <div class="site-container">
-    <div class="headline"><h1><a href="index.html"> < </a>Dokumentimport</h1></div>
+      <ol class="breadcrumb">
+          <li><a href="index.html"> < Übersicht </a></li>
+      </ol>  
+    <h1>Dokumentimport</h1>
     <div class="content-container">
       <div class="content-head"></div>
       <div class="content-body-container">
         <form>
             <p>
+              <label></label>
               <select name="top5" size="1">
                 <option>Heino</option>
                 <option>Michael Jackson</option>
@@ -23,6 +27,10 @@
                 <option>Nina Hagen</option>
                 <option>Marianne Rosenberg</option>
               </select>
+            </p>
+            <p>
+              <label>Datei</label>
+              <input name="Datei" type="file" size="50" maxlength="100000" accept="text/*">
             </p>
         </form>
       </div>

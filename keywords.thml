@@ -10,7 +10,10 @@
 </head>
 <body>
   <div class="site-container">
-    <div class="headline"><h1><a href="index.html"> < </a>Schlüsselbegriffe</h1></div>
+    <ol class="breadcrumb">
+      <li><a href="index.html"> < Übersicht </a></li>
+    </ol>  
+    <h1>Schlüsselbegriffe</h1>
     <div class="content-container">
       <div class="content-head"></div>
       <div class="content-body-container">

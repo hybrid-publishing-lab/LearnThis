@@ -42,35 +42,16 @@ table.documents-overview td:nth-child(4){
   padding-right: 0px;
 }
 
-div.content-body-container {
+/*div.content-body-container {
   display: inline-block;
-}
+}*/
 
 div.sidebar-menu-container {
-  display: inline-block;
+  max-width: 200px;
 }
 
-ul.sidebar-menu {
-  list-style: none;
-}
-
-ul.sidebar-menu li{
-  padding: 20px;
-  background-color: #EEEEEE;
-  margin: 5px;
-  font-weight: bold;
-  text-align: center;
-}
-
-span.delete {
-  width: 60px;
-  height: 60px;
-  background-color: #9999FF;
-}
-
-.nav-pills a,
-.nav-pills a:hover {
-    background-color: #EEEEEE;
+.nav-pills a {
+  background-color: #DDDDDD;
 }
 
 textarea {
@@ -78,4 +59,34 @@ textarea {
   resize: none;
   width: 100%;
   border: none;
+}
+
+textarea#comment{
+  min-height: 200px;
+  display: none;
+}
+
+textarea#main{
+  min-height: 200px;
+}
+
+input {
+  border: none;
+}
+
+button.merge {
+  width: 100%;
+}
+
+td {
+  height: 50px;
+}
+
+button.delete-button {
+  width: 100%;
+  height: 100%;
+}
+
+.dimmed {
+  opacity: 0.5;
 }
