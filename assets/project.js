@@ -1,6 +1,6 @@
 // Leave Edit Mode
 $(document).mouseup(function (e){
-  var container = $(".active");
+  var container = $(".edit-mode-active");
   // if the target of the click isn't the container
   // nor a descendant of the container
   if (!container.is(e.target) && container.has(e.target).length === 0){
@@ -13,15 +13,21 @@ $(document).ready( function(){
   $('textarea').autogrow({onInitialize: true});
 
   // Focus a Textarea
-  $('textarea').focus(function(event){
-    leaveEditMode();
-    enterEditMode(this);
+  $('.text-element textarea').focus(function(event){
+    var target = $(event.target);
+    if(!isEditModeActive(target)){
+      leaveEditMode();
+      enterEditMode(target);
+    } 
   });
 
   // Focus a Headline
-  $('.headline').focus(function(event){
-    leaveEditMode();
-    enterEditMode(this);
+  $('.text-element .headline').focus(function(event){
+    var target = $(event.target);
+    if(!isEditModeActive(target)){
+      leaveEditMode();
+      enterEditMode(target);
+    } 
   });
 
   // Comment Button
@@ -34,7 +40,7 @@ $(document).ready( function(){
     }else{
       comment.hide();
       comment.val('');
-      $('.comment-button').text('Comment');
+      $('.comment-button').text('Add Comment');
     }
   });
 
@@ -48,7 +54,7 @@ $(document).ready( function(){
     }else{
       comment.hide();
       comment.val('');
-      $('.comment-button').text('Comment');
+      $('.comment-button').text('Add Comment');
     }
   });
 });
@@ -72,17 +78,24 @@ function displayMenues(element){
 }
 
 function enterEditMode(element){
-  // deactivate Editmode for all other text-elements
-  $('.text-element').removeClass('active');
-  $(element).closest('.text-element').addClass('active');
+  if(!isEditModeActive(element)){
+    // deactivate Editmode for all other text-elements
+    $('.text-element').removeClass('edit-mode-active');
+    $(element).closest('.text-element').addClass('edit-mode-active');
 
-  unDimmTextElements();
-  dimmOtherTextElements(element);
+    unDimmTextElements();
+    dimmOtherTextElements(element);
 
-  displayMenues(element);
+    displayMenues(element);
+  }
 }
 
 function leaveEditMode(){
   unDimmTextElements();
   removeMenues();
+}
+
+function isEditModeActive(element){
+  var tmp = $(element).closest('.text-element');
+  return tmp.hasClass('edit-mode-active');
 }
