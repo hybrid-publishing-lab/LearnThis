@@ -10,7 +10,10 @@ $(document).mouseup(function (e){
 
 $(document).ready( function(){
 
-  $("#sortable").sortable({ handle: '.sort-handle' });
+  $("#sortable").sortable({
+    handle: '.sort-handle',
+    placeholder: "ui-state-highlight"
+  });
   // $("#sortable").disableSelection();
 
   // autogrow textareas

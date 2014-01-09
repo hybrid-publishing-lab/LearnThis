@@ -37,71 +37,62 @@
         </ul>
       </div>
     </div>
-    <div class="content-container">
-      <ul id="sortable">
-        <!-- Element -->
-        <li class="text-element">
-          <div class="col-xs-2"></div>
-          <div class="col-xs-8">
+    <div class="row">
+      <div class ="col-xs-2"></div>
+      <div class ="col-xs-8">
+        <ul id="sortable">
+          <!-- Element -->
+          <li class="text-element">
             <h1><textarea class="headline">Überschrift</textarea></h1>
-          </div>
-        <div class="col-xs-2">
-          <ul class="nav nav-pills nav-stacked show-on-focus">
-            <li class="sort-handle"><a href="#">Move</a></li>
-            <li><a href="#">Delete</a></li>
-            <li><a href="#">Add Text</a></li>
-            <li><a href="#">Add Headline</a></li>
-          </ul>
-        </div>
-        </li>
-        <!-- Element -->
-        <li class="text-element">
-          <!-- Merge -->
-          <div class="row">
-            <div class="col-xs-4"></div>
-            <div class="col-xs-4">
-              <div class="merge-top merge show-on-focus">
-                <button type="button" class="btn btn-default merge">
-                  <span class="glyphicon glyphicon-arrow-up"></span> Merge
-                </button>
-              </div>
-          </div>
-            <div class="col-xs-4"></div>
-          </div>
-          <!-- content -->
-          <div class="row paragraph">
-            <div class="col-xs-2">
-              <textarea class="show-on-focus" id="comment"></textarea>
-            </div>
-            <div class="col-xs-8" id="comment">
-              <textarea id="main">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</textarea>
-            </div>
-            <div class="col-xs-2">
+            <input type="hidden" name="size" />
+            <input type="hidden" name="order" />
+            <div class="roll-out-menu">
               <ul class="nav nav-pills nav-stacked show-on-focus">
                 <li class="sort-handle"><a href="#">Move</a></li>
-                <li><a href="#">Split</a></li>
+                <li><a href="#">Bigger</a></li>
+                <li><a href="#">Smaller</a></li>
                 <li><a href="#">Delete</a></li>
                 <li><a href="#">Add Text</a></li>
                 <li><a href="#">Add Headline</a></li>
-                <li><a class="comment-button" href="#">Add Comment</a></li>
               </ul>
             </div>
-          </div>
-          <!-- Merge -->
-          <div class="row">
-            <div class="col-xs-4"></div>
-            <div class="col-xs-4">
-              <div class="merge-bottom merge show-on-focus">
-                <button type="button" class="btn btn-default merge">
-                  <span class="glyphicon glyphicon-arrow-down"></span> Merge
-                </button>
+          </li>
+          <!-- Element -->
+          <li class="text-element">
+            <!-- Merge -->
+            <div class="merge-top merge show-on-focus">
+              <button type="button" class="btn btn-default merge">
+                <span class="glyphicon glyphicon-arrow-up"></span> Merge
+              </button>
+            </div>
+            <!-- content -->
+            <div class="paragraph">
+              <!-- <textarea class="show-on-focus" id="comment"></textarea> -->
+              <div>
+                <textarea id="main">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</textarea>
+              </div>
+              <div class="roll-out-menu">
+                <ul class="nav nav-pills nav-stacked show-on-focus">
+                  <li class="sort-handle"><a href="#">Move</a></li>
+                  <li><a href="#">Split</a></li>
+                  <li><a href="#">Delete</a></li>
+                  <li><a href="#">Add Text</a></li>
+                  <li><a href="#">Add Headline</a></li>
+                  <li><a class="comment-button" href="#">Add Comment</a></li>
+                </ul>
               </div>
             </div>
-            <div class="col-xs-4"></div>
-          </div>
-          <!-- Merge Ende -->
-        </li>
-      </ul>
+            <!-- Merge -->
+            <div class="merge-bottom merge show-on-focus">
+              <button type="button" class="btn btn-default merge">
+                <span class="glyphicon glyphicon-arrow-down"></span> Merge
+              </button>
+            </div>
+            <!-- Merge Ende -->
+          </li>
+        </ul>
+      </div>
+      <div class ="col-xs-2"></div>
     </div>
   </div>
 </body>

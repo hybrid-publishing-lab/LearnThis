@@ -78,3 +78,17 @@ button.delete-button {
 .show-on-focus{
   display: none;
 }
+
+.roll-out-menu {
+  max-width: 130px;
+  min-width: 80px;
+  left: 800px;
+  position: absolute;
+  top: 0;
+}
+
+/*sortable placeholder css*/
+.ui-state-highlight {
+  height: 3em;
+  border: 1px dashed gray;
+}
