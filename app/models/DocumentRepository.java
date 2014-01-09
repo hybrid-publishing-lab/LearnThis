@@ -1,11 +1,9 @@
 package models;
 
-import java.util.List;
-
-import org.springframework.data.repository.CrudRepository;
-
 import javax.inject.Named;
 import javax.inject.Singleton;
+
+import org.springframework.data.repository.CrudRepository;
 
 /**
  * Provides CRUD functionality for accessing people. Spring Data auto-magically takes care of many standard
@@ -13,8 +11,6 @@ import javax.inject.Singleton;
  */
 @Named
 @Singleton
-public interface PersonRepository extends CrudRepository<Person, Long> {
-    
-    List<Person> findBySurname(String surname);
+public interface DocumentRepository extends CrudRepository<Document, Long> {
     
 }
