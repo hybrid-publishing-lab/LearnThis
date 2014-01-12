@@ -12,5 +12,8 @@ GET     /document/:id                 	@controllers.Application.findById(id: Lon
 GET     /assets/*file               	controllers.Assets.at(path="/public", file)
 
 POST	/json/document/save				@controllers.DocumentController.saveDoc
-GET 	/json/document/new				@controllers.DocumentController.newDoc
 GET		/json/document/:id				@controllers.DocumentController.findById(id: Long)
+
+POST	/json/textelement/delete/:id	@controllers.TextelementController.delete(id: Long)
+GET		/json/headline/new				@controllers.TextelementController.newHeadline
+GET		/json/paragraph/new				@controllers.TextelementController.newParagraph

@@ -3,13 +3,18 @@ package models;
 import javax.persistence.Entity;
 
 @Entity
-public class Headline extends Textelement{
-
-    /*
-     * Angular type
-     */
-    public final static String TYPE = "Headline";
+public class Headline extends Textelement {
     
     public Integer size;
+
+    @Override
+    public String getType() {
+        return "Headline";
+    }
+
+    public void merge(Headline headline) {
+        super.merge(headline);
+        this.size = headline.size;
+    }
     
 }

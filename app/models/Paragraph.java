@@ -1,16 +1,20 @@
 package models;
 
 import javax.persistence.Entity;
-import javax.persistence.Table;
 
 @Entity
-public class Paragraph extends Textelement{
+public class Paragraph extends Textelement {
 
-    /*
-     * Angular type
-     */
-    public final static String TYPE = "Paragraph";
-    
     public String comment;
+
+    @Override
+    public String getType() {
+        return "Paragraph";
+    }
+
+    public void merge(Paragraph para) {
+        super.merge(para);
+        this.comment = para.comment;
+    }
     
 }

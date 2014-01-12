@@ -4,9 +4,11 @@ function SaveService($http){
 	
 	this.saveDocument = function($scope, document){
 		
+		util.log("Saving document", document);
+		
 		$scope.saved = false;
 		
-		$http.post('/document/save', document).success(function(){
+		$http.post('/json/document/save', document).success(function(data){
 			$scope.saved = true;
 		});
 	}

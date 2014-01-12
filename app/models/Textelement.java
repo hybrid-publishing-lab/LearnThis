@@ -1,16 +1,12 @@
 package models;
 
-import java.util.List;
-
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.OneToMany;
 
-@MappedSuperclass
-public class Textelement<T> {
+@Entity
+//@MappedSuperclass
+public abstract class Textelement {
     @Id
     @GeneratedValue
     public Long id;
@@ -19,9 +15,16 @@ public class Textelement<T> {
 
     public Integer sort;
     
-    @ManyToOne
-    @JoinColumn(name = "document_id")
-    public Document document;
+    public abstract String getType();
+
+    public void merge(Textelement ele) {
+        this.text = ele.text;
+        this.sort = ele.sort;
+    }
+    
+//    @ManyToOne
+//    @JoinColumn(name = "document_id")
+//    public Document document;
     
 //    @OneToMany(mappedBy="textelement")
 //    public List<Keyword> keywords;

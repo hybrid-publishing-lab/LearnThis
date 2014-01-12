@@ -2,6 +2,10 @@ ul {
   list-style: none;
 }
 
+.hide {
+	display: none;
+}
+
 div.headline {
   margin-bottom: 40px;
 }
@@ -55,7 +59,7 @@ textarea {
   border: none;
 }
 
-textarea#comment{
+textarea.comment{
   display: none;
 }
 
@@ -75,6 +79,11 @@ button.delete-button {
   opacity: 0.5;
 }
 
+
+.edit-mode-active .show-on-focus {
+	display: block;
+}
+
 .show-on-focus{
   display: none;
 }
@@ -91,4 +100,24 @@ button.delete-button {
 .ui-state-highlight {
   height: 3em;
   border: 1px dashed gray;
+}
+
+.unsaved {
+	border: 1px solid red;
+}
+
+.size_1 {
+	font-size: 1.5rem;
+}
+.size_2 {
+	font-size: 2rem;
+}
+.size_3 {
+	font-size: 2.5rem;
+}
+.size_4 {
+	font-size: 3rem;
+}
+.size_5 {
+	font-size: 3.5rem;
 }
