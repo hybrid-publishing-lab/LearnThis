@@ -17,8 +17,12 @@ public class Document {
     @GeneratedValue
     public Long id;
 
-    public String autor;
+    public String surname;
 
+    public String givenname;
+
+    public String title;
+    
     public Date createdAt;
     
     public Date changedAt;

@@ -1,17 +1,17 @@
-@(message: String) @main("New Document") {
+@(document: Document) @main("New Document") {
 
 <div class="container" data-ng-controller="DocumentController"
-	data-ng-init="init(@message)" data-ng-class="{'unsaved': !saved}">
+	data-ng-init="init(@document.id)" data-ng-class="{'unsaved': !saved}">
 	<div class="site-head row">
 		<ol class="breadcrumb">
 			<li><a href="index.html"> < Übersicht </a></li>
 		</ol>
 		<div class="col-xs-2"></div>
 		<div class="jumbotron col-xs-8">
-			<h1>{{document.text}}</h1>
-			<p>Autor: {{document.autor}}</p>
-			<p>erstellt am: {{document.createdAt}}</p>
-			<p>geändert am: {{document.changedAt}}</p>
+			<h1>{{document.title}}</h1>
+			<p>Autor: {{document.givenname}} {{document.surname}}</p>
+			<p>erstellt: @document.createdAt.format("dd.MM.yyyy HH:mm")</p>
+			<p>geändert: @document.changedAt.format("dd.MM.yyyy HH:mm")</p>
 			<p>
 				<a data-ng-click="saveDoc()">Doc speichern</a>
 			</p>
@@ -21,7 +21,7 @@
 		</div>
 		<div class="col-xs-2">
 			<ul class="nav nav-pills nav-stacked">
-				<li><a href="#">EPub</a></li>
+				<li><a href='/export/epub/document/{{document.id}}'>EPub</a></li>
 				<li><a href="#">HTML</a></li>
 				<li><a href="#">PDF</a></li>
 				<li><a href="#">XML</a></li>

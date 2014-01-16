@@ -42,7 +42,11 @@ public class Application extends Controller {
     
     public Result newDoc(){
         final Document doc = new Document();
+        doc.title = "Document";
+        doc.givenname = "Vorname";
+        doc.surname = "Nachname";
         doc.createdAt = new Date();
+        doc.changedAt = new Date();
         // add headline
         Headline headline = new Headline();
         headline.text = "Headline";
@@ -60,6 +64,7 @@ public class Application extends Controller {
     }
     
     public Result findById(Long id){
-        return ok(views.html.document.render("" + id));
+        Document doc = documentRepository.findOne(id);
+        return ok(views.html.document.render(doc));
     }
 }

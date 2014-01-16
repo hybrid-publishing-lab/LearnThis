@@ -1,5 +1,7 @@
 package controllers;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.util.Date;
 
 import javax.inject.Inject;
@@ -12,13 +14,14 @@ import models.Headline;
 import models.HeadlineRepository;
 import models.Paragraph;
 import models.ParagraphRepository;
-import models.Textelement;
+import nl.siegmann.epublib.domain.Book;
+import nl.siegmann.epublib.epub.EpubWriter;
 import play.Logger;
 import play.data.Form;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
-import scala.annotation.elidable;
+import util.converter.DocumentConverter;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
@@ -45,17 +48,17 @@ public class DocumentController extends Controller {
     public Result saveDoc() {
         JsonNode json = request().body().asJson();
         if (json != null) {
-            Form<Document> docForm = Form.form(Document.class);
-            
+
             // das führt leider zu einer Exception kriegt man aber evtl hin?
-//            docForm.bind(json);
+            // Form<Document> docForm = Form.form(Document.class);
+            // docForm.bind(json);
             Long id = json.get("id").asLong();
             Document doc = documentRepository.findOne(id);
             doc.changedAt = new Date();
-            
+
             Form<Headline> headlineForm = Form.form(Headline.class);
             Form<Paragraph> paraForm = Form.form(Paragraph.class);
-            
+
             JsonNode textelements = json.get("textelements");
             for (JsonNode textelement : textelements) {
                 if ("Paragraph".equals(textelement.get("type").asText())) {
@@ -81,10 +84,10 @@ public class DocumentController extends Controller {
                     }
                     headlineRepository.save(headline);
                     doc.textelements.add(headline);
-                } 
-                
+                }
+
             }
-            documentRepository.save(doc );
+            documentRepository.save(doc);
             return ok(Json.toJson(doc));
         }
         return badRequest("Expecting Json data");
@@ -93,5 +96,25 @@ public class DocumentController extends Controller {
     public Result findById(Long id) {
         Document doc = documentRepository.findOne(id);
         return ok(Json.toJson(doc));
+    }
+
+    public Result exportEpub(Long id) {
+        try {
+            Document doc = documentRepository.findOne(id);
+            Book book = DocumentConverter.toEpub(doc);
+
+            // Write Epub to Buffer
+            EpubWriter epubWriter = new EpubWriter();
+            ByteArrayOutputStream out = new ByteArrayOutputStream();
+            epubWriter.write(book, out);
+            byte[] buffer = out.toByteArray();
+            
+//            response().setContentType("application/x-download");
+            String filename = doc.title+"-"+doc.givenname+"_"+doc.surname+"-"+id+".epub";
+            response().setHeader("Content-disposition","attachment; filename="+filename);
+            return ok(new ByteArrayInputStream(buffer)).as("application/epub+zip");
+        } catch (Exception e) {
+            return notFound();
+        }
     }
 }
