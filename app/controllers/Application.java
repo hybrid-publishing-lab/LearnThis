@@ -59,7 +59,7 @@ public class Application extends Controller {
         doc.textelements.add(paragraph);
         documentRepository.save(doc);
         
-        return redirect(routes.Application.findById(doc.id));// 
+        return redirect(routes.Application.findById(doc.id));
 //        return ok(views.html.document.render("new"));
     }
     

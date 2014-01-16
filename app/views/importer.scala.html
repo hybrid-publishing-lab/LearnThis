@@ -1,20 +1,10 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" type="text/css" href="assets/project.css" />
-<link rel="stylesheet" type="text/css" href="assets/bootstrap-3.0.3/css/bootstrap.css">
-<script language='JavaScript' src='assets/project.js'></script>
-
-<title>Dokumentimport</title>
-</head>
-<body>
+@(msg: String) @main("Dokumentimport") {
   <div class="container">
       <ol class="breadcrumb">
-          <li><a href="index.html"> < Übersicht </a></li>
+          <li><a href="/"> < Übersicht </a></li>
       </ol>  
     <h1>Dokumentimport</h1>
-      <form class="form-horizontal" role="form" action="input_file.htm" method="post" enctype="multipart/form-data">
+      <form class="form-horizontal" role="form" action="upload" method="post" enctype="multipart/form-data">
           <div class="form-group">
             <label for="select-encoding" class="col-sm-2 control-label">Encoding</label>
             <div class="col-sm-10">
@@ -27,7 +17,7 @@
           <div class="form-group">
             <label for="select-file" class="col-sm-2 control-label">Datei</label>
             <div class="col-sm-10">
-              <input name="Datei" id="select-file" class="form-control" type="file" accept="text/*">
+              <input name="file" id="select-file" class="form-control" type="file" accept="text/*">
             </div>
           </div>
           <div class="form-group">
@@ -37,5 +27,4 @@
           </div>
       </form>
 </div>
-</body>
-</html>
+}

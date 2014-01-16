@@ -13,8 +13,11 @@ GET     /assets/*file               	controllers.Assets.at(path="/public", file)
 
 POST	/json/document/save				@controllers.DocumentController.saveDoc
 GET		/json/document/:id				@controllers.DocumentController.findById(id: Long)
-GET		/export/epub/document/:id			@controllers.DocumentController.exportEpub(id: Long)
+GET		/export/epub/document/:id		@controllers.DocumentController.exportEpub(id: Long)
 
 POST	/json/textelement/delete/:id	@controllers.TextelementController.delete(id: Long)
 GET		/json/headline/new				@controllers.TextelementController.newHeadline
 GET		/json/paragraph/new				@controllers.TextelementController.newParagraph
+
+GET     /import/form	             	@controllers.ImportController.form
+POST    /import/upload	             	@controllers.ImportController.upload
