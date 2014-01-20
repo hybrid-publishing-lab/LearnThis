@@ -7,6 +7,8 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -31,13 +33,9 @@ public abstract class Textelement {
     public String text;
 
     public Integer sort;
-
-    public abstract String getType();
-
-    public void merge(Textelement ele) {
-        this.text = ele.text;
-        this.sort = ele.sort;
-    }
+    
+    @Enumerated(EnumType.STRING)
+    public TextelementType textelementType;
 
     @ManyToOne
     @JoinColumn(name = "document_id")
@@ -46,6 +44,20 @@ public abstract class Textelement {
 
     @OneToMany(fetch=FetchType.EAGER, mappedBy = "textelement", cascade = CascadeType.ALL)
     public Set<Keyword> keywords = new HashSet<Keyword>();
+    
+    @OneToMany(fetch=FetchType.EAGER, mappedBy = "textelement", cascade = CascadeType.ALL)
+    public Set<Metatag> metatags = new HashSet<Metatag>();
+    
+    public Textelement(){
+        textelementType = TextelementType.standard;
+    }
+    
+    public abstract String getType();
+
+    public void merge(Textelement ele) {
+        this.text = ele.text;
+        this.sort = ele.sort;
+    }
 
     @PreUpdate
     @PrePersist
