@@ -61,45 +61,30 @@ public class ImportController extends Controller {
                 Map<String, String[]> postData = body.asFormUrlEncoded();
                 String encoding = getEncoding(postData.get("encoding"));
                 Document doc = Importer.importFromTextfile(file, encoding);
-                // TODO not very nice to iterate over the textelements
-                // TODO not working !!! mit Janus besprechen
-                // wenn man es nicht tut, wird eine exception geworfen, dass die elemente noch nicht gespeichert sind.
-//                for(Textelement element : doc.textelements){
-//                    if(element instanceof Paragraph){
-//                        paragraphRepository.save((Paragraph)element);
-//                    }else if(element instanceof Headline){
-//                        headlineRepository.save((Headline)element);
-//                    }
-//                }
+                doc.title = fileName;
                 documentRepository.save(doc);
-                 return redirect(routes.Application.findById(doc.id));
-                // return redirect(routes.ImportController.form());
-//                return ok(views.html.index.render(""));
+                return redirect(routes.Application.findById(doc.id));
             } catch (Exception e) {
                 Logger.warn("Datei liegt nicht im richtigen Format vor.", e);
                 flash("error", "Datei liegt nicht im richtigen Format vor.");
-                return form();
-                // TODO redirect to Form
-                // return redirect(routes.ImportController.form());
+                return redirect(routes.ImportController.form());
             }
-            
+
         } else {
             flash("error", "Missing file");
-            return form();
-            // TODO redirect to Form
-            // return redirect(routes.ImportController.form());
+            return redirect(routes.ImportController.form());
         }
 
     }
-    
-    private static String getEncoding(String[] encoding){
-        if(encoding.length == 1){
-            if("UTF-8".equals(encoding[0])) {
+
+    private static String getEncoding(String[] encoding) {
+        if (encoding.length == 1) {
+            if ("UTF-8".equals(encoding[0])) {
                 return "UTF-8";
-            }else{
+            } else {
                 return "ISO-8859-15";
             }
-        }else{
+        } else {
             return "ISO-8859-15";
         }
     }

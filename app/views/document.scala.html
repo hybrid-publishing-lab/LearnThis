@@ -8,16 +8,18 @@
 		</ol>
 		<div class="col-xs-2"></div>
 		<div class="jumbotron col-xs-8">
-			<h1>{{document.title}}</h1>
-			<p>Autor: {{document.givenname}} {{document.surname}}</p>
+			<h1><textarea class="hidden-form-element" data-ng-model="document.title" data-ng-change="change()" data-ng-blur="saveDoc()">{{document.title}}</textarea></h1>
+			<p>Autor: <input type="text" value="{{document.givenname}}" class="hidden-form-element" data-ng-model="document.givenname" data-ng-change="change()" data-ng-blur="saveDoc()" />
+				<input type="text" value="{{document.surname}}" class="hidden-form-element" data-ng-model="document.surname" data-ng-change="change()" data-ng-blur="saveDoc()" />
+			</p>
 			<p>erstellt: @document.createdAt.format("dd.MM.yyyy HH:mm")</p>
 			<p>geändert: @document.changedAt.format("dd.MM.yyyy HH:mm")</p>
-			<p>
+			<!-- <p>
 				<a data-ng-click="saveDoc()">Doc speichern</a>
 			</p>
 			<p>
 				<a data-ng-click="logDoc()">Doc in Console loggen</a>
-			</p>
+			</p> -->
 		</div>
 		<div class="col-xs-2">
 			<ul class="nav nav-pills nav-stacked">

@@ -53,10 +53,14 @@ public class DocumentController extends Controller {
 
             // das führt leider zu einer Exception kriegt man aber evtl hin?
             // Form<Document> docForm = Form.form(Document.class);
+            // TODO nicht sehr schoen, Vielleicht kann Janus eine Idee liefern?
             // docForm.bind(json);
             Long id = json.get("id").asLong();
             Document doc = documentRepository.findOne(id);
             doc.changedAt = new Date();
+            doc.title = json.get("title").asText();
+            doc.surname = json.get("surname").asText();
+            doc.givenname = json.get("givenname").asText();
 
             Form<Headline> headlineForm = Form.form(Headline.class);
             Form<Paragraph> paraForm = Form.form(Paragraph.class);

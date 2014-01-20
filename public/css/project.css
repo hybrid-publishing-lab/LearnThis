@@ -59,6 +59,11 @@ textarea {
   border: none;
 }
 
+.hidden-form-element {
+	background-color: transparent;
+	border-width: 0px;
+}
+
 textarea.comment{
   display: none;
 }

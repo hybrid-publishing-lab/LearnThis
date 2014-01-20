@@ -1,4 +1,4 @@
-// Leave Edit Mode
+//// Leave Edit Mode
 //$(document).mouseup(function (e){
 //  var container = $(".edit-mode-active");
 //  // if the target of the click isn't the container
