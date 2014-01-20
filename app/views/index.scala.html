@@ -14,13 +14,13 @@
 						<th></th>
 					</tr>
 					<tr data-ng-repeat="document in documents">
-						<td data-ng-bind="document.title"></td>
+						<td><a href="/document/{{document.id}}" data-ng-bind="document.title"></a></td>
 						<td><span data-ng-bind="document.givenname"></span>&nbsp;<span data-ng-bind="document.surname"></span></td>
 						<td> {{ document.changedAt | date:'yyyy-MM-dd HH:mm'}}</td>
 						<td>
 							<div class="btn-group btn-group-lg">
 								<button type="button" class="btn btn-default" style="width: ">#</button>
-								<button type="button" class="btn btn-default delete-button" data-ng-click="deleteElement($index)">
+								<button type="button" class="btn btn-default delete-button" data-ng-click="deleteElement(document, $index)">
 									<span class="glyphicon glyphicon-trash delete"></span>
 								</button>
 							</div>

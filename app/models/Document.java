@@ -29,7 +29,7 @@ public class Document {
     
     public Date changedAt;
     
-    @OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL, mappedBy="document")
+    @OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL, mappedBy="document", orphanRemoval=true)
     public Set<Textelement> textelements = new HashSet<Textelement>();
     
     public Document(){

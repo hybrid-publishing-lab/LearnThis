@@ -42,10 +42,10 @@ public abstract class Textelement {
     @JsonIgnore
     public Document document;
 
-    @OneToMany(fetch=FetchType.EAGER, mappedBy = "textelement", cascade = CascadeType.ALL)
+    @OneToMany(fetch=FetchType.EAGER, mappedBy = "textelement", cascade = CascadeType.ALL, orphanRemoval=true)
     public Set<Keyword> keywords = new HashSet<Keyword>();
     
-    @OneToMany(fetch=FetchType.EAGER, mappedBy = "textelement", cascade = CascadeType.ALL)
+    @OneToMany(fetch=FetchType.EAGER, mappedBy = "textelement", cascade = CascadeType.ALL, orphanRemoval=true)
     public Set<Metatag> metatags = new HashSet<Metatag>();
     
     public Textelement(){
