@@ -1,6 +1,10 @@
 package models;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Paragraph extends Textelement {
@@ -16,5 +20,5 @@ public class Paragraph extends Textelement {
         super.merge(para);
         this.comment = para.comment;
     }
-    
+
 }

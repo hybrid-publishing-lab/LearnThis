@@ -47,14 +47,17 @@ public class Application extends Controller {
         doc.surname = "Nachname";
         doc.createdAt = new Date();
         doc.changedAt = new Date();
+        documentRepository.save(doc);
         // add headline
         Headline headline = new Headline();
         headline.text = "Headline";
+        headline.document = doc;
         headlineRepository.save(headline);
         doc.textelements.add(headline);
         // add paragraph
         Paragraph paragraph = new Paragraph();
         paragraph.text = "Paragraph";
+        paragraph.document = doc;
         paragraphRepository.save(paragraph);
         doc.textelements.add(paragraph);
         documentRepository.save(doc);

@@ -8,6 +8,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import models.Document;
 import models.DocumentRepository;
 import models.Headline;
@@ -93,6 +95,7 @@ public class DocumentController extends Controller {
         return badRequest("Expecting Json data");
     }
 
+//    @Transactional
     public Result findById(Long id) {
         Document doc = documentRepository.findOne(id);
         return ok(Json.toJson(doc));
