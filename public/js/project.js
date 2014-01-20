@@ -1,12 +1,12 @@
 // Leave Edit Mode
-$(document).mouseup(function (e){
-  var container = $(".edit-mode-active");
-  // if the target of the click isn't the container
-  // nor a descendant of the container
-  if (!container.is(e.target) && container.has(e.target).length === 0){
-      leaveEditMode();
-  }
-});
+//$(document).mouseup(function (e){
+//  var container = $(".edit-mode-active");
+//  // if the target of the click isn't the container
+//  // nor a descendant of the container
+//  if (!container.is(e.target) && container.has(e.target).length === 0){
+//      leaveEditMode();
+//  }
+//});
 
 $(document).ready( function(){
 
@@ -19,51 +19,51 @@ $(document).ready( function(){
   // autogrow textareas
   $('textarea').autogrow({onInitialize: true});
 
-  // Focus a Textarea
-  $('.text-element textarea').focus(function(event){
-    var target = $(event.target);
-    if(!isEditModeActive(target)){
-      leaveEditMode();
-      enterEditMode(target);
-    } 
-  });
-
-  // Focus a Headline
-  $('.text-element .headline').focus(function(event){
-    var target = $(event.target);
-    if(!isEditModeActive(target)){
-      leaveEditMode();
-      enterEditMode(target);
-    } 
-  });
-
-  // Comment Button
-  $('.comment-button').click(function(event){
-    var comment = $('textarea#comment');
-    if(comment.is(':hidden')){
-      // ŕeveal comment textarea and focus
-      comment.show().focus();
-      $('.comment-button').text('Delete Comment');
-    }else{
-      comment.hide();
-      comment.val('');
-      $('.comment-button').text('Add Comment');
-    }
-  });
-
-  // Add Text Button
-  $('.add-text-button').click(function(event){
-    var comment = $('textarea#comment');
-    if(comment.is(':hidden')){
-      // ŕeveal comment textarea and focus
-      comment.show().focus();
-      $('.comment-button').text('Delete Comment');
-    }else{
-      comment.hide();
-      comment.val('');
-      $('.comment-button').text('Add Comment');
-    }
-  });
+//  // Focus a Textarea
+//  $('.text-element textarea').focus(function(event){
+//    var target = $(event.target);
+//    if(!isEditModeActive(target)){
+//      leaveEditMode();
+//      enterEditMode(target);
+//    } 
+//  });
+//
+//  // Focus a Headline
+//  $('.text-element .headline').focus(function(event){
+//    var target = $(event.target);
+//    if(!isEditModeActive(target)){
+//      leaveEditMode();
+//      enterEditMode(target);
+//    } 
+//  });
+//
+//  // Comment Button
+//  $('.comment-button').click(function(event){
+//    var comment = $('textarea#comment');
+//    if(comment.is(':hidden')){
+//      // ŕeveal comment textarea and focus
+//      comment.show().focus();
+//      $('.comment-button').text('Delete Comment');
+//    }else{
+//      comment.hide();
+//      comment.val('');
+//      $('.comment-button').text('Add Comment');
+//    }
+//  });
+//
+//  // Add Text Button
+//  $('.add-text-button').click(function(event){
+//    var comment = $('textarea#comment');
+//    if(comment.is(':hidden')){
+//      // ŕeveal comment textarea and focus
+//      comment.show().focus();
+//      $('.comment-button').text('Delete Comment');
+//    }else{
+//      comment.hide();
+//      comment.val('');
+//      $('.comment-button').text('Add Comment');
+//    }
+//  });
 });
 
 function dimmOtherTextElements(element){

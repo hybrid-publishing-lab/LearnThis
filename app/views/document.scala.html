@@ -28,95 +28,67 @@
 			</ul>
 		</div>
 	</div>
-	<div class="row">
-		<div class="col-xs-2"></div>
-		<div class="col-xs-8">
-			<ul>
-
-				<li class="text-element"
-					data-ng-class="{'edit-mode-active': isActive(textelement.id)}"
-					data-ng-repeat="textelement in document.textelements">
-
-					<div data-ng-if="textelement.type == 'Paragraph'">
-						<!-- Merge -->
-						<div class="merge-top merge show-on-focus">
-							<button type="button" class="btn btn-default merge">
-								<span class="glyphicon glyphicon-arrow-up"></span> Merge
-							</button>
-						</div>
-						<!-- content -->
-						<div class="paragraph">
-							<!-- <textarea class="show-on-focus" class="comment"></textarea> -->
-							<div>
-								<textarea class="main" data-ng-model="textelement.text"
-										data-ng-click="activateElement(textelement.id)"
-										data-ng-change="change()" data-ng-blur="saveDoc()"></textarea>
-							</div>
-							<div class="roll-out-menu">
-								<ul class="nav nav-pills nav-stacked show-on-focus">
-									<li class="sort-handle"><a href="#">Move</a></li>
-									<li><a href="#">Split</a></li>
-									<li><a data-ng-click="deleteElement(textelement, $index)"
-										href="#">Delete</a></li>
-									<li><a data-ng-click="createParagraph($index, document.id)" href="#">Add
-											Text</a></li>
-									<li><a data-ng-click="createHeadline($index, document.id)" href="#">Add
-											Headline</a></li>
-									<li><a class="comment-button" href="#">Add Comment</a></li>
-								</ul>
-							</div>
-						</div>
-						<!-- Merge -->
-						<div class="merge-bottom merge show-on-focus">
-							<button type="button" class="btn btn-default merge">
-								<span class="glyphicon glyphicon-arrow-down"></span> Merge
-							</button>
-						</div>
-						<!-- Merge Ende -->
+	<div id="sortable">
+		<div class="row text-element"
+			data-ng-class="{'edit-mode-active': isActive(textelement.id)}"
+			data-ng-repeat="textelement in document.textelements">
+			<div class="col-xs-2">
+				<div class="roll-out-menu" data-ng-if="textelement.type == 'Paragraph'">
+					<ul class="nav nav-pills nav-stacked show-on-focus">
+						<li class="sort-handle"><a href="#">Move</a></li>
+						<li><a href="#">Split</a></li>
+						<li><a data-ng-click="deleteElement(textelement, $index)" href="#">Delete</a></li>
+						<li><a data-ng-click="createParagraph($index, document.id)" href="#">Add Text</a></li>
+						<li><a data-ng-click="createHeadline($index, document.id)" href="#">Add Headline</a></li>
+						<li><a class="comment-button" href="#">Add Comment</a></li>
+					</ul>
+				</div>
+				<div class="roll-out-menu" data-ng-if="textelement.type == 'Headline'">
+					<ul class="nav nav-pills nav-stacked show-on-focus">
+						<li class="sort-handle"><a href="#">Move</a></li>
+						<li data-ng-if="textelement.size < 5"><a data-ng-click="changeSize($event, textelement, 1)" href="#"> Bigger </a></li>
+						<li data-ng-if="textelement.size > 0"><a data-ng-click="changeSize($event, textelement, -1)" href="#"> Smaller </a></li>
+						<li><a data-ng-click="deleteElement(textelement, $index)" href="#"> Delete </a></li>
+						<li><a data-ng-click="createParagraph($index)" href="#"> Add Text </a></li>
+						<li><a data-ng-click="createHeadline($index)" href="#"> Add Headline </a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-xs-8" data-ng-if="textelement.type == 'Paragraph'">
+				<!-- Merge -->
+				<div class="merge-top merge show-on-focus">
+					<button type="button" class="btn btn-default merge">
+						<span class="glyphicon glyphicon-arrow-up"></span> Merge
+					</button>
+				</div>
+				<!-- content -->
+				<div class="paragraph">
+					<!-- <textarea class="show-on-focus" class="comment"></textarea> -->
+					<div>
+						<textarea class="main" data-ng-model="textelement.text"
+								data-ng-click="activateElement(textelement.id)"
+								data-ng-change="change()" data-ng-blur="saveDoc()"></textarea>
 					</div>
-					<div data-ng-if="textelement.type == 'Headline'">
-						<h3 data-ng-class="'size_'+textelement.size"
-							data-ng-click="activateElement(textelement.id)">
-							<textarea class="headline" data-ng-model="textelement.text"
-									data-ng-change="change()" data-ng-blur="saveDoc()"></textarea>
-						</h3>
-						<div class="roll-out-menu">
-							<ul class="nav nav-pills nav-stacked show-on-focus">
-								<li class="sort-handle"><a href="#">Move</a></li>
-								<li data-ng-if="textelement.size < 5">
-									<a data-ng-click="changeSize($event, textelement, 1)" href="#">
-										Bigger
-									</a>
-								</li>
-								<li data-ng-if="textelement.size > 0">
-									<a data-ng-click="changeSize($event, textelement, -1)" href="#">
-										Smaller
-									</a>
-								</li>
-								<li>
-									<a data-ng-click="deleteElement(textelement, $index)" href="#">
-										Delete
-									</a>
-								</li>
-								<li>
-									<a data-ng-click="createParagraph($index)" href="#">
-										Add Text
-									</a>
-								</li>
-								<li>
-									<a data-ng-click="createHeadline($index)" href="#">
-										Add Headline
-									</a>
-								</li>
-							</ul>
-						</div>
-					</div>
-
-				</li>
-
-			</ul>
+					
+				</div>
+				<!-- Merge -->
+				<div class="merge-bottom merge show-on-focus">
+					<button type="button" class="btn btn-default merge">
+						<span class="glyphicon glyphicon-arrow-down"></span> Merge
+					</button>
+				</div>
+				<!-- Merge Ende -->
+			</div>
+			<div class="col-xs-8" data-ng-if="textelement.type == 'Headline'">
+				<h3 data-ng-class="'size_'+textelement.size"
+					data-ng-click="activateElement(textelement.id)">
+					<textarea class="headline" data-ng-model="textelement.text"
+							data-ng-change="change()" data-ng-blur="saveDoc()"></textarea>
+				</h3>
+				
+			</div>
+			<div class="col-xs-2"></div>
 		</div>
-		<div class="col-xs-2"></div>
 	</div>
 </div>
 
