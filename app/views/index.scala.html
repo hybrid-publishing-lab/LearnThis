@@ -1,5 +1,5 @@
 @(msg: String) @main("Dokument Index") {
-<div class="container">
+<div class="container" data-ng-controller="DocumentListController" data-ng-init="init()">
 	<div class="row">
 		<div class="col-xs-12">
 			<h1>Dokumentübersicht</h1>
@@ -13,53 +13,14 @@
 						<th>Zuletzt geändert</th>
 						<th></th>
 					</tr>
-					<tr>
-						<td><a href="dokument-bearbeiten.html">Graphentheorie</a></td>
-						<td>Walter Soost</td>
-						<td>23.06.2013 15:27</td>
+					<tr data-ng-repeat="document in documents">
+						<td data-ng-bind="document.title"></td>
+						<td><span data-ng-bind="document.givenname"></span>&nbsp;<span data-ng-bind="document.surname"></span></td>
+						<td> {{ document.changedAt | date:'yyyy-MM-dd HH:mm'}}</td>
 						<td>
 							<div class="btn-group btn-group-lg">
 								<button type="button" class="btn btn-default" style="width: ">#</button>
-								<button type="button" class="btn btn-default delete-button">
-									<span class="glyphicon glyphicon-trash delete"></span>
-								</button>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<td><a href="dokument-bearbeiten.html">Graphentheorie</a></td>
-						<td>Walter Soost</td>
-						<td>23.06.2013 15:27</td>
-						<td>
-							<div class="btn-group btn-group-lg">
-								<button type="button" class="btn btn-default" style="width: ">#</button>
-								<button type="button" class="btn btn-default delete-button">
-									<span class="glyphicon glyphicon-trash delete"></span>
-								</button>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<td><a href="dokument-bearbeiten.html">Graphentheorie</a></td>
-						<td>Walter Soost</td>
-						<td>23.06.2013 15:27</td>
-						<td>
-							<div class="btn-group btn-group-lg">
-								<button type="button" class="btn btn-default" style="width: ">#</button>
-								<button type="button" class="btn btn-default delete-button">
-									<span class="glyphicon glyphicon-trash delete"></span>
-								</button>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<td><a href="dokument-bearbeiten.html">Graphentheorie</a></td>
-						<td>Walter Soost</td>
-						<td>23.06.2013 15:27</td>
-						<td>
-							<div class="btn-group btn-group-lg">
-								<button type="button" class="btn btn-default" style="width: ">#</button>
-								<button type="button" class="btn btn-default delete-button">
+								<button type="button" class="btn btn-default delete-button" data-ng-click="deleteElement($index)">
 									<span class="glyphicon glyphicon-trash delete"></span>
 								</button>
 							</div>

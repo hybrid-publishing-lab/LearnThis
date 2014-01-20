@@ -2,13 +2,13 @@ package controllers;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
-
-import org.springframework.transaction.annotation.Transactional;
 
 import models.Document;
 import models.DocumentRepository;
@@ -95,10 +95,23 @@ public class DocumentController extends Controller {
         return badRequest("Expecting Json data");
     }
 
-//    @Transactional
+    public Result delete(Long id) {
+        documentRepository.delete(id);
+        return ok();
+    }
+    
     public Result findById(Long id) {
         Document doc = documentRepository.findOne(id);
         return ok(Json.toJson(doc));
+    }
+    
+    public Result findAll() {
+        Iterable<Document> docs = documentRepository.findAll();
+        List<Document> result = new ArrayList<Document>();
+        for(Document doc : docs){
+            result.add(doc);
+        }
+        return ok(Json.toJson(result));
     }
 
     public Result exportEpub(Long id) {
