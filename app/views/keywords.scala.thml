@@ -1,0 +1,14 @@
+@(msg: String) @main("Dokument Schlüsselbegriffe") {
+  <div class="site-container">
+    <ol class="breadcrumb">
+      <li><a href="/"> < Übersicht </a></li>
+    </ol>  
+    <h1>Schlüsselbegriffe</h1>
+    <div class="content-container">
+      <div class="content-head"></div>
+      <div class="content-body-container">
+
+      </div>
+    </div>
+  </div>
+}

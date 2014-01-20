@@ -58,6 +58,18 @@ public abstract class Textelement {
         this.text = ele.text;
         this.sort = ele.sort;
     }
+    
+    // ensures correct cross referencing
+    public void addKeyword(Keyword kw){
+        this.keywords.add(kw);
+        kw.textelement = this;
+    }
+    
+    // ensures correct cross referencing
+    public void addMetaTag(Metatag tag){
+        this.metatags.add(tag);
+        tag.textelement = this;
+    }
 
     @PreUpdate
     @PrePersist

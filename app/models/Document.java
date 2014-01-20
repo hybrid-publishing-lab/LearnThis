@@ -37,6 +37,12 @@ public class Document {
         this.changedAt = new Date();
     }
     
+    // ensures correct cross referencing
+    public void addTextElement(Textelement element){
+        this.textelements.add(element);
+        element.document = this;
+    }
+    
     @PreUpdate
     @PrePersist
     public void updateLastModified() {

@@ -42,14 +42,14 @@ function DocumentController($scope, $http, saveService){
 		});
 	}
 	
-	$scope.createParagraph = function (index) {
-		$http.get('/json/paragraph/new').success(function(data){
+	$scope.createParagraph = function (index, docId) {
+		$http.get('/json/document/'+docId+'/paragraph/new').success(function(data){
 			$scope.document.textelements.push(data);
 		});
 	}
 
-	$scope.createHeadline = function (index) {
-		$http.get('/json/headline/new').success(function(data){
+	$scope.createHeadline = function (index, docId) {
+		$http.get('/json/document/'+docId+'/headline/new').success(function(data){
 			$scope.document.textelements.push(data);
 		});
 	}

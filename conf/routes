@@ -4,22 +4,22 @@
 
 # Home page - we use the @controllers syntax here so that the router knows we are referring to a class. In turn it
 # will call on the GlobalSettings.getController method to resolve the actual controller instance.
-GET     /                           	@controllers.Application.index
-GET		/document/new					@controllers.Application.newDoc
-GET     /document/:id                 	@controllers.Application.findById(id: Long)
+GET     /                           						@controllers.Application.index
+GET		/document/new										@controllers.Application.newDoc
+GET     /document/:id                 						@controllers.Application.findById(id: Long)
 
 # Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file               	controllers.Assets.at(path="/public", file)
+GET     /assets/*file               						controllers.Assets.at(path="/public", file)
 
-POST	/json/document/save				@controllers.DocumentController.saveDoc
-GET		/json/document/all				@controllers.DocumentController.findAll()
-GET		/json/document/:id				@controllers.DocumentController.findById(id: Long)
-POST	/json/document/delete/:id		@controllers.DocumentController.delete(id: Long)
-GET		/export/epub/document/:id		@controllers.DocumentController.exportEpub(id: Long)
+POST	/json/document/save									@controllers.DocumentController.saveDoc
+GET		/json/document/all									@controllers.DocumentController.findAll()
+GET		/json/document/:id									@controllers.DocumentController.findById(id: Long)
+POST	/json/document/delete/:id							@controllers.DocumentController.delete(id: Long)
+GET		/export/epub/document/:id							@controllers.DocumentController.exportEpub(id: Long)
 
-POST	/json/textelement/delete/:id	@controllers.TextelementController.delete(id: Long)
-GET		/json/headline/new				@controllers.TextelementController.newHeadline
-GET		/json/paragraph/new				@controllers.TextelementController.newParagraph
+POST	/json/textelement/delete/:id						@controllers.TextelementController.delete(id: Long)
+GET		/json/document/:id/headline/new						@controllers.TextelementController.newHeadline(id: Long)
+GET		/json/document/:id/paragraph/new					@controllers.TextelementController.newParagraph(id: Long)
 
-GET     /import/form	             	@controllers.ImportController.form
-POST    /import/upload	             	@controllers.ImportController.upload
+GET     /import/form	             						@controllers.ImportController.form
+POST    /import/upload	             						@controllers.ImportController.upload
