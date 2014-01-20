@@ -26,11 +26,13 @@ public class Importer {
                     hl.text = element;
                     hl.size = 1;
                     doc.textelements.add(hl);
+                    hl.document = doc;
                 }else{
                     // Paragraph
                     Paragraph pg = new Paragraph();
                     pg.text = element;
                     doc.textelements.add(pg);
+                    pg.document = doc;
                 }
             }
         }finally {

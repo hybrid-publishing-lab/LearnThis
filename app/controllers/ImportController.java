@@ -72,7 +72,9 @@ public class ImportController extends Controller {
 //                    }
 //                }
                 documentRepository.save(doc);
-                return ok(views.html.document.render(doc));
+                 return redirect(routes.Application.findById(doc.id));
+                // return redirect(routes.ImportController.form());
+//                return ok(views.html.index.render(""));
             } catch (Exception e) {
                 Logger.warn("Datei liegt nicht im richtigen Format vor.", e);
                 flash("error", "Datei liegt nicht im richtigen Format vor.");
