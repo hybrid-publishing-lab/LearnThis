@@ -1,4 +1,4 @@
-//// Leave Edit Mode
+// Leave Edit Mode
 //$(document).mouseup(function (e){
 //  var container = $(".edit-mode-active");
 //  // if the target of the click isn't the container
@@ -10,15 +10,9 @@
 
 $(document).ready( function(){
 
-  $("#sortable").sortable({
-    handle: '.sort-handle',
-    placeholder: "ui-state-highlight"
-  });
-  // $("#sortable").disableSelection();
-
   // autogrow textareas
   $('textarea').autogrow({onInitialize: true});
-
+  
 //  // Focus a Textarea
 //  $('.text-element textarea').focus(function(event){
 //    var target = $(event.target);
@@ -37,19 +31,6 @@ $(document).ready( function(){
 //    } 
 //  });
 //
-//  // Comment Button
-//  $('.comment-button').click(function(event){
-//    var comment = $('textarea#comment');
-//    if(comment.is(':hidden')){
-//      // ŕeveal comment textarea and focus
-//      comment.show().focus();
-//      $('.comment-button').text('Delete Comment');
-//    }else{
-//      comment.hide();
-//      comment.val('');
-//      $('.comment-button').text('Add Comment');
-//    }
-//  });
 //
 //  // Add Text Button
 //  $('.add-text-button').click(function(event){

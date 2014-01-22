@@ -52,18 +52,19 @@ public class Application extends Controller {
         Headline headline = new Headline();
         headline.text = "Headline";
         headline.document = doc;
+        headline.sort = 0;
         headlineRepository.save(headline);
         doc.textelements.add(headline);
         // add paragraph
         Paragraph paragraph = new Paragraph();
         paragraph.text = "Paragraph";
         paragraph.document = doc;
+        paragraph.sort = 1;
         paragraphRepository.save(paragraph);
         doc.textelements.add(paragraph);
         documentRepository.save(doc);
         
         return redirect(routes.Application.findById(doc.id));
-//        return ok(views.html.document.render("new"));
     }
     
     public Result findById(Long id){

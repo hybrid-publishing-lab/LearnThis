@@ -65,7 +65,9 @@ textarea {
 }
 
 textarea.comment{
-  display: none;
+  width: 100%;
+  min-height: 6em;
+  border: 1px solid grey;
 }
 
 button.merge {

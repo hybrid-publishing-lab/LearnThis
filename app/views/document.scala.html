@@ -56,29 +56,32 @@
 	</div>
 
 
-	<div id="sortable">
-		<div class="row text-element"
+	<div ng-model="document.textelements" 
+			ui-sortable="sortableOptions">
+		<div class="row text-element "
 			data-ng-class="{'edit-mode-active': isActive(textelement.id)}"
-			data-ng-repeat="textelement in document.textelements">
+			data-ng-repeat="textelement in document.textelements|orderBy:sort">
+			
 			<div class="col-xs-2">
 				<div class="roll-out-menu" data-ng-if="textelement.type == 'Paragraph'">
 					<ul class="nav nav-pills nav-stacked show-on-focus">
-						<li class="sort-handle"><a href="#">Move</a></li>
-						<li><a href="#">Split</a></li>
-						<li><a data-ng-click="deleteElement(textelement, $index)" href="#">Delete</a></li>
-						<li><a data-ng-click="createParagraph($index, document.id)" href="#">Add Text</a></li>
-						<li><a data-ng-click="createHeadline($index, document.id)" href="#">Add Headline</a></li>
-						<li><a class="comment-button" href="#">Add Comment</a></li>
+						<li class="sort-handle" ><a href="javascript:void(0)">Move</a></li>
+						<li><a href="javascript:void(0)">Split</a></li>
+						<li><a data-ng-click="deleteElement(textelement, $index)" href="javascript:void(0)">Delete</a></li>
+						<li><a data-ng-click="createParagraph($index, document.id)" href="javascript:void(0)">Add Text</a></li>
+						<li><a data-ng-click="createHeadline($index, document.id)" href="javascript:void(0)">Add Headline</a></li>
+						<li><a data-ng-if="!textelement.comment" data-ng-click="activateComment(textelement, $event)" href="javascript:void(0)">Add Comment</a></li>
+						<li><a data-ng-if="textelement.comment" data-ng-click="deleteComment(textelement)" href="javascript:void(0)">Delete Comment</a></li>
 					</ul>
 				</div>
 				<div class="roll-out-menu" data-ng-if="textelement.type == 'Headline'">
 					<ul class="nav nav-pills nav-stacked show-on-focus">
-						<li class="sort-handle"><a href="#">Move</a></li>
-						<li data-ng-if="textelement.size < 5"><a data-ng-click="changeSize($event, textelement, 1)" href="#"> Bigger </a></li>
-						<li data-ng-if="textelement.size > 0"><a data-ng-click="changeSize($event, textelement, -1)" href="#"> Smaller </a></li>
-						<li><a data-ng-click="deleteElement(textelement, $index)" href="#"> Delete </a></li>
-						<li><a data-ng-click="createParagraph($index)" href="#"> Add Text </a></li>
-						<li><a data-ng-click="createHeadline($index)" href="#"> Add Headline </a></li>
+						<li class="sort-handle"><a href="javascript:void(0)">Move</a></li>
+						<li data-ng-if="textelement.size < 5"><a data-ng-click="changeSize($event, textelement, 1)" href="javascript:void(0)"> Bigger </a></li>
+						<li data-ng-if="textelement.size > 0"><a data-ng-click="changeSize($event, textelement, -1)" href="javascript:void(0)"> Smaller </a></li>
+						<li><a data-ng-click="deleteElement(textelement, $index)" href="javascript:void(0)"> Delete </a></li>
+						<li><a data-ng-click="createParagraph($index)" href="javascript:void(0)"> Add Text </a></li>
+						<li><a data-ng-click="createHeadline($index)" href="javascript:void(0)"> Add Headline </a></li>
 					</ul>
 				</div>
 			</div>
@@ -91,7 +94,6 @@
 				</div>
 				<!-- content -->
 				<div class="paragraph">
-					<!-- <textarea class="show-on-focus" class="comment"></textarea> -->
 					<div>
 						<textarea class="main" data-ng-model="textelement.text"
 								data-ng-click="activateElement(textelement.id)"
@@ -115,7 +117,10 @@
 				</h3>
 				
 			</div>
-			<div class="col-xs-2"></div>
+			<div class="col-xs-2">
+				<!--  Rueckseite -->
+				<textarea class="comment" id="{{textelement.id}}" data-ng-if="textelement.comment" data-ng-model="textelement.comment" autofocus></textarea>
+			</div>
 		</div>
 	</div>
 </div>

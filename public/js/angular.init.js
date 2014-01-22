@@ -3,7 +3,7 @@ var lhp = {};
 // ///////////////////////////
 // Init angular App
 //
-var lhpApp = angular.module('lhpApp', [ 'lhpControllers', 'lhpServices' ]);
+var lhpApp = angular.module('lhpApp', [ 'lhpControllers', 'lhpServices','ui.sortable' ]);
 
 var lhpControllers = angular.module('lhpControllers', []);
 

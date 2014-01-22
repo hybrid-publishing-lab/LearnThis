@@ -66,6 +66,7 @@ public class DocumentController extends Controller {
             Form<Paragraph> paraForm = Form.form(Paragraph.class);
 
             JsonNode textelements = json.get("textelements");
+            int i = 0;
             for (JsonNode textelement : textelements) {
                 if ("Paragraph".equals(textelement.get("type").asText())) {
                     Logger.info("saving Para ", textelement.toString());
@@ -73,23 +74,20 @@ public class DocumentController extends Controller {
                     if (para.id != null) {
                         Paragraph dbPara = paragraphRepository.findOne(para.id);
                         dbPara.merge(para);
-                        paragraphRepository.save(dbPara);
-                    } else {
-                        paragraphRepository.save(para);
+                        doc.textelements.add(dbPara);
+                    }else{
+                        doc.textelements.add(para);
                     }
-                    doc.textelements.add(para);
                 } else {
                     Logger.info("saving Headline ", textelement.toString());
                     Headline headline = headlineForm.bind(textelement).get();
                     if (headline.id != null) {
                         Headline dbHeadline = headlineRepository.findOne(headline.id);
                         dbHeadline.merge(headline);
-                        headlineRepository.save(dbHeadline);
-                    } else {
-                        headlineRepository.save(headline);
+                        doc.textelements.add(dbHeadline);
+                    } else{
+                        doc.textelements.add(headline);
                     }
-                    headlineRepository.save(headline);
-                    doc.textelements.add(headline);
                 }
 
             }
