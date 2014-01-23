@@ -10,6 +10,7 @@ import models.Headline;
 import models.Paragraph;
 import models.Textelement;
 import models.TextelementRepository;
+import models.TextelementTypes;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -35,6 +36,9 @@ public class TextelementController extends Controller {
         Document doc = documentRepository.findOne(id);
         Paragraph para = new Paragraph();
         para.text = "Neuer Paragraph";
+        // TODO die Paragraph id wird nicht gesetzt warum?
+        // wenn man den Paragraph einzeln speichert, werden durch das speichern des documents zwei angelegt
+        // gleiches gilt fuer die Headling
         doc.appendTextElement(para);
         documentRepository.save(doc);
         return ok(Json.toJson(para));
@@ -57,5 +61,11 @@ public class TextelementController extends Controller {
         doc.textelements.remove(toDelete);
         documentRepository.save(doc);
         return ok();
+    }
+    
+    public Result getTypes() {
+        // TODO convert TextelementType Enum to json
+//        return ok("['standard','special']");
+        return ok(Json.toJson(new TextelementTypes()));
     }
 }

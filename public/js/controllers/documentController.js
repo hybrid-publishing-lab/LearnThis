@@ -10,6 +10,9 @@ function DocumentController($scope, $http, saveService) {
 			$http.get('/json/document/' + docId).success(function(data) {
 				$scope.document = data;
 			});
+			$http.get('/json/textelement/types').success(function(data) {
+				$scope.textelementTypes = data;
+			});
 			// in fail
 			// $scope.isInit = false;
 		}

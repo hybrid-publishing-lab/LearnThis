@@ -74,7 +74,7 @@ public class DocumentController extends Controller {
                     if (para.id != null) {
                         Paragraph dbPara = paragraphRepository.findOne(para.id);
                         dbPara.merge(para);
-                        doc.updateTextElement(para);
+                        doc.updateTextElement(dbPara);
                         paragraphRepository.save(dbPara);
                     }else{
                         doc.appendTextElement(para);

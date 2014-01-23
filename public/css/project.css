@@ -68,6 +68,7 @@ textarea.comment {
 	width: 100%;
 	min-height: 6em;
 	border: 1px solid grey;
+	overflow: hidden;
 }
 
 button.merge {

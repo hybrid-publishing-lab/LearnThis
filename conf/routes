@@ -20,6 +20,7 @@ GET		/export/epub/document/:id							@controllers.DocumentController.exportEpub(
 POST	/json/textelement/delete/:id						@controllers.TextelementController.delete(id: Long)
 GET		/json/document/:id/headline/new						@controllers.TextelementController.newHeadline(id: Long)
 GET		/json/document/:id/paragraph/new					@controllers.TextelementController.newParagraph(id: Long)
+GET		/json/textelement/types								@controllers.TextelementController.getTypes
 
 GET     /import/form	             						@controllers.ImportController.form
 POST    /import/upload	             						@controllers.ImportController.upload

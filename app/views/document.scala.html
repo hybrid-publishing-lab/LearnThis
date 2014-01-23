@@ -92,6 +92,9 @@
 						<span class="glyphicon glyphicon-arrow-up"></span> Merge
 					</button>
 				</div>
+				<div class="show-on-focus">
+					<select class="form-control" data-ng-change="change()" data-ng-blur="saveDoc()" ng-model="textelement.textelementType" ng-options="type for type in textelementTypes.types"></select>
+				</div>
 				<!-- content -->
 				<div class="paragraph">
 					<div>

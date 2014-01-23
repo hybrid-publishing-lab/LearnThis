@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -58,6 +59,7 @@ public abstract class Textelement implements Comparable<Textelement>{
     public void merge(Textelement ele) {
         this.text = ele.text;
         this.sort = ele.sort;
+        this.textelementType = ele.textelementType;
     }
 
     @PreUpdate
