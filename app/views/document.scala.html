@@ -77,11 +77,11 @@
 				<div class="roll-out-menu" data-ng-if="textelement.type == 'Headline'">
 					<ul class="nav nav-pills nav-stacked show-on-focus">
 						<li class="sort-handle"><a href="javascript:void(0)">Move</a></li>
-						<li data-ng-if="textelement.size < 5"><a data-ng-click="changeSize($event, textelement, 1)" href="javascript:void(0)"> Bigger </a></li>
-						<li data-ng-if="textelement.size > 0"><a data-ng-click="changeSize($event, textelement, -1)" href="javascript:void(0)"> Smaller </a></li>
+						<li ng-disabled="textelement.size < 2"><a data-ng-click="changeSize($event, textelement, -1)" href="javascript:void(0)"> Bigger </a></li>
+						<li ng-disabled="textelement.size > 5"><a data-ng-click="changeSize($event, textelement, 1)" href="javascript:void(0)"> Smaller </a></li>
 						<li><a data-ng-click="deleteElement(textelement, $index)" href="javascript:void(0)"> Delete </a></li>
-						<li><a data-ng-click="createParagraph($index)" href="javascript:void(0)"> Add Text </a></li>
-						<li><a data-ng-click="createHeadline($index)" href="javascript:void(0)"> Add Headline </a></li>
+						<li><a data-ng-click="createParagraph($index, document.id)" href="javascript:void(0)"> Add Text </a></li>
+						<li><a data-ng-click="createHeadline($index, document.id)" href="javascript:void(0)"> Add Headline </a></li>
 					</ul>
 				</div>
 			</div>

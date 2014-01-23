@@ -69,8 +69,10 @@ function DocumentController($scope, $http, saveService) {
 	}
 
 	$scope.changeSize = function($event, ele, change) {
-		ele.size = ele.size + change;
-		this.change();
+		if((change < 0 && ele.size > 1) || (change > 0 && ele.size < 6)){
+			ele.size = ele.size + change;
+			this.change();
+		}
 		// focus nicht verlieren
 		$event.preventDefault();
 	}
@@ -86,7 +88,7 @@ function DocumentController($scope, $http, saveService) {
 	$scope.sortableOptions = {
 		handle : '.sort-handle',
 		placeholder : "ui-state-highlight",
-		cursor:"move",
+		cursor: "move",
 		update : function(e, ui){
 			$scope.saved = false;
 			$scope.saveDoc();

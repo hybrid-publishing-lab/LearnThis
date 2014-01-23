@@ -16,5 +16,10 @@ public class Headline extends Textelement {
         super.merge(headline);
         this.size = headline.size;
     }
+
+    @Override
+    public String toString() {
+        return "Headline [size=" + size + ", id=" + id + ", text=" + text + ", sort=" + sort + "]";
+    }
     
 }

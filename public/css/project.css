@@ -1,5 +1,5 @@
 ul {
-  list-style: none;
+	list-style: none;
 }
 
 .hide {
@@ -7,56 +7,80 @@ ul {
 }
 
 div.headline {
-  margin-bottom: 40px;
+	margin-bottom: 40px;
+}
+
+h3.size_1 {
+	font-size: 60px;
+}
+
+h3.size_2 {
+	font-size: 50px;
+}
+
+h3.size_3 {
+	font-size: 40px;
+}
+
+h3.size_4 {
+	font-size: 30px;
+}
+
+h3.size_5 {
+	font-size: 20px;
+}
+
+h3.size_6 {
+	font-size: 15px;
 }
 
 table.documents-overview th {
-  border: 0px;
-  background-color: white;
-  padding: 2px;
-  padding-left: 20px;
-  padding-right: 20px;
-  font-weight: normal;
+	border: 0px;
+	background-color: white;
+	padding: 2px;
+	padding-left: 20px;
+	padding-right: 20px;
+	font-weight: normal;
 }
 
 table.documents-overview td {
-  padding-left: 20px;
-  padding-right: 20px;
-  background-color: #EEEEEE;
-  border: 0px;
+	padding-left: 20px;
+	padding-right: 20px;
+	background-color: #EEEEEE;
+	border: 0px;
 }
 
-table.documents-overview td:nth-child(1){
-  font-size: 20px;
-  font-weight: bold;
+table.documents-overview td:nth-child(1) {
+	font-size: 20px;
+	font-weight: bold;
 }
 
-table.documents-overview td:nth-child(2){
-  font-size: 16px;
+table.documents-overview td:nth-child(2) {
+	font-size: 16px;
 }
 
-table.documents-overview td:nth-child(3){
-  font-size: 16px;
+table.documents-overview td:nth-child(3) {
+	font-size: 16px;
 }
 
-table.documents-overview td:nth-child(4){
-  padding-left: 0px;
-  padding-right: 0px;
+table.documents-overview td:nth-child(4) {
+	padding-left: 0px;
+	padding-right: 0px;
 }
 
 div.sidebar-menu-container {
-  max-width: 200px;
+	max-width: 200px;
 }
 
 .nav-pills a {
-  background-color: #DDDDDD;
+	background-color: #DDDDDD;
 }
 
 textarea {
-  overflow: hidden;
-  resize: none;
-  width: 100%;
-  border: none;
+	overflow: hidden;
+	resize: none;
+	width: 100%;
+	border: none;
 }
 
 .hidden-form-element {
@@ -64,41 +88,40 @@ textarea {
 	border-width: 0px;
 }
 
-textarea.comment{
-  width: 100%;
-  min-height: 6em;
-  border: 1px solid grey;
+textarea.comment {
+	width: 100%;
+	min-height: 6em;
+	border: 1px solid grey;
 }
 
 button.merge {
-  width: 100%;
+	width: 100%;
 }
 
 td {
-  height: 50px;
+	height: 50px;
 }
 
 button.delete-button {
-  height: 46px;
+	height: 46px;
 }
 
 .dimmed {
-  opacity: 0.5;
+	opacity: 0.5;
 }
-
 
 .edit-mode-active .show-on-focus {
 	display: block;
 }
 
-.show-on-focus{
-  display: none;
+.show-on-focus {
+	display: none;
 }
 
 /*sortable placeholder css*/
 .ui-state-highlight {
-  height: 3em;
-  border: 1px dashed gray;
+	height: 3em;
+	border: 1px dashed gray;
 }
 
 .unsaved {
@@ -108,15 +131,19 @@ button.delete-button {
 .size_1 {
 	font-size: 1.5rem;
 }
+
 .size_2 {
 	font-size: 2rem;
 }
+
 .size_3 {
 	font-size: 2.5rem;
 }
+
 .size_4 {
 	font-size: 3rem;
 }
+
 .size_5 {
 	font-size: 3.5rem;
 }

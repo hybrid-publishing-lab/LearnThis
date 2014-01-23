@@ -40,9 +40,24 @@ public class Document {
     }
     
     // ensures correct cross referencing
-    public void addTextElement(Textelement element){
+    public void appendTextElement(Textelement element){
+        int maxSort = 0;
+        for(Textelement ele : this.textelements){
+            if(ele.sort != null && maxSort < ele.sort){
+                maxSort = ele.sort;
+            }
+        }
+        element.sort = maxSort + 1;
         this.textelements.add(element);
         element.document = this;
+    }
+    
+    // ensures the set to be up to date
+    public void updateTextElement(Textelement element){
+        if(this.textelements.contains(element)){
+            this.textelements.remove(element);
+            this.textelements.add(element);
+        }
     }
     
     @PreUpdate

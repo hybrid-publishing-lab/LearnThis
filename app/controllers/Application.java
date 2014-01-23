@@ -53,6 +53,7 @@ public class Application extends Controller {
         headline.text = "Headline";
         headline.document = doc;
         headline.sort = 0;
+        headline.size = 2;
         headlineRepository.save(headline);
         doc.textelements.add(headline);
         // add paragraph

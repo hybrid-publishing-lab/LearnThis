@@ -52,9 +52,9 @@ public class DocumentController extends Controller {
         if (json != null) {
 
             // das führt leider zu einer Exception kriegt man aber evtl hin?
-            // Form<Document> docForm = Form.form(Document.class);
+//             Form<Document> docForm = Form.form(Document.class);
             // TODO nicht sehr schoen, Vielleicht kann Janus eine Idee liefern?
-            // docForm.bind(json);
+//             docForm.bind(json);
             Long id = json.get("id").asLong();
             Document doc = documentRepository.findOne(id);
             doc.changedAt = new Date();
@@ -74,19 +74,23 @@ public class DocumentController extends Controller {
                     if (para.id != null) {
                         Paragraph dbPara = paragraphRepository.findOne(para.id);
                         dbPara.merge(para);
-                        doc.textelements.add(dbPara);
+                        doc.updateTextElement(para);
+                        paragraphRepository.save(dbPara);
                     }else{
-                        doc.textelements.add(para);
+                        doc.appendTextElement(para);
+                        paragraphRepository.save(para);
                     }
                 } else {
-                    Logger.info("saving Headline ", textelement.toString());
+                    Logger.info("saving Headline", textelement.toString());
                     Headline headline = headlineForm.bind(textelement).get();
                     if (headline.id != null) {
                         Headline dbHeadline = headlineRepository.findOne(headline.id);
                         dbHeadline.merge(headline);
-                        doc.textelements.add(dbHeadline);
+                        doc.updateTextElement(dbHeadline);
+                        headlineRepository.save(dbHeadline);
                     } else{
-                        doc.textelements.add(headline);
+                        doc.appendTextElement(headline);
+                        headlineRepository.save(headline);
                     }
                 }
 

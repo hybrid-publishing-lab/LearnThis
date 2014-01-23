@@ -35,7 +35,7 @@ public class TextelementController extends Controller {
         Document doc = documentRepository.findOne(id);
         Paragraph para = new Paragraph();
         para.text = "Neuer Paragraph";
-        doc.addTextElement(para);
+        doc.appendTextElement(para);
         documentRepository.save(doc);
         return ok(Json.toJson(para));
     }
@@ -45,7 +45,7 @@ public class TextelementController extends Controller {
         Headline headline = new Headline();
         headline.text = "Neue Headline";
         headline.size = 3;
-        doc.addTextElement(headline);
+        doc.appendTextElement(headline);
         documentRepository.save(doc);
         return ok(Json.toJson(headline));
     }

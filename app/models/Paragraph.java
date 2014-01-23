@@ -17,4 +17,9 @@ public class Paragraph extends Textelement {
         this.comment = para.comment;
     }
 
+    @Override
+    public String toString() {
+        return "Paragraph [comment=" + comment + ", id=" + id + ", text=" + text + ", sort=" + sort + "]";
+    }
+
 }
