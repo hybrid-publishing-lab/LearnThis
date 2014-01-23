@@ -34,33 +34,45 @@ public class TextelementController extends Controller {
 
     public Result newParagraph(Long id) {
         Document doc = documentRepository.findOne(id);
-        Paragraph para = new Paragraph();
-        para.text = "Neuer Paragraph";
-        // TODO die Paragraph id wird nicht gesetzt warum?
-        // wenn man den Paragraph einzeln speichert, werden durch das speichern des documents zwei angelegt
-        // gleiches gilt fuer die Headling
-        doc.appendTextElement(para);
-        documentRepository.save(doc);
-        return ok(Json.toJson(para));
+        if(doc != null){
+            Paragraph para = new Paragraph();
+            para.text = "Neuer Paragraph";
+            // TODO die Paragraph id wird nicht gesetzt warum?
+            // wenn man den Paragraph einzeln speichert, werden durch das speichern des documents zwei angelegt
+            // gleiches gilt fuer die Headling
+            doc.appendTextElement(para);
+            documentRepository.save(doc);
+            return ok(Json.toJson(para));
+        }else{
+            return notFound();
+        }
     }
 
     public Result newHeadline(Long id) {
         Document doc = documentRepository.findOne(id);
+        if(doc != null){
         Headline headline = new Headline();
         headline.text = "Neue Headline";
         headline.size = 3;
         doc.appendTextElement(headline);
         documentRepository.save(doc);
         return ok(Json.toJson(headline));
+        }else{
+            return notFound();
+        }
     }
 
     public Result delete(Long id) {
         Textelement toDelete = textelementRepository.findOne(id);
-        textelementRepository.delete(id);
-        Document doc = toDelete.document;
-        doc.textelements.remove(toDelete);
-        documentRepository.save(doc);
-        return ok();
+        if (toDelete != null) {
+            textelementRepository.delete(id);
+            Document doc = toDelete.document;
+            doc.textelements.remove(toDelete);
+            documentRepository.save(doc);
+            return ok();
+        } else {
+            return notFound();
+        }
     }
     
     public Result getTypes() {
