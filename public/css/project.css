@@ -10,30 +10,6 @@ div.headline {
 	margin-bottom: 40px;
 }
 
-h3.size_1 {
-	font-size: 60px;
-}
-
-h3.size_2 {
-	font-size: 50px;
-}
-
-h3.size_3 {
-	font-size: 40px;
-}
-
-h3.size_4 {
-	font-size: 30px;
-}
-
-h3.size_5 {
-	font-size: 20px;
-}
-
-h3.size_6 {
-	font-size: 15px;
-}
-
 table.documents-overview th {
 	border: 0px;
 	background-color: white;
@@ -146,4 +122,14 @@ button.delete-button {
 
 .size_5 {
 	font-size: 3.5rem;
+}
+
+.roll-out-menu {
+	position: relative;
+}
+
+.roll-out-menu ul {
+	position: absolute;
+	width: 100%;
+/* 	top: 30px; */
 }

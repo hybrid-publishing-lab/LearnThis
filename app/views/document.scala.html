@@ -60,7 +60,7 @@
 			ui-sortable="sortableOptions">
 		<div class="row text-element "
 			data-ng-class="{'edit-mode-active': isActive(textelement.id)}"
-			data-ng-repeat="textelement in document.textelements|orderBy:sort">
+			data-ng-repeat="textelement in document.textelements | orderBy:sort">
 			
 			<div class="col-xs-2">
 				<div class="roll-out-menu" data-ng-if="textelement.type == 'Paragraph'">
@@ -119,7 +119,7 @@
 			</div>
 			<div class="col-xs-2">
 				<!--  Rueckseite -->
-				<textarea class="comment" id="{{textelement.id}}" data-ng-if="textelement.comment" data-ng-model="textelement.comment" autofocus></textarea>
+				<textarea class="comment" id="{{textelement.id}}" data-ng-if="textelement.comment" data-ng-model="textelement.comment" data-ng-change="change()" data-ng-blur="saveDoc()"></textarea>
 			</div>
 		</div>
 	</div>

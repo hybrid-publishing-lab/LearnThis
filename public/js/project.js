@@ -47,43 +47,43 @@ $(document).ready( function(){
 //  });
 });
 
-function dimmOtherTextElements(element){
-  var textElement = $(element).closest('.text-element');
-  $(".text-element").not(textElement).addClass('dimmed');
-}
-
-function unDimmTextElements(){
-  $(".text-element").removeClass('dimmed');
-}
-
-function removeMenues(){
-  $('.text-element').find('.show-on-focus').slideUp();
-}
-
-function displayMenues(element){
-  var showElements = $(element).closest('.text-element').find('.show-on-focus');
-  showElements.slideDown();
-}
-
-function enterEditMode(element){
-  if(!isEditModeActive(element)){
-    // deactivate Editmode for all other text-elements
-    $('.text-element').removeClass('edit-mode-active');
-    $(element).closest('.text-element').addClass('edit-mode-active');
-
-    unDimmTextElements();
-    dimmOtherTextElements(element);
-
-    displayMenues(element);
-  }
-}
-
-function leaveEditMode(){
-  unDimmTextElements();
-  removeMenues();
-}
-
-function isEditModeActive(element){
-  var tmp = $(element).closest('.text-element');
-  return tmp.hasClass('edit-mode-active');
-}
+//function dimmOtherTextElements(element){
+//  var textElement = $(element).closest('.text-element');
+//  $(".text-element").not(textElement).addClass('dimmed');
+//}
+//
+//function unDimmTextElements(){
+//  $(".text-element").removeClass('dimmed');
+//}
+//
+//function removeMenues(){
+//  $('.text-element').find('.show-on-focus').slideUp();
+//}
+//
+//function displayMenues(element){
+//  var showElements = $(element).closest('.text-element').find('.show-on-focus');
+//  showElements.slideDown();
+//}
+//
+//function enterEditMode(element){
+//  if(!isEditModeActive(element)){
+//    // deactivate Editmode for all other text-elements
+//    $('.text-element').removeClass('edit-mode-active');
+//    $(element).closest('.text-element').addClass('edit-mode-active');
+//
+//    unDimmTextElements();
+//    dimmOtherTextElements(element);
+//
+//    displayMenues(element);
+//  }
+//}
+//
+//function leaveEditMode(){
+//  unDimmTextElements();
+//  removeMenues();
+//}
+//
+//function isEditModeActive(element){
+//  var tmp = $(element).closest('.text-element');
+//  return tmp.hasClass('edit-mode-active');
+//}

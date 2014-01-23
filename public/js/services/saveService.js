@@ -8,8 +8,12 @@ function SaveService($http){
 		
 		$scope.saved = false;
 		
-		$http.post('/json/document/save', document).success(function(data){
+		$http.post('/json/document/save', document)
+		.success(function(data, status, header, config){
 			$scope.saved = true;
+		})
+		.error(function(data, status, header, config){
+			
 		});
 	}
 	
