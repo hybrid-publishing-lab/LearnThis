@@ -7,9 +7,7 @@ import javax.inject.Singleton;
 import models.Document;
 import models.DocumentRepository;
 import models.Headline;
-import models.HeadlineRepository;
 import models.Paragraph;
-import models.ParagraphRepository;
 import models.Textelement;
 import models.TextelementRepository;
 import play.libs.Json;
@@ -25,17 +23,12 @@ public class TextelementController extends Controller {
 
     private final TextelementRepository textelementRepository;
     private final DocumentRepository documentRepository;
-    private final ParagraphRepository paragraphRepository;
-    private final HeadlineRepository headlineRepository;
 
     // We are using constructor injection to receive a repository to support our desire for immutability.
     @Inject
-    public TextelementController(TextelementRepository textelementRepository, DocumentRepository documentRepository,
-            ParagraphRepository paragraphRepository, HeadlineRepository headlineRepository) {
+    public TextelementController(TextelementRepository textelementRepository, DocumentRepository documentRepository) {
         this.textelementRepository = textelementRepository;
         this.documentRepository = documentRepository;
-        this.paragraphRepository = paragraphRepository;
-        this.headlineRepository = headlineRepository;
     }
 
     public Result newParagraph(Long id) {
@@ -44,7 +37,6 @@ public class TextelementController extends Controller {
         para.text = "Neuer Paragraph";
         doc.appendTextElement(para);
         documentRepository.save(doc);
-        paragraphRepository.save(para);
         return ok(Json.toJson(para));
     }
 
@@ -55,7 +47,6 @@ public class TextelementController extends Controller {
         headline.size = 3;
         doc.appendTextElement(headline);
         documentRepository.save(doc);
-        headlineRepository.save(headline);
         return ok(Json.toJson(headline));
     }
 

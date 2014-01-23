@@ -4,8 +4,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -14,7 +14,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 
@@ -42,11 +41,13 @@ public abstract class Textelement implements Comparable<Textelement>{
     @JsonIgnore
     public Document document;
 
-    @OneToMany(fetch=FetchType.EAGER, mappedBy = "textelement", cascade = CascadeType.ALL, orphanRemoval=true)
-    public Set<Keyword> keywords = new HashSet<Keyword>();
+//    @OneToMany(fetch=FetchType.EAGER, mappedBy = "textelement", cascade = CascadeType.ALL, orphanRemoval=true)
+    @ElementCollection(fetch = FetchType.EAGER)
+    public Set<String> keywords = new HashSet<String>();
     
-    @OneToMany(fetch=FetchType.EAGER, mappedBy = "textelement", cascade = CascadeType.ALL, orphanRemoval=true)
-    public Set<Metatag> metatags = new HashSet<Metatag>();
+//    @OneToMany(fetch=FetchType.EAGER, mappedBy = "textelement", cascade = CascadeType.ALL, orphanRemoval=true)
+    @ElementCollection(fetch = FetchType.EAGER)
+    public Set<String> metatags = new HashSet<String>();
     
     public Textelement(){
         textelementType = TextelementType.standard;
@@ -58,28 +59,14 @@ public abstract class Textelement implements Comparable<Textelement>{
         this.text = ele.text;
         this.sort = ele.sort;
     }
-    
-    // ensures correct cross referencing
-    public void addKeyword(Keyword kw){
-        this.keywords.add(kw);
-        kw.textelement = this;
-    }
-    
-    // ensures correct cross referencing
-    public void addMetaTag(Metatag tag){
-        this.metatags.add(tag);
-        tag.textelement = this;
-    }
 
     @PreUpdate
     @PrePersist
     public void updateKeywords() {
+        this.keywords.clear();
         List<String> newKeywords = KeywordParser.parseHashTags(text);
         for (String keywordStr : newKeywords) {
-            Keyword keyword = new Keyword();
-            keyword.text = keywordStr;
-            keyword.textelement = this;
-            this.keywords.add(keyword);
+            this.keywords.add(keywordStr);
         }
     }
 
