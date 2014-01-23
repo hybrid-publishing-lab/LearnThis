@@ -57,7 +57,7 @@ function DocumentController($scope, $http, saveService) {
 	}
 
 	$scope.activateComment = function(textelement) {
-		textelement.comment = "Kommentar bearbeiten";
+		textelement.comment = "Rückseite bearbeiten";
 		
 //		TODO fokus auf das kommentarfeld setzen. Das Kommentarfeld scheint hier noch gar nicht im
 //		dom zu existieren, da es mit data-ng-if ausgeblendet wird
