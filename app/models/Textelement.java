@@ -43,10 +43,12 @@ public abstract class Textelement implements Comparable<Textelement>{
 
 //    @OneToMany(fetch=FetchType.EAGER, mappedBy = "textelement", cascade = CascadeType.ALL, orphanRemoval=true)
     @ElementCollection(fetch = FetchType.EAGER)
+    @JsonIgnore  // TODO Workaround, da die Keywords von Play nicht korrekt geparst werden können
     public Set<String> keywords = new HashSet<String>();
     
 //    @OneToMany(fetch=FetchType.EAGER, mappedBy = "textelement", cascade = CascadeType.ALL, orphanRemoval=true)
     @ElementCollection(fetch = FetchType.EAGER)
+    @JsonIgnore  // TODO Workaround, da die Keywords von Play nicht korrekt geparst werden können
     public Set<String> metatags = new HashSet<String>();
     
     public Textelement(){
@@ -61,8 +63,10 @@ public abstract class Textelement implements Comparable<Textelement>{
         this.textelementType = ele.textelementType;
     }
 
-    @PreUpdate
-    @PrePersist
+// TODO funktioniert leider nicht und fuehrt zu fehlern
+// muss jetzt von hand aufgerufen werden
+//    @PreUpdate
+//    @PrePersist
     public void updateKeywords() {
         this.keywords.clear();
         List<String> newKeywords = KeywordParser.parseHashTags(text);

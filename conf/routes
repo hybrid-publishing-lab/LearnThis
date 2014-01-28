@@ -7,6 +7,7 @@
 GET     /                           						@controllers.Application.index
 GET		/document/new										@controllers.Application.newDoc
 GET     /document/:id                 						@controllers.Application.findById(id: Long)
+GET		/document/:id/keywords								@controllers.Application.keywords(id: Long)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               						controllers.Assets.at(path="/public", file)

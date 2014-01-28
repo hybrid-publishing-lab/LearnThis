@@ -38,9 +38,9 @@ public class TextelementController extends Controller {
         JsonNode json = request().body().asJson();
         if (doc != null) {
             Paragraph para = new Paragraph();
-            para.text = json.asText();
-            if (StringUtils.isEmpty(json.asText())) {
-                para.text = "Neuer Paragraph";
+            para.text = "Neuer Paragraph";
+            if (json != null && StringUtils.isNotEmpty(json.asText())) {
+                para.text = json.asText();
             }
             doc.insertTextElement(para, index);
             documentRepository.save(doc);

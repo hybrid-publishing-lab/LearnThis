@@ -62,4 +62,9 @@ public class Application extends Controller {
         Document doc = documentRepository.findOne(id);
         return ok(views.html.document.render(doc));
     }
+    
+    public Result keywords(Long docId){
+        Document doc = documentRepository.findOne(docId);
+        return ok(views.html.keywords.render(doc));
+    }
 }

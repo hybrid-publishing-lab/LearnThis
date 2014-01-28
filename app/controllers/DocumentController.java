@@ -67,12 +67,14 @@ public class DocumentController extends Controller {
                     Paragraph para = paraForm.bind(textelement).get();
                     para.document = doc;
                     para.sort = i;
+                    para.updateKeywords();
                     doc.textelements.add(para);
                 } else {
                     Logger.info("saving Headline", textelement.toString());
                     Headline headline = headlineForm.bind(textelement).get();
                     headline.document = doc;
                     headline.sort = i;
+                    headline.updateKeywords();
                     doc.textelements.add(headline);
                 }
                 i++;
