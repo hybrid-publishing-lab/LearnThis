@@ -58,6 +58,7 @@ public class TextelementController extends Controller {
     public Result delete(Long docId, Long textelementId) {
         Document doc = documentRepository.findOne(docId);
         boolean removed = doc.removeTextelement(textelementId);
+        documentRepository.save(doc);
         if (removed) {
             return ok();
         } else {
