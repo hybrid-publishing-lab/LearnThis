@@ -1,5 +1,5 @@
 @(doc: Document) @main("Dokument Schlüsselbegriffe") {
-  <div class="site-container">
+<div class="container">
     <ol class="breadcrumb">
       <li><a href="/"> < Übersicht </a></li>
     </ol>  
@@ -10,7 +10,7 @@
 		<ul>
 			@for(textelement <- doc.textelements) {
 				<li>
-				<div>@textelement.text</div>
+<!-- 				<div>@textelement.text</div> -->
 				<ul>
 				@for(keyword <- textelement.keywords) {
 				  <li>@keyword</li>

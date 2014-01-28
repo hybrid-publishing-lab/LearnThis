@@ -73,6 +73,9 @@
 						<li><a data-ng-click="createHeadline($index, document.id)" href="javascript:void(0)">+ Überschrift</a></li>
 						<li><a data-ng-if="!textelement.comment" data-ng-click="activateComment(textelement, $event)" href="javascript:void(0)">+ Rückseite</a></li>
 						<li><a data-ng-if="textelement.comment" data-ng-click="deleteComment(textelement)" href="javascript:void(0)">- Rückseite</a></li>
+						<li><div class="show-on-focus">
+					<select class="form-control" data-ng-change="change()" data-ng-blur="saveDoc()" ng-model="textelement.textelementType" ng-options="type for type in textelementTypes.types"></select>
+				</div></li>
 						<li><a data-ng-click="deleteElement(textelement, $index)" href="javascript:void(0)">Löschen</a></li>
 					</ul>
 				</div>
@@ -94,9 +97,7 @@
 						<span class="glyphicon glyphicon-arrow-up"></span> Zusammenführen
 					</button>
 				</div>
-				<div class="show-on-focus">
-					<select class="form-control" data-ng-change="change()" data-ng-blur="saveDoc()" ng-model="textelement.textelementType" ng-options="type for type in textelementTypes.types"></select>
-				</div>
+				
 				<!-- content -->
 				<div class="paragraph">
 					<div>
@@ -124,7 +125,7 @@
 			</div>
 			<div class="col-xs-2">
 				<!--  Rueckseite -->
-				<textarea class="comment" id="{{textelement.id}}" data-ng-if="textelement.comment" data-ng-model="textelement.comment" data-ng-change="change()" data-ng-blur="saveDoc()" placeholder="Platzhalter"></textarea>
+				<textarea class="comment" id="{{textelement.id}}" data-ng-if="textelement.comment" data-ng-model="textelement.comment" data-ng-change="change()" data-ng-blur="saveDoc()" placeholder="Platzhalter" ng-auto-expand></textarea>
 			</div>
 		</div>
 	</div>

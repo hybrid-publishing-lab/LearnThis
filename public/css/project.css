@@ -48,7 +48,8 @@ div.sidebar-menu-container {
 	max-width: 200px;
 }
 
-.nav-pills a {
+.nav-pills a,
+.nav-pills select{
 	background-color: #DDDDDD;
 }
 
