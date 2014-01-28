@@ -1,6 +1,7 @@
 package models;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -51,6 +52,38 @@ public class Document {
         this.textelements.add(element);
         element.document = this;
     }
+
+    /**
+     * Fügt ein Textelement an einem index ein.
+     * Sort wird für das Element und alle nachfolgenden richtig gesetzt.
+     * Es wird dabei auch der Fall betrachtet, dass sort nicht fortlaufend und von 0 an ausgehend durchnummeriert ist.
+     * @param e Textelement
+     * @param index an dem das Element eingefuegt werden soll
+     */
+    public void insertTextElement(Textelement e, Integer index) {
+        if(index <= this.textelements.size()){
+            int sort = this.textelements.size();
+            boolean indexFound = false;
+            Collections.sort(this.textelements);
+            for(int i = 0 ; i < textelements.size() ; i++){
+                Textelement ele = textelements.get(i);
+                // merke den sort wert des elementes mit dem index
+                if(ele.sort != null && i == index){
+                    sort = ele.sort;
+                    indexFound = true;
+                }
+                // erhoehe sort fuer alle nachfolgenden element
+                if(indexFound){
+                    ele.sort = ele.sort +1;
+                }
+            }
+            e.document = this;
+            e.sort = sort;
+            this.textelements.add(index, e);
+        }else{
+            appendTextElement(e);
+        }
+    }
     
     public Textelement findTextelement(Long id){
         for(Textelement ele : textelements){
@@ -75,4 +108,5 @@ public class Document {
     public void updateLastModified() {
         changedAt = new Date();
     }
+
 }

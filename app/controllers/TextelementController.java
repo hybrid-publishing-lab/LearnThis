@@ -4,6 +4,11 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
+import org.apache.commons.lang3.StringUtils;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.ning.org.jboss.netty.util.internal.StringUtil;
+
 import models.Document;
 import models.DocumentRepository;
 import models.Headline;
@@ -28,29 +33,33 @@ public class TextelementController extends Controller {
         this.documentRepository = documentRepository;
     }
 
-    public Result newParagraph(Long id) {
+    public Result newParagraph(Long id, Integer index) {
         Document doc = documentRepository.findOne(id);
-        if(doc != null){
+        JsonNode json = request().body().asJson();
+        if (doc != null) {
             Paragraph para = new Paragraph();
-            para.text = "Neuer Paragraph";
-            doc.appendTextElement(para);
+            para.text = json.asText();
+            if (StringUtils.isEmpty(json.asText())) {
+                para.text = "Neuer Paragraph";
+            }
+            doc.insertTextElement(para, index);
             documentRepository.save(doc);
             return ok(Json.toJson(para));
-        }else{
+        } else {
             return notFound();
         }
     }
 
-    public Result newHeadline(Long id) {
+    public Result newHeadline(Long id, Integer index) {
         Document doc = documentRepository.findOne(id);
-        if(doc != null){
-        Headline headline = new Headline();
-        headline.text = "Neue Headline";
-        headline.size = 3;
-        doc.appendTextElement(headline);
-        documentRepository.save(doc);
-        return ok(Json.toJson(headline));
-        }else{
+        if (doc != null) {
+            Headline headline = new Headline();
+            headline.text = "Neue Headline";
+            headline.size = 3;
+            doc.insertTextElement(headline, index);
+            documentRepository.save(doc);
+            return ok(Json.toJson(headline));
+        } else {
             return notFound();
         }
     }
@@ -65,10 +74,10 @@ public class TextelementController extends Controller {
             return notFound();
         }
     }
-    
+
     public Result getTypes() {
         // TODO convert TextelementType Enum to json
-//        return ok("['standard','special']");
+        // return ok("['standard','special']");
         return ok(Json.toJson(new TextelementTypes()));
     }
 }

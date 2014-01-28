@@ -39,3 +39,19 @@ lhpApp.directive('ngAutoExpand', function() {
         }
     };
 });
+
+lhpApp.directive('saveCursorPosition', function() {
+    return {
+        restrict: 'A',
+        link: function( $scope, elem, attrs) {
+        	var saveCursorPosition = function($event) {
+        		var element = $event.target;
+        		$scope.lastCursor.position = element.selectionStart;
+        		util.log("Last Cursor Position: "+$scope.lastCursor.position);
+        	}
+            elem.bind('keyup', saveCursorPosition);
+            elem.bind('mouseup', saveCursorPosition);
+        }
+    };
+});
+

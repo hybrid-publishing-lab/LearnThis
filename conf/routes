@@ -18,8 +18,8 @@ POST	/json/document/delete/:id							@controllers.DocumentController.delete(id: 
 GET		/export/epub/document/:id							@controllers.DocumentController.exportEpub(id: Long)
 
 POST	/json/document/:docId/textelement/:id/delete		@controllers.TextelementController.delete(docId: Long, id: Long)
-GET		/json/document/:id/headline/new						@controllers.TextelementController.newHeadline(id: Long)
-GET		/json/document/:id/paragraph/new					@controllers.TextelementController.newParagraph(id: Long)
+GET		/json/document/:id/headline/new/:index				@controllers.TextelementController.newHeadline(id: Long, index: Integer)
+POST	/json/document/:id/paragraph/new/:index				@controllers.TextelementController.newParagraph(id: Long, index: Integer)
 GET		/json/textelement/types								@controllers.TextelementController.getTypes
 
 GET     /import/form	             						@controllers.ImportController.form

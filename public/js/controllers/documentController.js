@@ -4,6 +4,7 @@ function DocumentController($scope, $http, saveService) {
 	$scope.saved = true;
 	$scope.isInit = false;
 	$scope.currentlySaving = false;
+	$scope.lastCursor = {position: undefined};
 
 	$scope.init = function(docId) {
 		if (!$scope.isInit && docId) {
@@ -47,15 +48,15 @@ function DocumentController($scope, $http, saveService) {
 		});
 	}
 
-	$scope.createParagraph = function(index, docId) {
-		$http.get('/json/document/' + docId + '/paragraph/new').success(function(data) {
-			$scope.document.textelements.push(data);
+	$scope.createParagraph = function(index, docId, text) {
+		$http.post('/json/document/' + docId + '/paragraph/new/'+index, JSON.stringify(text)).success(function(data) {
+                $scope.document.textelements.splice(index, 0, data);
 		});
 	}
 
 	$scope.createHeadline = function(index, docId) {
-		$http.get('/json/document/' + docId + '/headline/new').success(function(data) {
-			$scope.document.textelements.push(data);
+		$http.get('/json/document/' + docId + '/headline/new/'+index).success(function(data) {
+			$scope.document.textelements.splice(index, 0, data);
 		});
 	}
 
@@ -110,6 +111,19 @@ function DocumentController($scope, $http, saveService) {
 			    textelements.splice(index+1,1);
 				$scope.saved = false;
 				$scope.saveDoc();
+	    }
+	}
+	
+	$scope.split = function(index){
+		var textelements = $scope.document.textelements;
+		var doc = $scope.document;
+	    if(index >= 0 && textelements.length > index){
+	    		var cursorPosition = $scope.lastCursor.position;
+	    		var firstPart = textelements[index].text.substring(0, cursorPosition);
+	    		var secondPart = textelements[index].text.substring(cursorPosition);
+	    		textelements[index].text = firstPart;
+	    		$scope.createParagraph(index+1, doc.id, secondPart);
+				$scope.change();
 	    }
 	}
 	

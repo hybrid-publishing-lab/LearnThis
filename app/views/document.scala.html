@@ -15,6 +15,7 @@
 			</p>
 			<p>erstellt: @document.createdAt.format("dd.MM.yyyy HH:mm")</p>
 			<p>geändert: @document.changedAt.format("dd.MM.yyyy HH:mm")</p>
+			
 			<!-- <p>
 				<a data-ng-click="saveDoc()">Doc speichern</a>
 			</p>
@@ -67,8 +68,8 @@
 				<div class="roll-out-menu" data-ng-if="textelement.type == 'Paragraph'">
 					<ul class="nav nav-pills nav-stacked show-on-focus">
 						<li class="sort-handle" ><a href="javascript:void(0)">Verschieben</a></li>
-						<li><a href="javascript:void(0)">Teilen</a></li>
-						<li><a data-ng-click="createParagraph($index, document.id)" href="javascript:void(0)">+ Paragraph</a></li>
+						<li><a data-ng-click="split($index)" href="javascript:void(0)">Teilen</a></li>
+						<li><a data-ng-click="createParagraph($index+1, document.id)" href="javascript:void(0)">+ Paragraph</a></li>
 						<li><a data-ng-click="createHeadline($index, document.id)" href="javascript:void(0)">+ Überschrift</a></li>
 						<li><a data-ng-if="!textelement.comment" data-ng-click="activateComment(textelement, $event)" href="javascript:void(0)">+ Rückseite</a></li>
 						<li><a data-ng-if="textelement.comment" data-ng-click="deleteComment(textelement)" href="javascript:void(0)">- Rückseite</a></li>
@@ -80,7 +81,7 @@
 						<li class="sort-handle"><a href="javascript:void(0)">Verschieben</a></li>
 						<li ng-disabled="textelement.size < 2"><a data-ng-click="changeSize($event, textelement, -1)" href="javascript:void(0)">Vergrößern</a></li>
 						<li ng-disabled="textelement.size > 5"><a data-ng-click="changeSize($event, textelement, 1)" href="javascript:void(0)">Verkleinern</a></li>
-						<li><a data-ng-click="createParagraph($index, document.id)" href="javascript:void(0)">+ Paragraph</a></li>
+						<li><a data-ng-click="createParagraph($index+1, document.id)" href="javascript:void(0)">+ Paragraph</a></li>
 						<li><a data-ng-click="createHeadline($index, document.id)" href="javascript:void(0)">+ Überschrift</a></li>
 						<li><a data-ng-click="deleteElement(textelement, $index)" href="javascript:void(0)"> Löschen</a></li>
 					</ul>
@@ -101,7 +102,7 @@
 					<div>
 						<textarea class="main" data-ng-model="textelement.text"
 								data-ng-click="activateElement(textelement)"
-								data-ng-change="change()" data-ng-blur="saveDoc()" ng-auto-expand></textarea>
+								data-ng-change="change()" data-ng-blur="saveDoc()" ng-auto-expand save-cursor-position></textarea>
 					</div>
 					
 				</div>
@@ -117,7 +118,7 @@
 				<h3 data-ng-class="'size_'+textelement.size"
 					data-ng-click="activateElement(textelement)">
 					<textarea class="headline" data-ng-model="textelement.text"
-							data-ng-change="change()" data-ng-blur="saveDoc()" ng-auto-expand></textarea>
+							data-ng-change="change()" data-ng-blur="saveDoc()" ng-auto-expand save-cursor-position></textarea>
 				</h3>
 				
 			</div>

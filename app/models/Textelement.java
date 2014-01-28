@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -99,15 +98,15 @@ public abstract class Textelement implements Comparable<Textelement>{
     
     @Override
     public int compareTo(Textelement b) {
-      if (b.id == null && this.id == null) {
+      if (b.sort == null && this.sort == null) {
         return 0;
       }
-      if (this.id == null) {
+      if (this.sort == null) {
         return 1;
       }
-      if (b.id == null) {
+      if (b.sort == null) {
         return -1;
       }
-      return this.id.compareTo(b.id);
+      return this.sort.compareTo(b.sort);
     }
 }
