@@ -1,7 +1,8 @@
 @(document: Document) @main("New Document") {
-
 <div class="container" data-ng-controller="DocumentController"
 	data-ng-init="init(@document.id)" data-ng-class="{'unsaved': !saved}">
+	<div id="overlay" class="row" data-ng-show="currentlySaving">
+	</div>
 	<div class="site-head row">
 		<ol class="breadcrumb">
 			<li><a href="/"> < Übersicht </a></li>
@@ -59,7 +60,7 @@
 	<div ng-model="document.textelements" 
 			ui-sortable="sortableOptions">
 		<div class="row text-element "
-			data-ng-class="{'edit-mode-active': isActive(textelement.id)}"
+			data-ng-class="{'edit-mode-active': isActive(textelement)}"
 			data-ng-repeat="textelement in document.textelements | orderBy:sort">
 			
 			<div class="col-xs-2">
@@ -99,7 +100,7 @@
 				<div class="paragraph">
 					<div>
 						<textarea class="main" data-ng-model="textelement.text"
-								data-ng-click="activateElement(textelement.id)"
+								data-ng-click="activateElement(textelement)"
 								data-ng-change="change()" data-ng-blur="saveDoc()"></textarea>
 					</div>
 					
@@ -114,7 +115,7 @@
 			</div>
 			<div class="col-xs-8" data-ng-if="textelement.type == 'Headline'">
 				<h3 data-ng-class="'size_'+textelement.size"
-					data-ng-click="activateElement(textelement.id)">
+					data-ng-click="activateElement(textelement)">
 					<textarea class="headline" data-ng-model="textelement.text"
 							data-ng-change="change()" data-ng-blur="saveDoc()"></textarea>
 				</h3>
@@ -127,5 +128,4 @@
 		</div>
 	</div>
 </div>
-
 }

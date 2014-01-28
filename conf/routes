@@ -17,7 +17,7 @@ GET		/json/document/:id									@controllers.DocumentController.findById(id: Lon
 POST	/json/document/delete/:id							@controllers.DocumentController.delete(id: Long)
 GET		/export/epub/document/:id							@controllers.DocumentController.exportEpub(id: Long)
 
-POST	/json/textelement/delete/:id						@controllers.TextelementController.delete(id: Long)
+POST	/json/document/:docId/textelement/:id/delete		@controllers.TextelementController.delete(docId: Long, id: Long)
 GET		/json/document/:id/headline/new						@controllers.TextelementController.newHeadline(id: Long)
 GET		/json/document/:id/paragraph/new					@controllers.TextelementController.newParagraph(id: Long)
 GET		/json/textelement/types								@controllers.TextelementController.getTypes

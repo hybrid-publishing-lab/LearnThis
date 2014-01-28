@@ -13,9 +13,7 @@ import javax.inject.Singleton;
 import models.Document;
 import models.DocumentRepository;
 import models.Headline;
-import models.HeadlineRepository;
 import models.Paragraph;
-import models.ParagraphRepository;
 import nl.siegmann.epublib.domain.Book;
 import nl.siegmann.epublib.epub.EpubWriter;
 import play.Logger;
@@ -35,16 +33,11 @@ import com.fasterxml.jackson.databind.JsonNode;
 public class DocumentController extends Controller {
 
     private final DocumentRepository documentRepository;
-    private final ParagraphRepository paragraphRepository;
-    private final HeadlineRepository headlineRepository;
 
     // We are using constructor injection to receive a repository to support our desire for immutability.
     @Inject
-    public DocumentController(final DocumentRepository documentRepository, ParagraphRepository paragraphRepository,
-            HeadlineRepository headlineRepository) {
+    public DocumentController(final DocumentRepository documentRepository) {
         this.documentRepository = documentRepository;
-        this.paragraphRepository = paragraphRepository;
-        this.headlineRepository = headlineRepository;
     }
 
     public Result saveDoc() {
@@ -66,34 +59,23 @@ public class DocumentController extends Controller {
             Form<Paragraph> paraForm = Form.form(Paragraph.class);
 
             JsonNode textelements = json.get("textelements");
+            doc.textelements.clear();
             int i = 0;
             for (JsonNode textelement : textelements) {
                 if ("Paragraph".equals(textelement.get("type").asText())) {
                     Logger.info("saving Para ", textelement.toString());
                     Paragraph para = paraForm.bind(textelement).get();
-                    if (para.id != null) {
-                        Paragraph dbPara = paragraphRepository.findOne(para.id);
-                        dbPara.merge(para);
-                        doc.updateTextElement(dbPara);
-                        paragraphRepository.save(dbPara);
-                    }else{
-                        doc.appendTextElement(para);
-                        paragraphRepository.save(para);
-                    }
+                    para.document = doc;
+                    para.sort = i;
+                    doc.textelements.add(para);
                 } else {
                     Logger.info("saving Headline", textelement.toString());
                     Headline headline = headlineForm.bind(textelement).get();
-                    if (headline.id != null) {
-                        Headline dbHeadline = headlineRepository.findOne(headline.id);
-                        dbHeadline.merge(headline);
-                        doc.updateTextElement(dbHeadline);
-                        headlineRepository.save(dbHeadline);
-                    } else{
-                        doc.appendTextElement(headline);
-                        headlineRepository.save(headline);
-                    }
+                    headline.document = doc;
+                    headline.sort = i;
+                    doc.textelements.add(headline);
                 }
-
+                i++;
             }
             documentRepository.save(doc);
             return ok(Json.toJson(doc));

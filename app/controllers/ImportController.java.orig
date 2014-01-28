@@ -9,6 +9,9 @@ import javax.inject.Singleton;
 
 import models.Document;
 import models.DocumentRepository;
+import models.HeadlineRepository;
+import models.ParagraphRepository;
+import models.TextelementRepository;
 import play.Logger;
 import play.mvc.Controller;
 import play.mvc.Http.MultipartFormData;
@@ -24,11 +27,18 @@ import util.Importer;
 public class ImportController extends Controller {
 
     private final DocumentRepository documentRepository;
+    private final ParagraphRepository paragraphRepository;
+    private final HeadlineRepository headlineRepository;
+    private final TextelementRepository textelementRepository;
 
     // We are using constructor injection to receive a repository to support our desire for immutability.
     @Inject
-    public ImportController(final DocumentRepository documentRepository) {
+    public ImportController(final DocumentRepository documentRepository, ParagraphRepository paragraphRepository,
+            HeadlineRepository headlineRepository, TextelementRepository textelementRepository) {
         this.documentRepository = documentRepository;
+        this.paragraphRepository = paragraphRepository;
+        this.headlineRepository = headlineRepository;
+        this.textelementRepository = textelementRepository;
     }
 
     public Result form() {

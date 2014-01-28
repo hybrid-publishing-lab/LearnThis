@@ -30,7 +30,8 @@ public class Document {
     
     public Date changedAt;
     
-    @OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL, mappedBy="document", orphanRemoval=true)
+//    @OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL, mappedBy="document", orphanRemoval=true)
+    @OneToMany(fetch=FetchType.EAGER, mappedBy="document", orphanRemoval=true)
     @OrderBy("sort ASC")
     public List<Textelement> textelements = new ArrayList<Textelement>();
     
@@ -52,22 +53,14 @@ public class Document {
         element.document = this;
     }
     
-    public Textelement findTextelement(Long id){
-        for(Textelement ele : textelements){
-            if(ele.id != null && ele.id.equals(id)){
-                return ele;
+    // ensures the set to be up to date
+    public void updateTextElement(Textelement element){
+        for(Textelement te : this.textelements){
+            if(te.id.equals(element.id)){
+                this.textelements.remove(te);
+                this.textelements.add(element);
             }
         }
-        return null;
-    }
-    
-    public boolean removeTextelement(Long id){
-        Textelement toDelete = findTextelement(id);
-        if(toDelete != null){
-            this.textelements.remove(toDelete);
-            return true;
-        }
-        return false;
     }
     
     @PreUpdate

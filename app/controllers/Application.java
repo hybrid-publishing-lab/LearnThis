@@ -9,10 +9,7 @@ import javax.inject.Singleton;
 import models.Document;
 import models.DocumentRepository;
 import models.Headline;
-import models.HeadlineRepository;
 import models.Paragraph;
-import models.ParagraphRepository;
-
 import play.mvc.Controller;
 import play.mvc.Result;
 
@@ -24,16 +21,11 @@ import play.mvc.Result;
 public class Application extends Controller {
 
     private final DocumentRepository documentRepository;
-    private final ParagraphRepository paragraphRepository;
-    private final HeadlineRepository headlineRepository;
 
     // We are using constructor injection to receive a repository to support our desire for immutability.
     @Inject
-    public Application(final DocumentRepository documentRepository, ParagraphRepository paragraphRepository,
-            HeadlineRepository headlineRepository) {
+    public Application(final DocumentRepository documentRepository) {
         this.documentRepository = documentRepository;
-        this.paragraphRepository = paragraphRepository;
-        this.headlineRepository = headlineRepository;
     }
     
     public Result index() {
@@ -54,14 +46,12 @@ public class Application extends Controller {
         headline.document = doc;
         headline.sort = 0;
         headline.size = 2;
-        headlineRepository.save(headline);
         doc.textelements.add(headline);
         // add paragraph
         Paragraph paragraph = new Paragraph();
         paragraph.text = "Paragraph";
         paragraph.document = doc;
         paragraph.sort = 1;
-        paragraphRepository.save(paragraph);
         doc.textelements.add(paragraph);
         documentRepository.save(doc);
         

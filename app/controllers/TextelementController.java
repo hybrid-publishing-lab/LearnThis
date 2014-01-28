@@ -8,8 +8,6 @@ import models.Document;
 import models.DocumentRepository;
 import models.Headline;
 import models.Paragraph;
-import models.Textelement;
-import models.TextelementRepository;
 import models.TextelementTypes;
 import play.libs.Json;
 import play.mvc.Controller;
@@ -22,13 +20,11 @@ import play.mvc.Result;
 @Singleton
 public class TextelementController extends Controller {
 
-    private final TextelementRepository textelementRepository;
     private final DocumentRepository documentRepository;
 
     // We are using constructor injection to receive a repository to support our desire for immutability.
     @Inject
-    public TextelementController(TextelementRepository textelementRepository, DocumentRepository documentRepository) {
-        this.textelementRepository = textelementRepository;
+    public TextelementController(DocumentRepository documentRepository) {
         this.documentRepository = documentRepository;
     }
 
@@ -37,9 +33,6 @@ public class TextelementController extends Controller {
         if(doc != null){
             Paragraph para = new Paragraph();
             para.text = "Neuer Paragraph";
-            // TODO die Paragraph id wird nicht gesetzt warum?
-            // wenn man den Paragraph einzeln speichert, werden durch das speichern des documents zwei angelegt
-            // gleiches gilt fuer die Headling
             doc.appendTextElement(para);
             documentRepository.save(doc);
             return ok(Json.toJson(para));
@@ -62,13 +55,10 @@ public class TextelementController extends Controller {
         }
     }
 
-    public Result delete(Long id) {
-        Textelement toDelete = textelementRepository.findOne(id);
-        if (toDelete != null) {
-            textelementRepository.delete(id);
-            Document doc = toDelete.document;
-            doc.textelements.remove(toDelete);
-            documentRepository.save(doc);
+    public Result delete(Long docId, Long textelementId) {
+        Document doc = documentRepository.findOne(docId);
+        boolean removed = doc.removeTextelement(textelementId);
+        if (removed) {
             return ok();
         } else {
             return notFound();

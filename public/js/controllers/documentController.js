@@ -3,6 +3,7 @@ function DocumentController($scope, $http, saveService) {
 
 	$scope.saved = true;
 	$scope.isInit = false;
+	$scope.currentlySaving = false;
 
 	$scope.init = function(docId) {
 		if (!$scope.isInit && docId) {
@@ -34,7 +35,9 @@ function DocumentController($scope, $http, saveService) {
 
 	$scope.deleteElement = function(ele, index) {
 		$scope.saved = false;
-		$http.post('/json/textelement/delete/' + ele.id, ele).success(function(data) {
+		var docId = $scope.document.id;
+		// ele wird nur mitgegeben, damit es einem post request entspricht, wird nicht benutzt
+		$http.post('/json/document/'+docId+'/textelement/'+ele.id+'/delete', ele).success(function(data) {
 			$scope.saved = true;
 			if ($scope.document.textelements[index] == ele) {
 				$scope.document.textelements.splice(index, 1);
@@ -80,12 +83,12 @@ function DocumentController($scope, $http, saveService) {
 		$event.preventDefault();
 	}
 
-	$scope.activateElement = function(id) {
-		return $scope.activeEle = id;
+	$scope.activateElement = function(textelement) {
+		return $scope.activeEle = textelement;
 	}
 
-	$scope.isActive = function(id) {
-		return $scope.activeEle == id;
+	$scope.isActive = function(textelement) {
+		return $scope.activeEle === textelement;
 	}
 
 	$scope.sortableOptions = {
