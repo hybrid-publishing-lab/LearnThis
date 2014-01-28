@@ -91,6 +91,28 @@ function DocumentController($scope, $http, saveService) {
 		return $scope.activeEle === textelement;
 	}
 
+	$scope.mergeWithTop = function(index){
+		var textelements = $scope.document.textelements;
+	    if(index >= 1){
+	    		textelements[index-1].text += "\n";
+	    		textelements[index-1].text += textelements[index].text;
+			    textelements.splice(index,1);
+				$scope.saved = false;
+				$scope.saveDoc();
+	    }
+	}
+	
+	$scope.mergeWithBottom = function(index){
+		var textelements = $scope.document.textelements;
+	    if(index >= 0 && textelements.length > index+1){
+	    		textelements[index].text += "\n";
+	            textelements[index].text += textelements[index+1].text;
+			    textelements.splice(index+1,1);
+				$scope.saved = false;
+				$scope.saveDoc();
+	    }
+	}
+	
 	$scope.sortableOptions = {
 		handle : '.sort-handle',
 		placeholder : "ui-state-highlight",

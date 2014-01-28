@@ -88,8 +88,8 @@
 			</div>
 			<div class="col-xs-8" data-ng-if="textelement.type == 'Paragraph'">
 				<!-- Merge -->
-				<div class="merge-top merge show-on-focus">
-					<button type="button" class="btn btn-default merge">
+				<div class="merge-top merge show-on-focus" data-ng-if="document.textelements[$index-1].type == 'Paragraph'">
+					<button type="button" class="btn btn-default merge" data-ng-click="mergeWithTop($index)">
 						<span class="glyphicon glyphicon-arrow-up"></span> Zusammenführen
 					</button>
 				</div>
@@ -106,8 +106,8 @@
 					
 				</div>
 				<!-- Merge -->
-				<div class="merge-bottom merge show-on-focus">
-					<button type="button" class="btn btn-default merge">
+				<div class="merge-bottom merge show-on-focus" data-ng-if="document.textelements[$index+1].type == 'Paragraph'">
+					<button type="button" class="btn btn-default merge" data-ng-click="mergeWithBottom($index)">
 						<span class="glyphicon glyphicon-arrow-down"></span> Zusammenführen
 					</button>
 				</div>
