@@ -101,7 +101,7 @@
 					<div>
 						<textarea class="main" data-ng-model="textelement.text"
 								data-ng-click="activateElement(textelement)"
-								data-ng-change="change()" data-ng-blur="saveDoc()"></textarea>
+								data-ng-change="change()" data-ng-blur="saveDoc()" ng-auto-expand></textarea>
 					</div>
 					
 				</div>
@@ -117,7 +117,7 @@
 				<h3 data-ng-class="'size_'+textelement.size"
 					data-ng-click="activateElement(textelement)">
 					<textarea class="headline" data-ng-model="textelement.text"
-							data-ng-change="change()" data-ng-blur="saveDoc()"></textarea>
+							data-ng-change="change()" data-ng-blur="saveDoc()" ng-auto-expand></textarea>
 				</h3>
 				
 			</div>
