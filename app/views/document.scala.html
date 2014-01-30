@@ -1,8 +1,11 @@
 @(document: Document) @main("New Document") {
 <div class="container" data-ng-controller="DocumentController"
-	data-ng-init="init(@document.id)" data-ng-class="{'unsaved': !saved}">
+	data-ng-init="init(@document.id)">
 	<div id="overlay" class="row" data-ng-show="currentlySaving">
 	</div>
+	<span class="alert alert-danger" ng-hide="saved">
+		<strong>Achtung!</strong> Das Dokument ist noch nicht gespeichert.
+	</span>
 	<div class="site-head row">
 		<ol class="breadcrumb">
 			<li><a href="/"> < Übersicht </a></li>
