@@ -1,10 +1,18 @@
 lhpControllers.controller('DocumentController', [ '$scope', '$http', 'SaveService', DocumentController ]);
 function DocumentController($scope, $http, saveService) {
+	
+	const filterAlle = "alle";
+	const filterNurRueckseite = "nurRueckseite";
+	const filterNachMetatag = "nachMetatag";
 
 	$scope.saved = true;
 	$scope.isInit = false;
 	$scope.currentlySaving = false;
 	$scope.lastCursor = {position: undefined};
+	$scope.filter = filterAlle;
+	$scope.filterExpression = "";
+	$scope.search = {metatags: ""};
+	
 
 	$scope.init = function(docId) {
 		if (!$scope.isInit && docId) {
@@ -136,4 +144,19 @@ function DocumentController($scope, $http, saveService) {
 			$scope.saveDoc();
 		}
 	};
+	
+	$scope.filterNurRueckseite = function(){
+		$scope.filter = filterNurRueckseite;
+		$scope.filterExpression = {comment: ''};
+	}
+	
+	$scope.filterAlle = function(){
+		$scope.filter = filterAlle;
+		$scope.filterExpression = "";
+	}
+
+	$scope.filterNachMetatag = function(){
+		$scope.filter = filterNachMetatag;
+		$scope.filterExpression = {metatags: $scope.search.metatags};
+	}
 }

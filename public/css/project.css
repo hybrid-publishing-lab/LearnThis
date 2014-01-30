@@ -61,16 +61,19 @@ textarea {
 	padding: 4px;
 }
 
+textarea.comment {
+	width: 100%;
+	border-left: 1px solid blue;
+}
+
+textarea.meta-tags {
+	width: 100%;
+	border-left: 1px solid green;
+}
+
 .hidden-form-element {
 	background-color: transparent;
 	border-width: 0px;
-}
-
-textarea.comment {
-	width: 100%;
-	min-height: 6em;
-	border: 1px solid grey;
-	overflow: hidden;
 }
 
 button.merge {
@@ -149,4 +152,10 @@ button.delete-button {
 	width: 100%;
 	background-color: rgba(0,0,0,0.2);
 	position: absolute;
+}
+
+.filterpanel input{
+	min-width: 50px;
+	max-width: 200px;
+	display: inline;
 }

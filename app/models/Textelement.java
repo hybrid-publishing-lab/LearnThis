@@ -44,10 +44,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
     @JsonIgnore  // TODO Workaround, da die Keywords von Play nicht korrekt geparst werden können
     public Set<String> keywords = new HashSet<String>();
     
-//    @OneToMany(fetch=FetchType.EAGER, mappedBy = "textelement", cascade = CascadeType.ALL, orphanRemoval=true)
-    @ElementCollection(fetch = FetchType.EAGER)
-    @JsonIgnore  // TODO Workaround, da die Keywords von Play nicht korrekt geparst werden können
-    public Set<String> metatags = new HashSet<String>();
+    @Column(length = 1000)
+    public String metatags = "";
     
     public Textelement(){
         textelementType = TextelementType.standard;
