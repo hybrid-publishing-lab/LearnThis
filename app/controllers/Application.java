@@ -12,6 +12,7 @@ import models.Headline;
 import models.Paragraph;
 import play.mvc.Controller;
 import play.mvc.Result;
+import util.JpaFixer;
 
 /**
  * The main set of web services.
@@ -60,11 +61,13 @@ public class Application extends Controller {
     
     public Result findById(Long id){
         Document doc = documentRepository.findOne(id);
+        JpaFixer.removeDuplicatesWorkaround(doc);
         return ok(views.html.document.render(doc));
     }
     
     public Result keywords(Long docId){
         Document doc = documentRepository.findOne(docId);
+        JpaFixer.removeDuplicatesWorkaround(doc);
         return ok(views.html.keywords.render(doc));
     }
 }

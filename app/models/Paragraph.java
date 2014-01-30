@@ -19,7 +19,7 @@ public class Paragraph extends Textelement {
 
     @Override
     public String toString() {
-        return "Paragraph [comment=" + comment + ", id=" + id + ", text=" + text + ", sort=" + sort + "]";
+        return "Paragraph [comment=" + comment + ", id=" + id + ", sort=" + sort + "]";
     }
 
 }

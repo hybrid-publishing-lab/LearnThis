@@ -49,6 +49,8 @@ public class ImportController extends Controller {
                 String encoding = getEncoding(postData.get("encoding"));
                 Document doc = Importer.importFromTextfile(file, encoding);
                 doc.title = fileName;
+                doc.givenname = "Vorname";
+                doc.surname = "Nachname";
                 documentRepository.save(doc);
                 return redirect(routes.Application.findById(doc.id));
             } catch (Exception e) {

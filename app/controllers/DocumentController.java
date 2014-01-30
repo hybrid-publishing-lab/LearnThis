@@ -21,6 +21,7 @@ import play.data.Form;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
+import util.JpaFixer;
 import util.converter.DocumentConverter;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -92,6 +93,7 @@ public class DocumentController extends Controller {
     
     public Result findById(Long id) {
         Document doc = documentRepository.findOne(id);
+        JpaFixer.removeDuplicatesWorkaround(doc);
         return ok(Json.toJson(doc));
     }
     
@@ -101,12 +103,14 @@ public class DocumentController extends Controller {
         for(Document doc : docs){
             result.add(doc);
         }
+        JpaFixer.removeDuplicatesWorkaround(result);
         return ok(Json.toJson(result));
     }
 
     public Result exportEpub(Long id) {
         try {
             Document doc = documentRepository.findOne(id);
+            JpaFixer.removeDuplicatesWorkaround(doc);
             Book book = DocumentConverter.toEpub(doc);
 
             // Write Epub to Buffer

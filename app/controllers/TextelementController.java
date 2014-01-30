@@ -4,19 +4,20 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
-import org.apache.commons.lang3.StringUtils;
-
-import com.fasterxml.jackson.databind.JsonNode;
-import com.ning.org.jboss.netty.util.internal.StringUtil;
-
 import models.Document;
 import models.DocumentRepository;
 import models.Headline;
 import models.Paragraph;
 import models.TextelementTypes;
+
+import org.apache.commons.lang3.StringUtils;
+
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
+import util.JpaFixer;
+
+import com.fasterxml.jackson.databind.JsonNode;
 
 /**
  * The main set of web services.
@@ -35,6 +36,7 @@ public class TextelementController extends Controller {
 
     public Result newParagraph(Long id, Integer index) {
         Document doc = documentRepository.findOne(id);
+        JpaFixer.removeDuplicatesWorkaround(doc);
         JsonNode json = request().body().asJson();
         if (doc != null) {
             Paragraph para = new Paragraph();
@@ -52,6 +54,7 @@ public class TextelementController extends Controller {
 
     public Result newHeadline(Long id, Integer index) {
         Document doc = documentRepository.findOne(id);
+        JpaFixer.removeDuplicatesWorkaround(doc);
         if (doc != null) {
             Headline headline = new Headline();
             headline.text = "Neue Headline";
@@ -66,6 +69,7 @@ public class TextelementController extends Controller {
 
     public Result delete(Long docId, Long textelementId) {
         Document doc = documentRepository.findOne(docId);
+        JpaFixer.removeDuplicatesWorkaround(doc);
         boolean removed = doc.removeTextelement(textelementId);
         documentRepository.save(doc);
         if (removed) {

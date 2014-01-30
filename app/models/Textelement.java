@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 // @MappedSuperclass
-public abstract class Textelement implements Comparable<Textelement>{
+    public abstract class Textelement{
     @Id
     @GeneratedValue
     public Long id;
@@ -96,19 +96,5 @@ public abstract class Textelement implements Comparable<Textelement>{
         } else if (!id.equals(other.id))
             return false;
         return true;
-    }
-    
-    @Override
-    public int compareTo(Textelement b) {
-      if (b.sort == null && this.sort == null) {
-        return 0;
-      }
-      if (this.sort == null) {
-        return 1;
-      }
-      if (b.sort == null) {
-        return -1;
-      }
-      return this.sort.compareTo(b.sort);
     }
 }

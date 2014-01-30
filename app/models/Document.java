@@ -15,6 +15,8 @@ import javax.persistence.OrderBy;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 
+import util.TextelementSortComparator;
+
 @Entity
 public class Document {
     @Id
@@ -64,7 +66,7 @@ public class Document {
         if(index <= this.textelements.size()){
             int sort = this.textelements.size();
             boolean indexFound = false;
-            Collections.sort(this.textelements);
+            Collections.sort(this.textelements, new TextelementSortComparator());
             for(int i = 0 ; i < textelements.size() ; i++){
                 Textelement ele = textelements.get(i);
                 // merke den sort wert des elementes mit dem index
@@ -109,4 +111,31 @@ public class Document {
         changedAt = new Date();
     }
 
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Document other = (Document) obj;
+        if (id == null) {
+            if (other.id != null)
+                return false;
+        } else if (!id.equals(other.id))
+            return false;
+        return true;
+    }
+
+    
+    
 }
