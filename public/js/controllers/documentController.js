@@ -12,6 +12,7 @@ function DocumentController($scope, $http, saveService) {
 	$scope.filter = filterAlle;
 	$scope.filterExpression = "";
 	$scope.search = {metatags: ""};
+	$scope.show = {comments: true, metatags: false};
 	
 
 	$scope.init = function(docId) {
@@ -68,16 +69,16 @@ function DocumentController($scope, $http, saveService) {
 		});
 	}
 
-	$scope.activateComment = function(textelement) {
-		textelement.comment = "Rückseite bearbeiten";
-		
-//		TODO fokus auf das kommentarfeld setzen. Das Kommentarfeld scheint hier noch gar nicht im
-//		dom zu existieren, da es mit data-ng-if ausgeblendet wird
-		
-//		var selector = 'textarea#'+textelement.id;
-//		var textarea = $(selector);
-//		textarea.focus();
-	}
+//	$scope.activateComment = function(textelement) {
+//		textelement.comment = "Rückseite bearbeiten";
+//		
+////		TODO fokus auf das kommentarfeld setzen. Das Kommentarfeld scheint hier noch gar nicht im
+////		dom zu existieren, da es mit data-ng-if ausgeblendet wird
+//		
+////		var selector = 'textarea#'+textelement.id;
+////		var textarea = $(selector);
+////		textarea.focus();
+//	}
 
 	$scope.deleteComment = function(textelement) {
 		textelement.comment = null;
@@ -158,5 +159,13 @@ function DocumentController($scope, $http, saveService) {
 	$scope.filterNachMetatag = function(){
 		$scope.filter = filterNachMetatag;
 		$scope.filterExpression = {metatags: $scope.search.metatags};
+	}
+	
+	$scope.showComments = function(){
+		$scope.show.comments = !$scope.show.comments;
+	}
+	
+	$scope.showMetatags = function(){
+		$scope.show.metatags = !$scope.show.metatags;
 	}
 }

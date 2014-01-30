@@ -49,7 +49,8 @@ div.sidebar-menu-container {
 }
 
 .nav-pills a,
-.nav-pills select{
+.nav-pills select,
+.nav-pills textarea{
 	background-color: #DDDDDD;
 }
 
@@ -63,13 +64,14 @@ textarea {
 
 textarea.comment {
 	width: 100%;
-	border-left: 1px solid blue;
+/* 	border-left: 1px solid blue; */
+	resize: both;
 }
 
-textarea.meta-tags {
+/* textarea.meta-tags {
 	width: 100%;
 	border-left: 1px solid green;
-}
+} */
 
 .hidden-form-element {
 	background-color: transparent;

@@ -8,10 +8,10 @@
 //  }
 //});
 
-$(document).ready( function(){
+//$(document).ready( function(){
 
   // autogrow textareas
-  $('textarea').autogrow({onInitialize: true});
+//  $('textarea').autogrow({onInitialize: true});
   
 //  // Focus a Textarea
 //  $('.text-element textarea').focus(function(event){
@@ -45,7 +45,7 @@ $(document).ready( function(){
 //      $('.comment-button').text('Add Comment');
 //    }
 //  });
-});
+//});
 
 //function dimmOtherTextElements(element){
 //  var textElement = $(element).closest('.text-element');

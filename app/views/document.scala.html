@@ -42,6 +42,8 @@
 			    <button class="btn btn-default" data-ng-class="{'active': filter == 'alle'}" data-ng-click="filterAlle()">Alle</button>
                 <button class="btn btn-default"  data-ng-class="{'active': filter == 'nurRueckseite'}" data-ng-click="filterNurRueckseite()">Nur mit Rückseite</button>
 			    <input type="text" class="form-control" placeholder="Metatag" ng-model="search.metatags" data-ng-change="filterNachMetatag()" ng-focus="filterNachMetatag()" style="width:200px; display: inline"/>
+                <button class="btn btn-default"  data-ng-class="{'active': show.comments == true}" data-ng-click="showComments()">Rückseite anzeigen</button>
+                <button class="btn btn-default"  data-ng-class="{'active': show.metatags == true}" data-ng-click="showMetatags()">Metatags anzeigen</button>
 			  </div>
 			</div>
 		</div>
@@ -61,8 +63,9 @@
 						<li><a data-ng-click="split($index)" href="javascript:void(0)">Teilen</a></li>
 						<li><a data-ng-click="createParagraph($index+1, document.id)" href="javascript:void(0)">+ Paragraph</a></li>
 						<li><a data-ng-click="createHeadline($index, document.id)" href="javascript:void(0)">+ Überschrift</a></li>
-						<li><a data-ng-if="!textelement.comment" data-ng-click="activateComment(textelement, $event)" href="javascript:void(0)">+ Rückseite</a></li>
-						<li><a data-ng-if="textelement.comment" data-ng-click="deleteComment(textelement)" href="javascript:void(0)">- Rückseite</a></li>
+<!-- 						<li><a data-ng-if="!textelement.comment" data-ng-click="activateComment(textelement, $event)" href="javascript:void(0)">+ Rückseite</a></li> -->
+<!-- 						<li><a data-ng-if="textelement.comment" data-ng-click="deleteComment(textelement)" href="javascript:void(0)">- Rückseite</a></li> -->
+<!-- 						<li><textarea class="meta-tags" placeholder="Metatags" data-ng-model="textelement.metatags" data-ng-change="change()" data-ng-blur="saveDoc()" ng-auto-expand></textarea></li> -->
 						<li><div class="show-on-focus">
 					<select class="form-control" data-ng-change="change()" data-ng-blur="saveDoc()" ng-model="textelement.textelementType" ng-options="type for type in textelementTypes.types"></select>
 				</div></li>
@@ -80,7 +83,7 @@
 					</ul>
 				</div>
 			</div>
-			<div class="col-xs-8" data-ng-if="textelement.type == 'Paragraph'">
+			<div class="col-xs-6" data-ng-if="textelement.type == 'Paragraph'">
 				<!-- Merge -->
 				<div class="merge-top merge show-on-focus" data-ng-if="document.textelements[$index-1].type == 'Paragraph'">
 					<button type="button" class="btn btn-default merge" data-ng-click="mergeWithTop($index)">
@@ -105,7 +108,7 @@
 				</div>
 				<!-- Merge Ende -->
 			</div>
-			<div class="col-xs-8" data-ng-if="textelement.type == 'Headline'">
+			<div class="col-xs-6" data-ng-if="textelement.type == 'Headline'">
 				<h3 data-ng-class="'size_'+textelement.size"
 					data-ng-click="activateElement(textelement)">
 					<textarea class="headline" data-ng-model="textelement.text"
@@ -113,10 +116,16 @@
 				</h3>
 				
 			</div>
-			<div class="col-xs-2">
+			<div class="comment col-xs-4">
+<!-- 				<textarea class="meta-tags" placeholder="Metatags" data-ng-model="textelement.metatags" data-ng-change="change()" data-ng-blur="saveDoc()" ng-auto-expand></textarea> -->
+				<div class="input-group input-group-sm" ng-hide="!show.metatags">
+				  <span class="input-group-addon">#</span>
+				  <input type="text" class="form-control meta-tags" placeholder="Metatags" data-ng-model="textelement.metatags" data-ng-change="change()" data-ng-blur="saveDoc()" placeholder="Metatags">
+				</div>
 				<!--  Rueckseite -->
-				<textarea class="comment" id="{{textelement.id}}" data-ng-if="textelement.comment" data-ng-model="textelement.comment" data-ng-change="change()" data-ng-blur="saveDoc()" placeholder="Platzhalter" ng-auto-expand></textarea>
-				<textarea class="meta-tags" placeholder="Metatags" data-ng-model="textelement.metatags" data-ng-change="change()" data-ng-blur="saveDoc()" ng-auto-expand></textarea>
+				<h6 data-ng-if="textelement.type == 'Paragraph'" ng-hide="!show.comments">Rückseite</h6>
+<!-- 				<textarea class="comment" id="{{textelement.id}}" ng-hide="!show.comments" data-ng-if="textelement.comment" data-ng-model="textelement.comment" data-ng-change="change()" data-ng-blur="saveDoc()" placeholder="Platzhalter" ng-auto-expand></textarea> -->
+				<textarea class="comment" id="{{textelement.id}}" data-ng-if="textelement.type == 'Paragraph'" ng-hide="!show.comments" data-ng-model="textelement.comment" data-ng-change="change()" data-ng-blur="saveDoc()" placeholder="Rückseite bearbeiten" ng-auto-expand></textarea>
 			</div>
 		</div>
 	</div>
