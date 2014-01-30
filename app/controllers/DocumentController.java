@@ -1,7 +1,5 @@
 package controllers;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -14,15 +12,12 @@ import models.Document;
 import models.DocumentRepository;
 import models.Headline;
 import models.Paragraph;
-import nl.siegmann.epublib.domain.Book;
-import nl.siegmann.epublib.epub.EpubWriter;
 import play.Logger;
 import play.data.Form;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 import util.JpaFixer;
-import util.converter.DocumentConverter;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
@@ -105,26 +100,5 @@ public class DocumentController extends Controller {
         }
         JpaFixer.removeDuplicatesWorkaround(result);
         return ok(Json.toJson(result));
-    }
-
-    public Result exportEpub(Long id) {
-        try {
-            Document doc = documentRepository.findOne(id);
-            JpaFixer.removeDuplicatesWorkaround(doc);
-            Book book = DocumentConverter.toEpub(doc);
-
-            // Write Epub to Buffer
-            EpubWriter epubWriter = new EpubWriter();
-            ByteArrayOutputStream out = new ByteArrayOutputStream();
-            epubWriter.write(book, out);
-            byte[] buffer = out.toByteArray();
-            
-//            response().setContentType("application/x-download");
-            String filename = doc.title+"-"+doc.givenname+"_"+doc.surname+"-"+id+".epub";
-            response().setHeader("Content-disposition","attachment; filename="+filename);
-            return ok(new ByteArrayInputStream(buffer)).as("application/epub+zip");
-        } catch (Exception e) {
-            return notFound();
-        }
     }
 }

@@ -1,0 +1,25 @@
+@(doc: Document) @main("New Document") {
+<div>
+	<div class="jumbotron">
+		<h1>@doc.title</h1>
+		<p>Autor: @doc.givenname @doc.surname</p>
+		<p>erstellt: @doc.createdAt.format("dd.MM.yyyy HH:mm")</p>
+		<p>geändert: @doc.changedAt.format("dd.MM.yyyy HH:mm")</p>
+	</div>
+	@for(textelement <- doc.textelements) {
+		@if(textelement.getType == "Paragraph") {
+		  	<p>@textelement.text</p>
+		} else {
+			@Html({
+				var headline:Headline = textelement.asInstanceOf[Headline]
+				var output : String = "<h3 class=\"size_"
+				output += headline.size
+				output += "\">"
+				output += headline.text
+				output += "</h3>"
+				output
+			})
+		}
+	}
+</div>
+}

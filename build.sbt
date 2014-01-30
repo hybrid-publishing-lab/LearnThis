@@ -15,5 +15,6 @@ libraryDependencies ++= Seq(
     "org.springframework" % "spring-expression" % "3.2.2.RELEASE",
     "org.hibernate" % "hibernate-entitymanager" % "3.6.10.Final",
     "mysql" % "mysql-connector-java" % "5.1.18",
+    "commons-io" % "commons-io" % "2.3",
     "org.mockito" % "mockito-core" % "1.9.5" % "test"
 )

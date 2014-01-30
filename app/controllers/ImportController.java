@@ -41,7 +41,7 @@ public class ImportController extends Controller {
         FilePart filePart = body.getFile("file");
         if (filePart != null) {
             String fileName = filePart.getFilename();
-            String contentType = filePart.getContentType();
+//            String contentType = filePart.getContentType();
             File file = filePart.getFile();
 
             try {

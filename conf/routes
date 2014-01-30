@@ -16,7 +16,10 @@ POST	/json/document/save									@controllers.DocumentController.saveDoc
 GET		/json/document/all									@controllers.DocumentController.findAll()
 GET		/json/document/:id									@controllers.DocumentController.findById(id: Long)
 POST	/json/document/delete/:id							@controllers.DocumentController.delete(id: Long)
-GET		/export/epub/document/:id							@controllers.DocumentController.exportEpub(id: Long)
+
+GET		/export/epub/document/:id							@controllers.ExportController.exportEpub(id: Long)
+GET		/export/html/document/:id							@controllers.ExportController.exportHtml(id: Long)
+GET		/export/pdf/document/:id							@controllers.ExportController.exportPdf(id: Long)
 
 POST	/json/document/:docId/textelement/:id/delete		@controllers.TextelementController.delete(docId: Long, id: Long)
 GET		/json/document/:id/headline/new/:index				@controllers.TextelementController.newHeadline(id: Long, index: Integer)
