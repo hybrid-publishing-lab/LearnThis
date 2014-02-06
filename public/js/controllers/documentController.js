@@ -94,6 +94,7 @@ function DocumentController($scope, $http, saveService) {
 	}
 
 	$scope.activateElement = function(textelement) {
+		$scope.saveDoc();
 		return $scope.activeEle = textelement;
 	}
 
