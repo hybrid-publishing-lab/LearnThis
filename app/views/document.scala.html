@@ -44,9 +44,9 @@
 			  <div class="panel-body">
 			    <button class="btn btn-default" data-ng-class="{'active': filter == 'alle'}" data-ng-click="filterAlle()">Alle</button>
                 <button class="btn btn-default"  data-ng-class="{'active': filter == 'nurRueckseite'}" data-ng-click="filterNurRueckseite()">Nur mit Rückseite</button>
-			    <input type="text" class="form-control" placeholder="Metatag" ng-model="search.metatags" data-ng-change="filterNachMetatag()" ng-focus="filterNachMetatag()" style="width:200px; display: inline"/>
+			    <input type="text" class="form-control" placeholder="Metainfo" ng-model="search.metatags" data-ng-change="filterNachMetatag()" ng-focus="filterNachMetatag()" style="width:200px; display: inline"/>
                 <button class="btn btn-default"  data-ng-class="{'active': show.comments == true}" data-ng-click="showComments()">Rückseite anzeigen</button>
-                <button class="btn btn-default"  data-ng-class="{'active': show.metatags == true}" data-ng-click="showMetatags()">Metatags anzeigen</button>
+                <button class="btn btn-default"  data-ng-class="{'active': show.metatags == true}" data-ng-click="showMetatags()">Metainfos anzeigen</button>
 			  </div>
 			</div>
 		</div>
@@ -122,8 +122,8 @@
 			<div class="comment col-xs-4">
 <!-- 				<textarea class="meta-tags" placeholder="Metatags" data-ng-model="textelement.metatags" data-ng-change="change()" data-ng-blur="saveDoc()" ng-auto-expand></textarea> -->
 				<div class="input-group input-group-sm metatag-input" ng-hide="!show.metatags">
-				  <span class="input-group-addon">#</span>
-				  <input type="text" class="form-control meta-tags" placeholder="Metatags" data-ng-model="textelement.metatags" data-ng-change="change()" data-ng-blur="saveDoc()" placeholder="Metatags">
+				  <span class="input-group-addon">i</span>
+				  <input type="text" class="form-control meta-tags" placeholder="Metainfo" data-ng-model="textelement.metatags" data-ng-change="change()" data-ng-blur="saveDoc()" placeholder="Metatags">
 				</div>
 				<!--  Rueckseite -->
 				<h6 data-ng-if="textelement.type == 'Paragraph'" ng-hide="!show.comments">Rückseite</h6>
