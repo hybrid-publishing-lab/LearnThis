@@ -38,6 +38,10 @@ function DocumentController($scope, $http, saveService) {
 			saveService.saveDocument($scope, $scope.document);
 		}
 	}
+	
+	$scope.reloadPage = function(){
+		window.location.reload();
+	}
 
 	$scope.change = function() {
 		$scope.saved = false;
@@ -94,7 +98,6 @@ function DocumentController($scope, $http, saveService) {
 	}
 
 	$scope.activateElement = function(textelement) {
-		$scope.saveDoc();
 		return $scope.activeEle = textelement;
 	}
 
@@ -108,8 +111,7 @@ function DocumentController($scope, $http, saveService) {
 	    		textelements[index-1].text += "\n";
 	    		textelements[index-1].text += textelements[index].text;
 			    textelements.splice(index,1);
-				$scope.saved = false;
-				$scope.saveDoc();
+				$scope.change();
 	    }
 	}
 	
@@ -119,8 +121,7 @@ function DocumentController($scope, $http, saveService) {
 	    		textelements[index].text += "\n";
 	            textelements[index].text += textelements[index+1].text;
 			    textelements.splice(index+1,1);
-				$scope.saved = false;
-				$scope.saveDoc();
+				$scope.change();
 	    }
 	}
 	
@@ -142,8 +143,7 @@ function DocumentController($scope, $http, saveService) {
 		placeholder : "ui-state-highlight",
 		cursor: "move",
 		update : function(e, ui){
-			$scope.saved = false;
-			$scope.saveDoc();
+			$scope.change();
 		}
 	};
 	

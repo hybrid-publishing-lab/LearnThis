@@ -158,6 +158,14 @@ button.delete-button {
 	margin-left: -200px;
 }
 
+.alert div.msg {
+	margin-bottom: 10px;
+}
+
+.alert button.save {
+	float: right;
+}
+
 .filterpanel input{
 	min-width: 50px;
 	max-width: 200px;
@@ -166,9 +174,4 @@ button.delete-button {
 
 div.metatag-input {
 	margin-bottom: 5px;
-}
-
-/* nur zu testzwecken */
-h6 {
-	display: none;
 }
