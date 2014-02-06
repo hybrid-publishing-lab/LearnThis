@@ -65,14 +65,10 @@ textarea {
 
 textarea.comment {
 	width: 100%;
-/* 	border-left: 1px solid blue; */
 	resize: both;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
 }
-
-/* textarea.meta-tags {
-	width: 100%;
-	border-left: 1px solid green;
-} */
 
 .hidden-form-element {
 	background-color: transparent;
@@ -166,4 +162,13 @@ button.delete-button {
 	min-width: 50px;
 	max-width: 200px;
 	display: inline;
+}
+
+div.metatag-input {
+	margin-bottom: 5px;
+}
+
+/* nur zu testzwecken */
+h6 {
+	display: none;
 }
