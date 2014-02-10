@@ -54,6 +54,7 @@ public class ExportController extends Controller {
             byte[] buffer = out.toByteArray();
             
             String filename = doc.title+"-"+doc.givenname+"_"+doc.surname+"-"+id+".epub";
+            filename = cleanFileName(filename);
             response().setHeader("Content-disposition","attachment; filename="+filename);
             return ok(new ByteArrayInputStream(buffer)).as("application/epub+zip");
         } catch (Exception e) {
@@ -66,6 +67,8 @@ public class ExportController extends Controller {
         JpaFixer.removeDuplicatesWorkaround(doc);
         
         String filename = doc.title+"-"+doc.givenname+"_"+doc.surname+"-"+id+".html";
+        filename = cleanFileName(filename);
+        response().setHeader("Content-Type", "text/html; charset=utf-8");
         response().setHeader("Content-disposition","attachment; filename="+filename);
         return ok(views.html.documentExport.render(doc));
     }
@@ -98,10 +101,15 @@ public class ExportController extends Controller {
             
 //            response().setContentType("application/x-download");
             String filename = doc.title+"-"+doc.givenname+"_"+doc.surname+"-"+id+".pdf";
+            filename = cleanFileName(filename);
             response().setHeader("Content-disposition","attachment; filename="+filename);
             return ok(new ByteArrayInputStream(buffer)).as("application/pdf");
         } catch (Exception e) {
             return notFound();
         }
+    }
+    
+    private String cleanFileName(String filename){
+        return filename.replaceAll("[^a-zA-Z0-9-_\\.]", "_");
     }
 }
