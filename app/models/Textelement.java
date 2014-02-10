@@ -59,10 +59,9 @@ public abstract class Textelement {
         this.textelementType = ele.textelementType;
     }
 
-    // TODO funktioniert leider nicht und fuehrt zu fehlern
-    // muss jetzt von hand aufgerufen werden
     // @PreUpdate
     // @PrePersist
+    // funktioniert leider nicht, da nur echte Objekt-Properties verändert werden dürfen
     public void updateKeywords() {
         this.keywords.clear();
         List<String> newKeywords = KeywordParser.parseHashTags(text);
