@@ -1,4 +1,4 @@
-@(doc: Document) @main("New Document") {
+@(doc: Document) @main("New Document"){
 <div>
 	<div class="jumbotron">
 		<h1>@doc.title</h1>
@@ -8,7 +8,18 @@
 	</div>
 	@for(textelement <- doc.textelements) {
 		@if(textelement.getType == "Paragraph") {
-		  	<p>@textelement.text</p>
+			@Html({
+				var para:Paragraph = textelement.asInstanceOf[Paragraph]
+				var output : String = "<p>"
+				output += para.text
+				output += "</p>"
+				if(null != para.comment){
+					output += "<p style=\"font-size: 0.8em; font-style: italic;\">"
+					output += para.comment
+					output += "</p>"
+				}
+				output
+			})
 		} else {
 			@Html({
 				var headline:Headline = textelement.asInstanceOf[Headline]

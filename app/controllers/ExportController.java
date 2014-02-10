@@ -11,7 +11,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
-
 import models.Document;
 import models.DocumentRepository;
 import nl.siegmann.epublib.domain.Book;

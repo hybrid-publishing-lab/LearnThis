@@ -1,7 +1,10 @@
 package util.converter;
 
+import org.apache.commons.lang3.StringUtils;
+
 import models.Document;
 import models.Headline;
+import models.Paragraph;
 import models.Textelement;
 import nl.siegmann.epublib.domain.Author;
 import nl.siegmann.epublib.domain.Book;
@@ -36,7 +39,13 @@ public class DocumentConverter {
                 int size = headline.size != null ? headline.size : 1;
                 sb.append("</h"+size+">");
             }else{
+                Paragraph para = (Paragraph) element;
                 sb.append("</p>");
+                if(StringUtils.isNotBlank(para.comment)){
+                    sb.append("<p style=\"font-size: 0.8em; font-style: italic;\">");
+                    sb.append(para.comment);
+                    sb.append("</p>");
+                }
             }
         }
         book.addSection("", new Resource(sb.toString().getBytes(), MediatypeService.XHTML));
