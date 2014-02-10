@@ -8,7 +8,7 @@ import models.Document;
 import models.DocumentRepository;
 import models.Headline;
 import models.Paragraph;
-import models.TextelementTypes;
+import models.TextelementType;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -80,8 +80,6 @@ public class TextelementController extends Controller {
     }
 
     public Result getTypes() {
-        // TODO convert TextelementType Enum to json
-        // return ok("['standard','special']");
-        return ok(Json.toJson(new TextelementTypes()));
+        return ok(Json.toJson(TextelementType.values()));
     }
 }

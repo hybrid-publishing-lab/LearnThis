@@ -40,10 +40,9 @@ public class DocumentController extends Controller {
         JsonNode json = request().body().asJson();
         if (json != null) {
 
-            // das führt leider zu einer Exception kriegt man aber evtl hin?
-//             Form<Document> docForm = Form.form(Document.class);
-            // TODO nicht sehr schoen, Vielleicht kann Janus eine Idee liefern?
-//             docForm.bind(json);
+            // TODO das führt leider zu einer Exception kriegt man aber evtl hin?
+            // Form<Document> docForm = Form.form(Document.class);
+            // docForm.bind(json);
             Long id = json.get("id").asLong();
             Document doc = documentRepository.findOne(id);
             doc.changedAt = new Date();
@@ -85,17 +84,17 @@ public class DocumentController extends Controller {
         documentRepository.delete(id);
         return ok();
     }
-    
+
     public Result findById(Long id) {
         Document doc = documentRepository.findOne(id);
         JpaFixer.removeDuplicatesWorkaround(doc);
         return ok(Json.toJson(doc));
     }
-    
+
     public Result findAll() {
         Iterable<Document> docs = documentRepository.findAll();
         List<Document> result = new ArrayList<Document>();
-        for(Document doc : docs){
+        for (Document doc : docs) {
             result.add(doc);
         }
         JpaFixer.removeDuplicatesWorkaround(result);

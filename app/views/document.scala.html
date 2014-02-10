@@ -79,7 +79,7 @@
 						<li><a data-ng-click="createParagraph($index+1, document.id)" href="javascript:void(0)">+ Paragraph</a></li>
 						<li><a data-ng-click="createHeadline($index, document.id)" href="javascript:void(0)">+ Überschrift</a></li>
 						<li><div class="show-on-focus">
-					<select class="form-control" data-ng-change="change()" ng-model="textelement.textelementType" ng-options="type for type in textelementTypes.types"></select>
+					<select class="form-control" data-ng-change="change()" ng-model="textelement.textelementType" ng-options="type for type in textelementTypes"></select>
 				</div></li>
 						<li><a data-ng-click="deleteElement(textelement, $index)" href="javascript:void(0)">Löschen</a></li>
 					</ul>
