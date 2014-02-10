@@ -49,9 +49,7 @@ div.sidebar-menu-container {
 	max-width: 200px;
 }
 
-.nav-pills a,
-.nav-pills select,
-.nav-pills textarea{
+.nav-pills a,.nav-pills select,.nav-pills textarea {
 	background-color: #DDDDDD;
 }
 
@@ -136,7 +134,6 @@ button.delete-button {
 .roll-out-menu ul {
 	position: absolute;
 	width: 100%;
-/* 	top: 30px; */
 }
 
 #overlay {
@@ -145,7 +142,7 @@ button.delete-button {
 	left: 0;
 	height: 100%;
 	width: 100%;
-	background-color: rgba(0,0,0,0.2);
+	background-color: rgba(0, 0, 0, 0.2);
 	position: fixed;
 }
 
@@ -166,12 +163,30 @@ button.delete-button {
 	float: right;
 }
 
-.filterpanel input{
-	min-width: 50px;
-	max-width: 200px;
+div.metatag-input {
+	margin-bottom: 5px;
+}
+
+.filterbar input {
+	width: 200px;
 	display: inline;
 }
 
-div.metatag-input {
-	margin-bottom: 5px;
+.filterbar select {
+	width: 200px;
+	display: inline;
+}
+
+.filterbar .hashtags {
+	margin-top: 10px;
+}
+
+.filterbar .hashtags h6 {
+	margin-left: 5px;
+	margin-bottom: 1px;
+}
+
+.filterbar button.right {
+	float: right;
+	margin-left: 5px;	
 }

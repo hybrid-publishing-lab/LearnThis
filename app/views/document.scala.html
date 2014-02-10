@@ -47,10 +47,18 @@
 			  <div class="panel-heading">Filter</div>
 			  <div class="panel-body">
 			    <button class="btn btn-default" data-ng-class="{'active': filter == 'alle'}" data-ng-click="filterAlle()">Alle</button>
-                <button class="btn btn-default"  data-ng-class="{'active': filter == 'nurRueckseite'}" data-ng-click="filterNurRueckseite()">Nur mit Rückseite</button>
-			    <input type="text" class="form-control" placeholder="Metainfo" ng-model="search.metatags" data-ng-change="filterNachMetatag()" ng-focus="filterNachMetatag()" style="width:200px; display: inline"/>
-                <button class="btn btn-default"  data-ng-class="{'active': show.comments == true}" data-ng-click="showComments()">Rückseite anzeigen</button>
-                <button class="btn btn-default"  data-ng-class="{'active': show.metatags == true}" data-ng-click="showMetatags()">Metainfos anzeigen</button>
+                <button class="btn btn-default" data-ng-class="{'active': filter == 'nurRueckseite'}" data-ng-click="filterNurRueckseite()">Nur mit Rückseite</button>
+			    <input type="text" class="form-control" placeholder="Metainfo" ng-model="search.metatags" data-ng-change="filterNachMetatag()" ng-focus="filterNachMetatag()"/>
+                <button class="btn btn-default right" data-ng-class="{'active': show.comments == true}" data-ng-click="showComments()">Rückseite anzeigen</button>
+                <button class="btn btn-default right" data-ng-class="{'active': show.metatags == true}" data-ng-click="showMetatags()">Metainfos anzeigen</button>
+                <div class="hashtags">
+                	<h6>Hashtags:</h6>
+	                <select multiple size="3" class="form-control" ng-model="search.hashtags" ng-options="kw for kw in document.keywords"  data-ng-click="filterNachHashTags()"></select>
+	                <div class="btn-group-vertical">
+	                	<button class="btn btn-default" data-ng-click="selectAllHashTags()"><span class="glyphicon glyphicon-align-justify"></span> Alle auswählen</button>
+	                	<button class="btn btn-default" data-ng-click="clearSelectedHashTags()"><span class="glyphicon glyphicon-remove"></span> Auswahl löschen</button>
+					</div>
+				</div>
 			  </div>
 			</div>
 		</div>
@@ -61,7 +69,7 @@
 			ui-sortable="sortableOptions">
 		<div class="row text-element "
 			data-ng-class="{'edit-mode-active': isActive(textelement)}"
-			data-ng-repeat="textelement in document.textelements | filter:filterExpression | orderBy:sort">
+			data-ng-repeat="textelement in document.textelements | filter:filterExpression | nonEmptyIntersection:search.hashtags | orderBy:sort">
 			
 			<div class="col-xs-2">
 				<div class="roll-out-menu" data-ng-if="textelement.type == 'Paragraph'">
@@ -70,9 +78,6 @@
 						<li><a data-ng-click="split($index)" href="javascript:void(0)">Teilen</a></li>
 						<li><a data-ng-click="createParagraph($index+1, document.id)" href="javascript:void(0)">+ Paragraph</a></li>
 						<li><a data-ng-click="createHeadline($index, document.id)" href="javascript:void(0)">+ Überschrift</a></li>
-<!-- 						<li><a data-ng-if="!textelement.comment" data-ng-click="activateComment(textelement, $event)" href="javascript:void(0)">+ Rückseite</a></li> -->
-<!-- 						<li><a data-ng-if="textelement.comment" data-ng-click="deleteComment(textelement)" href="javascript:void(0)">- Rückseite</a></li> -->
-<!-- 						<li><textarea class="meta-tags" placeholder="Metatags" data-ng-model="textelement.metatags" data-ng-change="change()" ng-auto-expand></textarea></li> -->
 						<li><div class="show-on-focus">
 					<select class="form-control" data-ng-change="change()" ng-model="textelement.textelementType" ng-options="type for type in textelementTypes.types"></select>
 				</div></li>

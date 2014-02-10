@@ -11,7 +11,7 @@ function DocumentController($scope, $http, saveService) {
 	$scope.lastCursor = {position: undefined};
 	$scope.filter = filterAlle;
 	$scope.filterExpression = "";
-	$scope.search = {metatags: ""};
+	$scope.search = {metatags: "", hashtags: []};
 	$scope.show = {comments: true, metatags: false};
 	
 
@@ -72,17 +72,6 @@ function DocumentController($scope, $http, saveService) {
 			$scope.document.textelements.splice(index, 0, data);
 		});
 	}
-
-//	$scope.activateComment = function(textelement) {
-//		textelement.comment = "Rückseite bearbeiten";
-//		
-////		TODO fokus auf das kommentarfeld setzen. Das Kommentarfeld scheint hier noch gar nicht im
-////		dom zu existieren, da es mit data-ng-if ausgeblendet wird
-//		
-////		var selector = 'textarea#'+textelement.id;
-////		var textarea = $(selector);
-////		textarea.focus();
-//	}
 
 	$scope.deleteComment = function(textelement) {
 		textelement.comment = null;
@@ -160,6 +149,19 @@ function DocumentController($scope, $http, saveService) {
 	$scope.filterNachMetatag = function(){
 		$scope.filter = filterNachMetatag;
 		$scope.filterExpression = {metatags: $scope.search.metatags};
+	}
+
+	$scope.filterNachHashTags = function(){
+		$scope.filter = filterNachHashtags;
+		$scope.filterExpression = {hashtags: $scope.search.hashtags};
+	}
+	
+	$scope.clearSelectedHashTags = function(){
+		$scope.search.hashtags = [];
+	}
+	
+	$scope.selectAllHashTags = function(){
+		$scope.search.hashtags = $scope.document.keywords;
 	}
 	
 	$scope.showComments = function(){

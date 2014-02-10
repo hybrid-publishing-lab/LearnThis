@@ -1,19 +1,20 @@
 package models;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import util.KeywordParser;
 
@@ -21,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 // @MappedSuperclass
-    public abstract class Textelement{
+public abstract class Textelement {
     @Id
     @GeneratedValue
     public Long id;
@@ -30,7 +31,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
     public String text;
 
     public Integer sort;
-    
+
     @Enumerated(EnumType.STRING)
     public TextelementType textelementType;
 
@@ -39,18 +40,17 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
     @JsonIgnore
     public Document document;
 
-//    @OneToMany(fetch=FetchType.EAGER, mappedBy = "textelement", cascade = CascadeType.ALL, orphanRemoval=true)
-    @ElementCollection(fetch = FetchType.EAGER)
-    @JsonIgnore  // TODO Workaround, da die Keywords von Play nicht korrekt geparst werden können
-    public Set<String> keywords = new HashSet<String>();
-    
+    @ElementCollection
+    @LazyCollection(LazyCollectionOption.FALSE)
+    public List<String> keywords = new ArrayList<String>();
+
     @Column(length = 1000)
     public String metatags = "";
-    
-    public Textelement(){
+
+    public Textelement() {
         textelementType = TextelementType.standard;
     }
-    
+
     public abstract String getType();
 
     public void merge(Textelement ele) {
@@ -59,10 +59,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
         this.textelementType = ele.textelementType;
     }
 
-// TODO funktioniert leider nicht und fuehrt zu fehlern
-// muss jetzt von hand aufgerufen werden
-//    @PreUpdate
-//    @PrePersist
+    // TODO funktioniert leider nicht und fuehrt zu fehlern
+    // muss jetzt von hand aufgerufen werden
+    // @PreUpdate
+    // @PrePersist
     public void updateKeywords() {
         this.keywords.clear();
         List<String> newKeywords = KeywordParser.parseHashTags(text);

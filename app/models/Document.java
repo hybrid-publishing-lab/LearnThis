@@ -3,7 +3,9 @@ package models;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -40,6 +42,17 @@ public class Document {
     public Document(){
         this.createdAt = new Date();
         this.changedAt = new Date();
+    }
+    
+    public Set<String> getKeywords(){
+        Set<String> result = new HashSet<String>();
+        for(Textelement ele : this.textelements){
+            if(ele instanceof Paragraph){
+                Paragraph para = (Paragraph) ele;
+                result.addAll(para.keywords);
+            }
+        }
+        return result;
     }
     
     // ensures correct cross referencing

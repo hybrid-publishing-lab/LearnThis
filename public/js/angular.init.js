@@ -3,9 +3,11 @@ var lhp = {};
 // ///////////////////////////
 // Init angular App
 //
-var lhpApp = angular.module('lhpApp', [ 'lhpControllers', 'lhpServices','ui.sortable' ]);
+var lhpApp = angular.module('lhpApp', [ 'lhpControllers', 'lhpFilters', 'lhpServices','ui.sortable' ]);
 
 var lhpControllers = angular.module('lhpControllers', []);
+
+var lhpFilters = angular.module('lhpFilters', []);
 
 /**
  * logs the event and uses $scope.broadcast to broadcast it
