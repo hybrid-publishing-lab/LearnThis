@@ -51,7 +51,7 @@ public class DocumentController extends Controller {
             Long id = json.get("id").asLong();
             Document doc = documentRepository.findOne(id);
             
-            if (doc.password != null && !doc.password.equals(pw)) {
+            if (doc.password != null && doc.password.length() > 0 && !doc.password.equals(pw)) {
                 return badRequest("Invalid password");
             }
             
