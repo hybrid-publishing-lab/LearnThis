@@ -1,0 +1,27 @@
+@(document: Document) @main("New Document") {
+<div class="container" data-ng-controller="DocumentController"
+	data-ng-init="init(@document.id)">
+	
+	<div class="site-head row">
+		<ol class="breadcrumb">
+			<li><a href="/"> < Übersicht </a></li>
+		</ol>
+		<div class="col-xs-2"></div>
+		<div class="jumbotron col-xs-8">
+			<h1>{{document.title}}</h1>
+			<wordcloud data-ng-if="document.combinedTexts" width="400" text="{{document.combinedTexts}}">
+			</wordcloud>
+			<p>Autor: {{document.givenname}} {{document.surname}}</p>
+			<p>erstellt: @document.createdAt.format("dd.MM.yyyy HH:mm")</p>
+			<p>geändert: @document.changedAt.format("dd.MM.yyyy HH:mm")</p>
+		</div>
+		<div class="col-xs-2">
+			<ul class="nav nav-pills nav-stacked">
+				<li><a href="/document/edit/@document.id">Editieren</a></li>
+				<li><a href="/document/learn/@document.id">Lernen</a></li>
+				<li><a data-ng-click="deleteDoc(@document.id)">Löschen</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+}
