@@ -10,6 +10,19 @@ function DocumentListController($scope, $http, saveService){
 			$scope.isInit = true;
 			$http.get('/json/document/all').success(function(data){
 				$scope.documents = data;
+				for(j = 0; j < $scope.documents.length; ++j) {
+					var combinedTexts = "" + $scope.documents[j].title;
+					for(index = 0; index < $scope.documents[j].cards.length; ++index) {
+						var card = $scope.documents[j].cards[index];
+						if (card.front && card.front.text) {
+							combinedTexts += ' ' + card.front.text;
+						}
+						if (card.back && card.back.text) {
+							combinedTexts += ' ' + card.back.text;
+						}
+					}
+					$scope.documents[j].combinedTexts = combinedTexts;
+				}
 			});
 		}
 	}

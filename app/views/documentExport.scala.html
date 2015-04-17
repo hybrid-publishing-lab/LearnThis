@@ -6,10 +6,10 @@
 		<p>erstellt: @doc.createdAt.format("dd.MM.yyyy HH:mm")</p>
 		<p>geändert: @doc.changedAt.format("dd.MM.yyyy HH:mm")</p>
 	</div>
-	@for(textelement <- doc.textelements) {
-		@if(textelement.getType == "Paragraph") {
+	@for(card <- doc.cards) {
+		@if(card.front.getType == "Paragraph") {
 			@Html({
-				var para:Paragraph = textelement.asInstanceOf[Paragraph]
+				var para:Paragraph = card.front.asInstanceOf[Paragraph]
 				var output : String = "<p>"
 				output += para.text
 				output += "</p>"
@@ -22,7 +22,7 @@
 			})
 		} else {
 			@Html({
-				var headline:Headline = textelement.asInstanceOf[Headline]
+				var headline:Headline = card.front.asInstanceOf[Headline]
 				var output : String = "<h3 class=\"size_"
 				output += headline.size
 				output += "\">"

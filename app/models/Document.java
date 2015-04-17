@@ -17,7 +17,9 @@ import javax.persistence.OrderBy;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 
-import util.TextelementSortComparator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import util.CardSortComparator;
 
 @Entity
 public class Document {
@@ -35,9 +37,12 @@ public class Document {
     
     public Date changedAt;
     
+    @JsonIgnore
+    public String password;
+    
     @OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL, mappedBy="document", orphanRemoval=true)
     @OrderBy("sort ASC")
-    public List<Textelement> textelements = new ArrayList<Textelement>();
+    public List<Card> cards = new ArrayList<Card>();
     
     public Document(){
         this.createdAt = new Date();
@@ -46,73 +51,70 @@ public class Document {
     
     public Set<String> getKeywords(){
         Set<String> result = new HashSet<String>();
-        for(Textelement ele : this.textelements){
-            if(ele instanceof Paragraph){
-                Paragraph para = (Paragraph) ele;
-                result.addAll(para.keywords);
-            }
+        for(Card card : this.cards){
+            result.addAll(card.keywords);
         }
         return result;
     }
     
     // ensures correct cross referencing
-    public void appendTextElement(Textelement element){
+    public void appendCard(Card card){
         int maxSort = 0;
-        for(Textelement ele : this.textelements){
-            if(ele.sort != null && maxSort < ele.sort){
-                maxSort = ele.sort;
+        for(Card c : this.cards){
+            if(c.sort != null && maxSort < c.sort){
+                maxSort = c.sort;
             }
         }
-        element.sort = maxSort + 1;
-        this.textelements.add(element);
-        element.document = this;
+        card.sort = maxSort + 1;
+        this.cards.add(card);
+        card.document = this;
     }
 
     /**
      * Fügt ein Textelement an einem index ein.
      * Sort wird für das Element und alle nachfolgenden richtig gesetzt.
      * Es wird dabei auch der Fall betrachtet, dass sort nicht fortlaufend und von 0 an ausgehend durchnummeriert ist.
-     * @param e Textelement
+     * @param card Textelement
      * @param index an dem das Element eingefuegt werden soll
      */
-    public void insertTextElement(Textelement e, Integer index) {
-        if(index <= this.textelements.size()){
-            int sort = this.textelements.size();
+    public void insertCard(Card card, Integer index) {
+        if(index <= this.cards.size()){
+            int sort = this.cards.size();
             boolean indexFound = false;
-            Collections.sort(this.textelements, new TextelementSortComparator());
-            for(int i = 0 ; i < textelements.size() ; i++){
-                Textelement ele = textelements.get(i);
+            Collections.sort(this.cards, new CardSortComparator());
+            for(int i = 0 ; i < cards.size() ; i++){
+                Card c = cards.get(i);
                 // merke den sort wert des elementes mit dem index
-                if(ele.sort != null && i == index){
-                    sort = ele.sort;
+                if(c.sort != null && i == index){
+                    sort = c.sort;
                     indexFound = true;
                 }
                 // erhoehe sort fuer alle nachfolgenden element
                 if(indexFound){
-                    ele.sort = ele.sort +1;
+                    c.sort = c.sort +1;
                 }
             }
-            e.document = this;
-            e.sort = sort;
-            this.textelements.add(index, e);
+            card.document = this;
+            card.sort = sort;
+            this.cards.add(index, card);
         }else{
-            appendTextElement(e);
+            appendCard(card);
         }
     }
     
-    public Textelement findTextelement(Long id){
-        for(Textelement ele : textelements){
-            if(ele.id != null && ele.id.equals(id)){
-                return ele;
+    public Card findCard(Long id){
+        for(Card card : cards){
+            if(card.id != null && card.id.equals(id)){
+                return card;
             }
         }
         return null;
     }
     
-    public boolean removeTextelement(Long id){
-        Textelement toDelete = findTextelement(id);
+    public boolean removeCard(Long id){
+        Card toDelete = findCard(id);
         if(toDelete != null){
-            this.textelements.remove(toDelete);
+            this.cards.remove(toDelete);
             return true;
         }
         return false;

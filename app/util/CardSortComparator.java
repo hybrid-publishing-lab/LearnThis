@@ -2,12 +2,12 @@ package util;
 
 import java.util.Comparator;
 
-import models.Textelement;
+import models.Card;
 
-public class TextelementSortComparator implements Comparator<Textelement>{
+public class CardSortComparator implements Comparator<Card>{
     
     @Override
-    public int compare(Textelement o1, Textelement o2) {
+    public int compare(Card o1, Card o2) {
         if (o1.sort == null && o2.sort == null) {
             return 0;
           }

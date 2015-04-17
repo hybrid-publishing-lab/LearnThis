@@ -1,0 +1,67 @@
+@(document: Document) @main("New Document") {
+<div class="container-fluid" data-ng-controller="DocumentLearnController"
+	data-ng-init="init(@document.id)">
+	
+	<div class="site-head row">
+		<ol class="breadcrumb">
+			<li><a href="/"> < Übersicht </a></li>
+		</ol>
+		<div class="col-xs-2">
+		</div>
+		<div class="jumbotron col-xs-8">
+			<h1>{{document.title}}</h1>
+		</div>
+		<div class="col-xs-2">
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-xs-2">
+			<a data-ng-click="prevCard()">Prev</a>
+		</div>
+		<div class="jumbotron col-xs-8">
+			<div data-ng-if="!showScore">
+				<div data-ng-if="currentCard[currentSide].type != 'MultipleChoice'">
+					<p>{{currentCard[currentSide].text}}</p>
+					<!-- if next entry in the pager is not of the same card -->
+					<div data-ng-if="currentIndex != pager[currentPage+1].cardIndex">
+						<input type="button" data-ng-click="userUnderstood(true)" value="Habe ich verstanden">
+						<input type="button" data-ng-click="userUnderstood(false)" value="Habe ich nicht verstanden">
+					</div>
+				</div>
+				<div data-ng-if="currentCard[currentSide].type == 'MultipleChoice'">
+					<p>{{currentCard[currentSide].text}}</p>
+					<div>
+						<ul data-ng-repeat="multipleChoice in currentCard[currentSide].choices | orderBy:sort">
+							<li>
+								<input type="checkbox" data-ng-model="multipleChoice.userChecked" data-ng-disabled="{{currentCard[currentSide].solved}}">
+								{{multipleChoice.text}}
+								<span data-ng-if="currentCard[currentSide].solved">
+									{{(multipleChoice.userChecked && multipleChoice.correct) || (!multipleChoice.userChecked && !multipleChoice.correct)}}
+								</span>
+							</li>
+						</ul>
+						<div>
+							<input type="button" data-ng-if="!currentCard[currentSide].solved" data-ng-click="userSolvesMc()" value="Auflösen">
+							<input type="button" data-ng-if="currentCard[currentSide].solved" data-ng-click="nextCard()" value="weiter">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div data-ng-if="showScore">
+				<p>Punktzahl: {{score}} / {{maxScore}}</p>
+				<a href="/">Übersicht</a>
+				<a data-ng-click="restart()">nochmal lernen</a>
+			</div>
+		</div>
+		<div class="col-xs-2">
+			<a data-ng-click="nextCard()">Next</a>
+		</div>
+	</div>
+	<div class="row pager">
+		<div class="col-xs-12">
+			{{currentPage+1}} / {{pager.length}}
+		</div>
+	</div>
+</div>
+}

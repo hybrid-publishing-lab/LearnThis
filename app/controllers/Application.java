@@ -6,6 +6,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
+import models.Card;
 import models.Document;
 import models.DocumentRepository;
 import models.Headline;
@@ -40,20 +41,28 @@ public class Application extends Controller {
         doc.surname = "Nachname";
         doc.createdAt = new Date();
         doc.changedAt = new Date();
+        doc.password = "";
         documentRepository.save(doc);
-        // add headline
-        Headline headline = new Headline();
-        headline.text = "Headline";
-        headline.document = doc;
-        headline.sort = 0;
-        headline.size = 2;
-        doc.textelements.add(headline);
+        
+//        // add headline
+//        Headline headline = new Headline();
+//        headline.text = "Headline";
+//        headline.size = 2;
+//        Card card = new Card();
+//        card.sort = 0;
+//        card.front = headline;
+//        card.document = doc;
+//        doc.cards.add(card);
+        
         // add paragraph
         Paragraph paragraph = new Paragraph();
         paragraph.text = "Paragraph";
-        paragraph.document = doc;
-        paragraph.sort = 1;
-        doc.textelements.add(paragraph);
+        Card card = new Card();
+        card.sort = 1;
+        card.front = paragraph;
+        card.document = doc;
+        doc.cards.add(card);
+        
         documentRepository.save(doc);
         
         return redirect(routes.Application.findById(doc.id));
@@ -69,5 +78,17 @@ public class Application extends Controller {
         Document doc = documentRepository.findOne(docId);
         JpaFixer.removeDuplicatesWorkaround(doc);
         return ok(views.html.keywords.render(doc));
+    }
+    
+    public Result edit(Long id){
+        Document doc = documentRepository.findOne(id);
+        JpaFixer.removeDuplicatesWorkaround(doc);
+        return ok(views.html.documentEdit.render(doc));
+    }
+    
+    public Result learn(Long id){
+        Document doc = documentRepository.findOne(id);
+        JpaFixer.removeDuplicatesWorkaround(doc);
+        return ok(views.html.documentLearn.render(doc));
     }
 }

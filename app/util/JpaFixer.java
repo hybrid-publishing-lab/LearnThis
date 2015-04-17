@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import models.Card;
 import models.Document;
 import models.Textelement;
 import play.Logger;
@@ -15,13 +16,13 @@ public class JpaFixer {
      * @param doc
      */
     public static void removeDuplicatesWorkaround(Document doc){
-        List<Textelement> textelements = doc.textelements;
-        Map<Long, Textelement> uniqueElements = new HashMap<Long, Textelement>();
-        for(int i = 0 ; i < textelements.size() ; i++){
-            Textelement value = textelements.get(i);
+        List<Card> cards = doc.cards;
+        Map<Long, Card> uniqueElements = new HashMap<Long, Card>();
+        for(int i = 0 ; i < cards.size() ; i++){
+            Card value = cards.get(i);
             Long key = value.id;
             if(uniqueElements.containsKey(key)){
-                textelements.remove(i);
+                cards.remove(i);
                 i--;
                 Logger.debug("Textelement removed from Document: "+value);
             }else{

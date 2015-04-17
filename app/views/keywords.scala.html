@@ -8,11 +8,10 @@
       <div class="content-head"></div>
       <div class="content-body-container">
 		<ul>
-			@for(textelement <- doc.textelements) {
+			@for(card <- doc.cards) {
 				<li>
-<!-- 				<div>@textelement.text</div> -->
 				<ul>
-				@for(keyword <- textelement.keywords) {
+				@for(keyword <- card.keywords) {
 				  <li>@keyword</li>
 				}	
 				</ul>

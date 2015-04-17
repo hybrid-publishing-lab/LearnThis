@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
+import models.Card;
 import models.Document;
 import models.Headline;
 import models.Paragraph;
@@ -28,16 +29,20 @@ public class Importer {
                     Headline hl = new Headline();
                     hl.text = element;
                     hl.size = 1;
-                    hl.sort = i;
-                    doc.textelements.add(hl);
-                    hl.document = doc;
+                    Card card = new Card();
+                    card.front = hl;
+                    card.sort = i;
+                    doc.cards.add(card);
+                    card.document = doc;
                 }else{
                     // Paragraph
                     Paragraph pg = new Paragraph();
                     pg.text = element;
-                    pg.sort = i;
-                    doc.textelements.add(pg);
-                    pg.document = doc;
+                    Card card = new Card();
+                    card.sort = i;
+                    card.front = pg;
+                    doc.cards.add(card);
+                    card.document = doc;
                 }
                 i++;
             }

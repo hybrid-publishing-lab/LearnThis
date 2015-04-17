@@ -8,10 +8,13 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
+import models.Card;
 import models.Document;
 import models.DocumentRepository;
 import models.Headline;
+import models.MultipleChoice;
 import models.Paragraph;
+import models.Textelement;
 import play.Logger;
 import play.data.Form;
 import play.libs.Json;
@@ -20,6 +23,7 @@ import play.mvc.Result;
 import util.JpaFixer;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.NullNode;
 
 /**
  * The main set of web services.
@@ -39,39 +43,40 @@ public class DocumentController extends Controller {
     public Result saveDoc() {
         JsonNode json = request().body().asJson();
         if (json != null) {
+            String pw = getPwFromRequest();
 
             // TODO das führt leider zu einer Exception kriegt man aber evtl hin?
             // Form<Document> docForm = Form.form(Document.class);
             // docForm.bind(json);
             Long id = json.get("id").asLong();
             Document doc = documentRepository.findOne(id);
+            
+            if (doc.password != null && !doc.password.equals(pw)) {
+                return badRequest("Invalid password");
+            }
+            
             doc.changedAt = new Date();
             doc.title = json.get("title").asText();
             doc.surname = json.get("surname").asText();
             doc.givenname = json.get("givenname").asText();
 
-            Form<Headline> headlineForm = Form.form(Headline.class);
-            Form<Paragraph> paraForm = Form.form(Paragraph.class);
-
-            JsonNode textelements = json.get("textelements");
-            doc.textelements.clear();
+            JsonNode cards = json.get("cards");
+            doc.cards.clear();
             int i = 0;
-            for (JsonNode textelement : textelements) {
-                if ("Paragraph".equals(textelement.get("type").asText())) {
-                    Logger.info("saving Para ", textelement.toString());
-                    Paragraph para = paraForm.bind(textelement).get();
-                    para.document = doc;
-                    para.sort = i;
-                    para.updateKeywords();
-                    doc.textelements.add(para);
-                } else {
-                    Logger.info("saving Headline", textelement.toString());
-                    Headline headline = headlineForm.bind(textelement).get();
-                    headline.document = doc;
-                    headline.sort = i;
-                    headline.updateKeywords();
-                    doc.textelements.add(headline);
+            for (JsonNode card : cards) {
+                Card c = new Card();
+                c.document = doc;
+                c.sort = i;
+                JsonNode textelement = card.get("front");
+                if (textelement != null && !(textelement instanceof NullNode)) {
+                    c.front = buildTextelement(textelement);
                 }
+                textelement = card.get("back");
+                if (textelement != null && !(textelement instanceof NullNode)) {
+                    c.back = buildTextelement(textelement);
+                }
+                doc.cards.add(c);
+                c.updateKeywords();
                 i++;
             }
             documentRepository.save(doc);
@@ -80,9 +85,69 @@ public class DocumentController extends Controller {
         return badRequest("Expecting Json data");
     }
 
+    private Textelement buildTextelement(JsonNode textelement) {
+
+        Form<MultipleChoice> mcForm = Form.form(MultipleChoice.class);
+        Form<Headline> headlineForm = Form.form(Headline.class);
+        Form<Paragraph> paraForm = Form.form(Paragraph.class);
+        
+        if ("MultipleChoice".equals(textelement.get("type").asText())) {
+            Logger.info("saving MultipleChoice", textelement.toString());
+            return mcForm.bind(textelement).get();
+        } else if("Headline".equals(textelement.get("type").asText())) {
+            Logger.info("saving Headline", textelement.toString());
+            return headlineForm.bind(textelement).get();
+        } else {
+            Logger.info("saving Para ", textelement.toString());
+            return paraForm.bind(textelement).get();
+        }
+    }
+
+    public Result changePassword(Long id) {
+        String pw = getPwFromRequest();
+        Document doc = documentRepository.findOne(id);
+        if (doc.password == null || doc.password.equals(pw)) {
+            JsonNode json = request().body().asJson();
+            JsonNode pwNode = json.get("pwNew");
+            String newPassword = null;
+            if (pwNode != null && !(pwNode instanceof NullNode)) {
+                newPassword = pwNode.textValue();
+            }
+            doc.password = newPassword;
+            documentRepository.save(doc);
+            return ok();
+        }
+        return badRequest();
+    }
+
     public Result delete(Long id) {
-        documentRepository.delete(id);
-        return ok();
+        String pw = getPwFromRequest();
+        Document doc = documentRepository.findOne(id);
+        if (doc.password == null || doc.password.equals(pw)) {
+            documentRepository.delete(id);
+            return ok();
+        }
+        return badRequest();
+    }
+
+    public Result checkPassword(Long id) {
+        String pw = getPwFromRequest();
+        Document doc = documentRepository.findOne(id);
+        if (doc.password.equals(pw)) {
+            return ok();
+        }
+        return badRequest();
+    }
+
+    private String getPwFromRequest() {
+        JsonNode json = request().body().asJson();
+        if (json != null) {
+            JsonNode pwNode = json.get("pw");
+            if (pwNode != null && !(pwNode instanceof NullNode)) {
+                return pwNode.textValue();
+            }
+        }
+        return null;
     }
 
     public Result findById(Long id) {

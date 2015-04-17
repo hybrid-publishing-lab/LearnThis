@@ -4,9 +4,11 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
+import models.Card;
 import models.Document;
 import models.DocumentRepository;
 import models.Headline;
+import models.MultipleChoice;
 import models.Paragraph;
 import models.TextelementType;
 
@@ -44,9 +46,11 @@ public class TextelementController extends Controller {
             if (json != null && StringUtils.isNotEmpty(json.asText())) {
                 para.text = json.asText();
             }
-            doc.insertTextElement(para, index);
+            Card card = new Card();
+            card.front = para;
+            doc.insertCard(card, index);
             documentRepository.save(doc);
-            return ok(Json.toJson(para));
+            return ok(Json.toJson(card));
         } else {
             return notFound();
         }
@@ -59,18 +63,36 @@ public class TextelementController extends Controller {
             Headline headline = new Headline();
             headline.text = "Neue Headline";
             headline.size = 3;
-            doc.insertTextElement(headline, index);
+            Card card = new Card();
+            card.front = headline;
+            doc.insertCard(card, index);
             documentRepository.save(doc);
-            return ok(Json.toJson(headline));
+            return ok(Json.toJson(card));
         } else {
             return notFound();
         }
     }
 
-    public Result delete(Long docId, Long textelementId) {
+    public Result newMultipleChoice(Long id, Integer index) {
+        Document doc = documentRepository.findOne(id);
+        JpaFixer.removeDuplicatesWorkaround(doc);
+        if (doc != null) {
+            MultipleChoice mc = new MultipleChoice();
+            mc.text = "Neue MultipleChoice";
+            Card card = new Card();
+            card.front = mc;
+            doc.insertCard(card, index);
+            documentRepository.save(doc);
+            return ok(Json.toJson(card));
+        } else {
+            return notFound();
+        }
+    }
+
+    public Result delete(Long docId, Long cardId) {
         Document doc = documentRepository.findOne(docId);
         JpaFixer.removeDuplicatesWorkaround(doc);
-        boolean removed = doc.removeTextelement(textelementId);
+        boolean removed = doc.removeCard(cardId);
         documentRepository.save(doc);
         if (removed) {
             return ok();

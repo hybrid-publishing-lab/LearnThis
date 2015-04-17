@@ -2,6 +2,7 @@ package util.converter;
 
 import org.apache.commons.lang3.StringUtils;
 
+import models.Card;
 import models.Document;
 import models.Headline;
 import models.Paragraph;
@@ -23,34 +24,39 @@ public class DocumentConverter {
         
         StringBuilder sb = new StringBuilder();
 
-        for(Textelement element : doc.textelements){
-            if(element instanceof Headline){
-                Headline headline = (Headline) element;
-                int size = headline.size != null ? headline.size : 1;
-                sb.append("<h"+size+">");
-            }else{
-                sb.append("<p>");
-            }
-            sb.append("");
-            sb.append(element.text);
-            sb.append("");
-            if(element instanceof Headline){
-                Headline headline = (Headline) element;
-                int size = headline.size != null ? headline.size : 1;
-                sb.append("</h"+size+">");
-            }else{
-                Paragraph para = (Paragraph) element;
-                sb.append("</p>");
-                if(StringUtils.isNotBlank(para.comment)){
-                    sb.append("<p style=\"font-size: 0.8em; font-style: italic;\">");
-                    sb.append(para.comment);
-                    sb.append("</p>");
-                }
-            }
+        for(Card card : doc.cards){
+            appendTextelement(sb, card.front);
+            appendTextelement(sb, card.back);
         }
         book.addSection("", new Resource(sb.toString().getBytes(), MediatypeService.XHTML));
         
         return book;
+    }
+
+    private static void appendTextelement(StringBuilder sb, Textelement element) {
+        if(element instanceof Headline){
+            Headline headline = (Headline) element;
+            int size = headline.size != null ? headline.size : 1;
+            sb.append("<h"+size+">");
+        }else{
+            sb.append("<p>");
+        }
+        sb.append("");
+        sb.append(element.text);
+        sb.append("");
+        if(element instanceof Headline){
+            Headline headline = (Headline) element;
+            int size = headline.size != null ? headline.size : 1;
+            sb.append("</h"+size+">");
+        }else{
+            Paragraph para = (Paragraph) element;
+            sb.append("</p>");
+            if(StringUtils.isNotBlank(para.comment)){
+                sb.append("<p style=\"font-size: 0.8em; font-style: italic;\">");
+                sb.append(para.comment);
+                sb.append("</p>");
+            }
+        }
     }
     
 }

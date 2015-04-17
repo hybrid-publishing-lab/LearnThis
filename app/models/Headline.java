@@ -19,7 +19,7 @@ public class Headline extends Textelement {
 
     @Override
     public String toString() {
-        return "Headline [size=" + size + ", id=" + id + ", sort=" + sort + "]";
+        return "Headline [size=" + size + ", id=" + id + "]";
     }
     
 }

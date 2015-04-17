@@ -1,5 +1,5 @@
-lhpControllers.controller('DocumentController', [ '$scope', '$http', 'SaveService', DocumentController ]);
-function DocumentController($scope, $http, saveService) {
+lhpControllers.controller('DocumentEditController', [ '$scope', '$http', 'SaveService', DocumentEditController ]);
+function DocumentEditController($scope, $http, saveService) {
 	
 	const filterAlle = "alle";
 	const filterNurRueckseite = "nurRueckseite";
@@ -13,7 +13,8 @@ function DocumentController($scope, $http, saveService) {
 	$scope.filterExpression = "";
 	$scope.search = {metatags: "", hashtags: []};
 	$scope.show = {comments: true, metatags: false};
-	
+	$scope.pwForm = {};
+	$scope.passwordCorrect = false;
 
 	$scope.init = function(docId) {
 		if (!$scope.isInit && docId) {
@@ -29,13 +30,43 @@ function DocumentController($scope, $http, saveService) {
 		}
 	}
 
+	$scope.submitPw = function() {
+		if ($scope.isInit) {
+			$http.post('/json/document/checkpw/'+$scope.document.id, $scope.pwForm).
+		    success(function(data, status, headers, config) {
+		    	$scope.passwordCorrect = true;
+		    }).
+		    error(function(data, status, headers, config) {
+		    	alert("Passwort inkorrekt.");
+		    });
+		}
+	}
+
+	$scope.changePw = function() {
+		if ($scope.isInit) {
+		    var pwNew = prompt("Neues Passwort", "");
+			$http.post('/json/document/changepw/'+$scope.document.id, {pw: $scope.pwForm.pw, pwNew: pwNew}).
+		    success(function(data, status, headers, config) {
+		    	$scope.pwForm.pw = pwNew;
+		    }).
+		    error(function(data, status, headers, config) {
+		    	alert("Passwort inkorrekt.");
+		    });
+		}
+	}
+	
+	$scope.removeBack = function(card) {
+		card.back = null;
+		$scope.change();
+	}
+	
 	$scope.logDoc = function() {
 		util.log($scope.document);
 	}
 
 	$scope.saveDoc = function() {
 		if (!$scope.saved) {
-			saveService.saveDocument($scope, $scope.document);
+			saveService.saveDocument($scope, $scope.document, $scope.pwForm.pw);
 		}
 	}
 	
@@ -47,29 +78,45 @@ function DocumentController($scope, $http, saveService) {
 		$scope.saved = false;
 	}
 
-	$scope.deleteElement = function(ele, index) {
+	$scope.addOption = function(choices) {
+		choices.push({text:'Neue Option',correct:'false'});
+		$scope.change();
+	}
+	
+	$scope.deleteOption = function(choices, index) {
+		choices.splice(index, 1);
+		$scope.change();
+	}
+	
+	$scope.deleteCard = function(ele, index) {
 		$scope.saved = false;
 		var docId = $scope.document.id;
 		// ele wird nur mitgegeben, damit es einem post request entspricht, wird nicht benutzt
-		$http.post('/json/document/'+docId+'/textelement/'+ele.id+'/delete', ele).success(function(data) {
+		$http.post('/json/document/'+docId+'/card/'+ele.id+'/delete', ele).success(function(data) {
 			$scope.saved = true;
-			if ($scope.document.textelements[index] == ele) {
-				$scope.document.textelements.splice(index, 1);
+			if ($scope.document.cards[index] == ele) {
+				$scope.document.cards.splice(index, 1);
 			} else {
 				alert('das element am index entspricht nicht dem zu löschenden element');
 			}
 		});
 	}
 
+	$scope.createMultipleChoice = function(index, docId, text) {
+		$http.post('/json/document/' + docId + '/multiplechoice/new/'+index, JSON.stringify(text)).success(function(data) {
+            $scope.document.cards.splice(index, 0, data);
+		});
+	}
+	
 	$scope.createParagraph = function(index, docId, text) {
 		$http.post('/json/document/' + docId + '/paragraph/new/'+index, JSON.stringify(text)).success(function(data) {
-                $scope.document.textelements.splice(index, 0, data);
+                $scope.document.cards.splice(index, 0, data);
 		});
 	}
 
 	$scope.createHeadline = function(index, docId) {
 		$http.get('/json/document/' + docId + '/headline/new/'+index).success(function(data) {
-			$scope.document.textelements.splice(index, 0, data);
+			$scope.document.cards.splice(index, 0, data);
 		});
 	}
 
@@ -95,33 +142,37 @@ function DocumentController($scope, $http, saveService) {
 	}
 
 	$scope.mergeWithTop = function(index){
-		var textelements = $scope.document.textelements;
+		var cards = $scope.document.cards;
 	    if(index >= 1){
-	    		textelements[index-1].text += "\n";
-	    		textelements[index-1].text += textelements[index].text;
-			    textelements.splice(index,1);
-				$scope.change();
+	    	cards[index-1].front.text += "\n";
+	    	cards[index-1].front.text += cards[index].front.text;
+	    	cards[index-1].back.text += "\n";
+	    	cards[index-1].back.text += cards[index].back.text;
+	    	cards.splice(index,1);
+			$scope.change();
 	    }
 	}
 	
 	$scope.mergeWithBottom = function(index){
-		var textelements = $scope.document.textelements;
-	    if(index >= 0 && textelements.length > index+1){
-	    		textelements[index].text += "\n";
-	            textelements[index].text += textelements[index+1].text;
-			    textelements.splice(index+1,1);
-				$scope.change();
+		var cards = $scope.document.cards;
+	    if(index >= 0 && cards.length > index+1){
+	    	cards[index+1].front.text += "\n";
+	    	cards[index+1].front.text += cards[index].front.text;
+	    	cards[index+1].back.text += "\n";
+	    	cards[index+1].back.text += cards[index].back.text;
+	    	cards.splice(index,1);
+			$scope.change();
 	    }
 	}
 	
 	$scope.split = function(index){
-		var textelements = $scope.document.textelements;
+		var cards = $scope.document.cards;
 		var doc = $scope.document;
-	    if(index >= 0 && textelements.length > index){
+	    if(index >= 0 && cards.length > index){
 	    		var cursorPosition = $scope.lastCursor.position;
-	    		var firstPart = textelements[index].text.substring(0, cursorPosition);
-	    		var secondPart = textelements[index].text.substring(cursorPosition);
-	    		textelements[index].text = firstPart;
+	    		var firstPart = cards[index].front.text.substring(0, cursorPosition);
+	    		var secondPart = cards[index].front.text.substring(cursorPosition);
+	    		cards[index].front.text = firstPart;
 	    		$scope.createParagraph(index+1, doc.id, secondPart);
 				$scope.change();
 	    }

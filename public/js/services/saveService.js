@@ -2,12 +2,13 @@ function SaveService($http){
 	
 	var me = this;
 	
-	this.saveDocument = function($scope, document){
+	this.saveDocument = function($scope, document, pw){
 		$scope.currentlySaving = true;
 		util.log("Saving document", document);
 		
 		$scope.saved = false;
 		
+		document.pw = pw;
 		$http.post('/json/document/save', document)
 		.success(function(data, status, header, config){
 			$scope.document = data;
