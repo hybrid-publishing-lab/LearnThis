@@ -133,7 +133,7 @@ public class DocumentController extends Controller {
     public Result checkPassword(Long id) {
         String pw = getPwFromRequest();
         Document doc = documentRepository.findOne(id);
-        if (doc.password.equals(pw)) {
+        if (doc.password == null || doc.password.length() == 0 || doc.password.equals(pw)) {
             return ok();
         }
         return badRequest();
