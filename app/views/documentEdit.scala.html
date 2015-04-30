@@ -1,4 +1,24 @@
 @(document: Document) @main("New Document") {
+<nav role="navigation" class="navbar navbar-default  navbar-fixed-top">  
+    <div class="container">
+    	<div class="navbar-header">
+            <button data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" class="navbar-toggle" type="button">
+                <span class="sr-only">Navigation ein-/ausblenden</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">YouLearn</a>
+        </div>
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				<li><a href="/" class="ownBtn">Übersicht</a></li>
+			</ul>
+		</div>
+    </div>
+</nav> 
+
+
 <div class="container" data-ng-controller="DocumentEditController"
 	data-ng-init="init(@document.id)">
 	<div id="overlay" class="row" data-ng-show="currentlySaving">
@@ -21,9 +41,6 @@
 	</div>
 	<div data-ng-if="passwordCorrect">
 		<div class="site-head row">
-			<ol class="breadcrumb">
-				<li><a href="/"> < Übersicht </a></li>
-			</ol>
 			<div class="col-xs-2"></div>
 			<div class="jumbotron col-xs-8">
 				<h1><textarea class="hidden-form-element" data-ng-model="document.title" data-ng-change="change()">{{document.title}}</textarea></h1>

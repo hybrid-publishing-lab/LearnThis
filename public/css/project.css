@@ -1,3 +1,57 @@
+body {
+    font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    background-color: #f8f8f8;
+    font-weight: 400;
+    margin-top: 80px;
+}
+
+.previews .thumbnail div.svg  {
+   background-color: #f8f8f8;
+   overflow: hidden;
+}
+
+.row.hLine{
+	border-top: 1px solid #dddddd;
+	margin-bottom: 20px;
+}
+
+.navbar-default{
+	background-color: #fff;
+}
+
+.navbar-default .navbar-nav >li > a.ownBtn{
+    -moz-user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.42857;
+    margin-top: 10px;
+    margin-right: 10px;
+    padding: 6px 12px;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+    background-color: #ebebeb;
+    border-color: #adadad;
+    color: #333333;
+}
+
+
+.navbar-default .navbar-nav > li > a.ownBtn:hover, 
+.navbar-default .navbar-nav > li > a.ownBtn:focus, 
+.navbar-default .navbar-nav > li > a.ownBtn:active, 
+.navbar-default .navbar-nav > li > a.ownBtn.active {
+    background-color: #fff;
+    border-color: #ccc;
+    color: #333333;
+
+}
+/**********************************/
+
 ul {
 	list-style: none;
 }

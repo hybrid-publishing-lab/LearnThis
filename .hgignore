@@ -18,3 +18,4 @@ syntax: regexp
 ^.*\.iml$
 ^.*\.eml$
 ^activator*.sbt$
+^conf/local\.conf$

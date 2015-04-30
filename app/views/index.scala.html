@@ -1,38 +1,43 @@
 @(msg: String) @main("Dokument Index") {
+
+<nav role="navigation" class="navbar navbar-default  navbar-fixed-top">  
+    <div class="container">
+    	<div class="navbar-header">
+            <button data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" class="navbar-toggle" type="button">
+                <span class="sr-only">Navigation ein-/ausblenden</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">YouLearn</a>
+        </div>
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				<li><a class="ownBtn" href="/document/new" role="button">Neues Dokument</a></li>
+				<li><a class="ownBtn" href="/import/form" role="button">Importieren</a></li>
+			</ul>
+		</div>
+    </div>
+</nav>    
 <div class="container" data-ng-controller="DocumentListController" data-ng-init="init()">
-	<div class="row">
-		<div class="col-xs-12">
-			<h1>Dokumentübersicht</h1>
-		</div>
-		<div class="row">
-			<div class="col-xs-8">
-				<div class="documents-overview" style="width: 100%">
-					<div data-ng-repeat="document in documents">
-						<div>
-							<p>
-								<a data-ng-href="/document/{{document.id}}" data-ng-bind="document.title"></a><br />
-								<span data-ng-bind="document.givenname"></span>&nbsp;<span data-ng-bind="document.surname"></span><br />
-								{{ document.changedAt | date:'yyyy-MM-dd HH:mm'}}<br />
-								<div class="btn-group btn-group-lg">
-									<a href="/document/{{document.id}}/keywords" class="btn btn-default">#</a>
-									<button type="button" class="btn btn-default delete-button" data-ng-click="deleteElement(document, $index)">
-										<span class="glyphicon glyphicon-trash delete"></span>
-									</button>
-								</div>
-							</p>
-							<a data-ng-href="/document/{{document.id}}">
-								<wordcloud data-ng-if="document.combinedTexts" width="400" text="{{document.combinedTexts}}">
-							</a>
-						</div>
-					</div>
-				</div>
+  	<div class="row previews">
+		<div class="col-xs-12 col-sm-6 col-md-3"  data-ng-repeat="document in documents">
+			<div class="thumbnail">
+				<div class="svg">
+				<a data-ng-href="/document/{{document.id}}" >
+					<wordcloud data-ng-if="document.combinedTexts" text="{{document.combinedTexts}}">
+				</a>
+				</div>	
+				<p>
+					<a data-ng-href="/document/{{document.id}}" data-ng-bind="document.title"></a><br />
+					<span data-ng-bind="document.givenname"></span>&nbsp;<span data-ng-bind="document.surname"></span><br />
+					{{ document.changedAt | date:'yyyy-MM-dd HH:mm'}}<br />
+				</p>		
 			</div>
-			<div class="sidebar-menu-container col-xs-4">
-				<ul class="nav nav-pills nav-stacked">
-					<li><a href="/document/new">Neues Dokument</a></li>
-					<li><a href="/import/form">Importieren</a></li>
-				</ul>
-			</div>
+			
 		</div>
+		<div class="clearfix visible-xs-block"></div>
+		
 	</div>
+</div>	
 	}
