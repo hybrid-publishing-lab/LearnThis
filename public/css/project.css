@@ -5,51 +5,149 @@ body {
     margin-top: 80px;
 }
 
-.previews .thumbnail div.svg  {
-   background-color: #f8f8f8;
-   overflow: hidden;
-}
-
-.row.hLine{
-	border-top: 1px solid #dddddd;
-	margin-bottom: 20px;
-}
+/*** Navigation ***/
 
 .navbar-default{
 	background-color: #fff;
 }
 
-.navbar-default .navbar-nav >li > a.ownBtn{
-    -moz-user-select: none;
-    background-image: none;
-    border: 1px solid transparent;
-    border-radius: 4px;
-    cursor: pointer;
-    display: inline-block;
-    font-size: 14px;
-    font-weight: normal;
-    line-height: 1.42857;
-    margin-top: 10px;
-    margin-right: 10px;
-    padding: 6px 12px;
-    text-align: center;
-    vertical-align: middle;
-    white-space: nowrap;
-    background-color: #ebebeb;
-    border-color: #adadad;
-    color: #333333;
+@media (min-width: 768px) {
+
+	.navbar-default .navbar-nav >li > a.ownBtn{
+	    -moz-user-select: none;
+	    background-image: none;
+	    border: 1px solid transparent;
+	    border-radius: 4px;
+	    cursor: pointer;
+	    display: inline-block;
+	    font-size: 14px;
+	    font-weight: normal;
+	    line-height: 1.42857;
+	    margin-top: 10px;
+	    margin-right: 10px;
+	    padding: 6px 12px;
+	    text-align: center;
+	    vertical-align: middle;
+	    white-space: nowrap;
+	    background-color: #ebebeb;
+	    border-color: #adadad;
+	    color: #333333;
+	}
+	
+	.navbar-default .navbar-nav > li > a.ownBtn:hover, 
+	.navbar-default .navbar-nav > li > a.ownBtn:focus, 
+	.navbar-default .navbar-nav > li > a.ownBtn:active, 
+	.navbar-default .navbar-nav > li > a.ownBtn.active {
+	    background-color: #fff;
+	    border-color: #ccc;
+	    color: #333333;
+	}
+}
+
+ul.subNavi{
+	border-top: 1px solid #dddddd;	
+	margin: 5px 0 4px;
+}
+
+ul.subNavi li{
+	padding-top:4px;
+}
+
+/*** Übersicht ***/
+
+.thumbnail.first  {
+   margin-bottom: 10px;
+}
+
+.thumbnail div.svgBg  {
+   background-color: #f8f8f8;
+   width: auto;
+   overflow: hidden;
+   position: relative;	
+}
+
+.previews .thumbnail div.svgBg  {
+   height: 200px;	
+}	
+
+.cardContent div.svgBg  {
+   height: 300px;
+}
+
+.thumbnail div.textBg  {
+   padding:10px;
+}
+
+/*** Karte ***/
+.cardContent .thumbnail{
+	padding:  4px 10px;
 }
 
 
-.navbar-default .navbar-nav > li > a.ownBtn:hover, 
-.navbar-default .navbar-nav > li > a.ownBtn:focus, 
-.navbar-default .navbar-nav > li > a.ownBtn:active, 
-.navbar-default .navbar-nav > li > a.ownBtn.active {
-    background-color: #fff;
-    border-color: #ccc;
-    color: #333333;
-
+.btnEdit {
+    background: url("../img/b_edit.png") no-repeat scroll left center  transparent;
+    padding-left: 24px;
 }
+
+.btnLern{
+    background: url("../img/b_select.png") no-repeat scroll left center transparent;
+    padding-left: 26px;
+}
+
+.btnClean {
+    background: url("../img/b_close.png") no-repeat scroll left center transparent;
+    padding-left: 26px;
+}
+
+.textBg p {
+    margin: 0 0 4px;
+}
+
+.textBg .cardNr{
+	text-align: right;
+	font-weight:700;
+	font-size: 16px;
+}
+
+/*** KartenListe ***/
+
+.allCard div.svgBg  {
+   height: 70px;
+}
+
+.allCard .cardNrContainer {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	background: #428bca;
+	font-size: 10px;
+	padding: 1px 4px;
+	font-weight: 700;
+	min-width: 25px;
+	text-align: right;
+	color: #fff;	
+}
+
+.pwContainer{
+	text-align: center;
+	margin: 20px 0;
+}
+
+/*** Edit ***/
+.cardEdit .thumbnail{
+	padding:  4px 10px;
+}
+
+a.filter{
+	background: url("../img/b_arrow_down.png") no-repeat scroll right center transparent;
+	display: block;
+	color:#333333; 
+}
+
+a.filter:hover{
+	text-decoration: none;
+}
+
 /**********************************/
 
 ul {

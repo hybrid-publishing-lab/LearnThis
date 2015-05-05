@@ -19,25 +19,48 @@
 </nav>  
 
 
-<div class="container" data-ng-controller="DocumentController"
-	data-ng-init="init(@document.id)">
-	
-	<div class="site-head row">
-		<div class="col-xs-2"></div>
-		<div class="jumbotron col-xs-8">
-			<h1>{{document.title}}</h1>
-			<wordcloud data-ng-if="document.combinedTexts" width="400" text="{{document.combinedTexts}}">
-			</wordcloud>
-			<p>Autor: {{document.givenname}} {{document.surname}}</p>
-			<p>erstellt: @document.createdAt.format("dd.MM.yyyy HH:mm")</p>
-			<p>geändert: @document.changedAt.format("dd.MM.yyyy HH:mm")</p>
-		</div>
-		<div class="col-xs-2">
-			<ul class="nav nav-pills nav-stacked">
-				<li><a href="/document/edit/@document.id">Editieren</a></li>
-				<li><a href="/document/learn/@document.id">Lernen</a></li>
-				<li><a data-ng-click="deleteDoc(@document.id)">Löschen</a></li>
-			</ul>
+<div class="container" data-ng-controller="DocumentController" data-ng-init="init(@document.id)">	
+	<div class="row">
+		<div class="cardContent col-md-8">
+			<div class="thumbnail first">
+				<div class="svgBg">
+					<wordcloud data-ng-if="document.combinedTexts" text="{{document.combinedTexts}}"></wordcloud>
+				</div>
+			</div>
+			<div class="thumbnail">
+				<div class="textBg">
+					<h1>{{document.title}}</h1>
+					<p>Autor: {{document.givenname}} {{document.surname}}<br/>
+					erstellt: @document.createdAt.format("dd.MM.yyyy HH:mm")<br/>
+					geändert: @document.changedAt.format("dd.MM.yyyy HH:mm")</p>
+					<p class="cardNr">9 Lernkarten</p>
+				</div>
+				<ul class="list-inline subNavi">
+					<li><a href="/document/edit/@document.id" class="btnEdit">Editieren</a></li>
+					<li><a href="/document/learn/@document.id" class="btnLern">Lernen</a></li>
+					<li><a data-ng-click="deleteDoc(@document.id)" class="btnClean">Löschen</a></li>
+				</ul>					
+			</div>
+		</div>		
+		<div class="allCard col-md-4 thumbnail" data-ng-controller="DocumentListController" data-ng-init="init()">
+			<h2>Nächste Lernkarten</h2>
+			<div class="row" data-ng-repeat="document in documents">
+				<div class="col-md-6">
+					<div class=svgBg>
+						<a data-ng-href="/document/{{document.id}}" >
+							<wordcloud data-ng-if="document.combinedTexts" text="{{document.combinedTexts}}">
+						</a>
+						<div class="cardNrContainer">34</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<p>
+						<a data-ng-href="/document/{{document.id}}" data-ng-bind="document.title"></a><br />
+						<span data-ng-bind="document.givenname"></span>&nbsp;<span data-ng-bind="document.surname"></span><br />
+						{{ document.changedAt | date:'yyyy-MM-dd HH:mm'}}<br />
+					</p>	
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
