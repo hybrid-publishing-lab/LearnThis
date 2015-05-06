@@ -13,6 +13,7 @@
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
 				<li><a href="/" class="ownBtn">Übersicht</a></li>
+				<li><a href="/@document.id" class="ownBtn">Kartenset</a></li>
 			</ul>
 		</div>
     </div>
@@ -44,24 +45,26 @@
 	</div>
 <!-- 	passwort <div data-ng-if="passwordCorrect"> -->
 		<div class="row cardEdit">
-			<div class="thumbnail col-xs-12">
-				<div class="textBg">
-					<h1><textarea class="hidden-form-element" data-ng-model="document.title" data-ng-change="change()">{{document.title}}</textarea></h1>
-					<p>Vorname: <input type="text" value="{{document.givenname}}" class="hidden-form-element" data-ng-model="document.givenname" data-ng-change="change()" /></p>
-					<p>Nachname: <input type="text" value="{{document.surname}}" class="hidden-form-element" data-ng-model="document.surname" data-ng-change="change()" /></p>
-					<p>erstellt: @document.createdAt.format("dd.MM.yyyy HH:mm")</p>
-					<p>geändert: @document.changedAt.format("dd.MM.yyyy HH:mm")</p>
-					<p class="cardNr">9 Lernkarten</p>
+			<div class="col-xs-12">
+				<div class="thumbnail">
+					<div class="textBg">
+						<h1><textarea class="hidden-form-element" data-ng-model="document.title" data-ng-change="change()">{{document.title}}</textarea></h1>
+						<p>Vorname: <input type="text" value="{{document.givenname}}" class="hidden-form-element" data-ng-model="document.givenname" data-ng-change="change()" /></p>
+						<p>Nachname: <input type="text" value="{{document.surname}}" class="hidden-form-element" data-ng-model="document.surname" data-ng-change="change()" /></p>
+						<p>erstellt: @document.createdAt.format("dd.MM.yyyy HH:mm")</p>
+						<p>geändert: @document.changedAt.format("dd.MM.yyyy HH:mm")</p>
+						<p class="cardNr">9 Lernkarten</p>
+					</div>
+					<ul class="list-inline subNavi">
+						<li><a href="/export/epub/document/{{document.id}}" class="btn btn-default">EPub</a></li>
+						<li><a href="/export/html/document/{{document.id}}" class="btn btn-default">HTML</a></li>
+						<li><a href="/export/pdf/document/{{document.id}}" class="btn btn-default">PDF</a></li>
+						<li><a href="#" class="btn btn-default">XML</a></li>
+					</ul>
+					<ul class="list-inline subNavi">
+						<li><a data-ng-click="changePw()">Passwort ändern</a></li>
+					</ul>		
 				</div>
-				<ul class="list-inline subNavi">
-					<li><a href="/export/epub/document/{{document.id}}" class="btn btn-default">EPub</a></li>
-					<li><a href="/export/html/document/{{document.id}}" class="btn btn-default">HTML</a></li>
-					<li><a href="/export/pdf/document/{{document.id}}" class="btn btn-default">PDF</a></li>
-					<li><a href="#" class="btn btn-default">XML</a></li>
-				</ul>
-				<ul class="list-inline subNavi">
-					<li><a data-ng-click="changePw()">Passwort ändern</a></li>
-				</ul>		
 			</div>
 		</div>
 		<div class="row">
@@ -108,10 +111,10 @@
 					</div>
 				</div>
 				
-				<div class="row thumbnail">
-				<div class="circle move"></div>
-					<div class="col-xs-2">
-						<div class="roll-out-menu" data-ng-if="card.front.type == 'Paragraph' || card.front.type == 'MultipleChoice'">
+				
+				<div class="row" data-ng-if="card.front.type == 'Paragraph' || card.front.type == 'MultipleChoice'">
+					<div class="col-xs-12">
+						<div class="roll-out-menu">
 							<ul class="nav nav-pills nav-stacked show-on-focus">
 								<li class="sort-handle" ><a href="javascript:void(0)">Verschieben</a></li>
 								<li><a data-ng-click="split($index)" href="javascript:void(0)">Aufteilen</a></li>
@@ -125,7 +128,11 @@
 								<li><a data-ng-click="deleteCard(card, $index)" href="javascript:void(0)">Löschen</a></li>
 							</ul>
 						</div>
-						<div class="roll-out-menu" data-ng-if="card.front.type == 'Headline'">
+					</div>
+				</div>
+				<div class="row" data-ng-if="card.front.type == 'Headline'">
+					<div class="col-xs-12">	
+						<div class="roll-out-menu">
 							<ul class="nav nav-pills nav-stacked show-on-focus">
 								<li class="sort-handle"><a href="javascript:void(0)">Verschieben</a></li>
 								<li ng-disabled="card.front.size < 2"><a data-ng-click="changeSize($event, textelement, -1)" href="javascript:void(0)">Vergrößern</a></li>
@@ -136,74 +143,87 @@
 							</ul>
 						</div>
 					</div>
-					<div class="col-xs-5" data-ng-if="card.front">
-						<!-- content -->
-						<div class="card paragraph">
-							<div>
-								<textarea class="main" data-ng-model="card.front.text"
-										data-ng-click="activateElement(card)"
-										data-ng-change="change()" ng-auto-expand save-cursor-position></textarea>
-							</div>
-						</div>
-					</div>
-					<div class="col-xs-5" data-ng-if="!card.front">
-						Empty Front
-					</div>
-					<!--  Rueckseite -->
-					<div data-ng-if="card.back" class="col-xs-5">
-						<div class="input-group input-group-sm metatag-input" ng-hide="!show.metatags">
-						  <span class="input-group-addon">i</span>
-						  <input type="text" class="form-control meta-tags" placeholder="Metainfo" data-ng-model="card.back.metatags" data-ng-change="change()" placeholder="Metatags">
-						</div>
-						<div data-ng-if="card.back.type == 'MultipleChoice'">
-							<div class="card paragraph">
-								<div>
-									<textarea class="main" data-ng-model="card.back.text"
-											data-ng-click="activateElement(card)"
-											data-ng-change="change()" ng-auto-expand save-cursor-position></textarea>
-								</div>
-								<div data-ng-repeat="multipleChoice in card.back.choices | orderBy:sort">
-									<input type="checkbox" data-ng-model="multipleChoice.correct" data-ng-change="change()">
-									<input type="text" data-ng-model="multipleChoice.text" data-ng-change="change()">
-									<a data-ng-click="deleteOption(card.back.choices, $index)">- Option</a>
-								</div>
-								<div>
-									<a data-ng-click="addOption(card.back.choices)">+ Option</a>
-								</div>
-							</div>
-						</div>
-						<div class="card" data-ng-if="card.back.type == 'Headline'">
-							<h3 data-ng-class="'size_'+card.back.size"
-								data-ng-click="activateElement(card)">
-								<textarea class="headline" data-ng-model="card.back.text"
-										data-ng-change="change()" ng-auto-expand save-cursor-position></textarea>
-							</h3>
-						</div>
-						<div class="card" data-ng-if="card.back.type == 'Paragraph'">
-							<textarea class="main" data-ng-model="card.back.text"
-									data-ng-click="activateElement(card)"
-									data-ng-change="change()" ng-auto-expand save-cursor-position></textarea>
-						</div>
-					</div>
-					<div data-ng-if="!card.back" class="col-xs-5">
-						<div class="backside">
-							Rückseite anlegen
-							<ul>
-								<li><a data-ng-click="card.back={type:'Paragraph',text:'Neuer Paragraph'};change();">+ Paragraph</a></li>
-								<li><a data-ng-click="card.back={type:'MultipleChoice',text:'Neue MultipleChoice',choices:[]};change();">+ MultipleChoice</a></li>
-							</ul>
-						</div>
-					</div>
 				</div>
 				
-				<div class="row" data-ng-if="$index < document.cards.length && card.front.type == 'Paragraph' && card.back.type == 'Paragraph' && document.cards[$index+1].front.type == 'Paragraph' && document.cards[$index+1].back.type == 'Paragraph'">
-					<div class="col-xs-2"></div>
-					<div class="col-xs-10">
-						<!-- Merge -->
-						<div class="merge-bottom merge show-on-focus" data-ng-if="document.cards[$index+1].front.type == 'Paragraph'">
-							<button type="button" class="btn btn-default merge" data-ng-click="mergeWithBottom($index)">
-								<span class="glyphicon glyphicon-arrow-down"></span> Zusammenführen
-							</button>
+				
+				
+				<div class="row">
+					<div class="col-xs-12">	
+						<div class="thumbnail">
+							<div class="circleLeft move"></div>
+							<div class="circleRight delete"></div>
+		
+							<div class="row learnCard">
+								<div class="col-xs-6" data-ng-if="card.front">
+									<!-- content -->
+									<div class="card paragraph cornerRight">
+										<div>
+											<textarea class="main" data-ng-model="card.front.text"
+													data-ng-click="activateElement(card)"
+													data-ng-change="change()" ng-auto-expand save-cursor-position></textarea>
+										</div>
+									</div>
+								</div>
+								<div class="col-xs-6" data-ng-if="!card.front">
+									Empty Front
+								</div>
+								<!--  Rueckseite -->
+								<div data-ng-if="card.back" class="col-xs-6">
+									<div class="input-group input-group-sm metatag-input" ng-hide="!show.metatags">
+									  <span class="input-group-addon">i</span>
+									  <input type="text" class="form-control meta-tags" placeholder="Metainfo" data-ng-model="card.back.metatags" data-ng-change="change()" placeholder="Metatags">
+									</div>
+									<div data-ng-if="card.back.type == 'MultipleChoice'">
+										<div class="card paragraph cornerLeft">
+											<div>
+												<textarea class="main" data-ng-model="card.back.text"
+														data-ng-click="activateElement(card)"
+														data-ng-change="change()" ng-auto-expand save-cursor-position></textarea>
+											</div>
+											<div data-ng-repeat="multipleChoice in card.back.choices | orderBy:sort">
+												<input type="checkbox" data-ng-model="multipleChoice.correct" data-ng-change="change()">
+												<input type="text" data-ng-model="multipleChoice.text" data-ng-change="change()">
+												<a data-ng-click="deleteOption(card.back.choices, $index)">- Option</a>
+											</div>
+											<div>
+												<a data-ng-click="addOption(card.back.choices)">+ Option</a>
+											</div>
+										</div>
+									</div>
+									<div class="card" data-ng-if="card.back.type == 'Headline'">
+										<h3 data-ng-class="'size_'+card.back.size"
+											data-ng-click="activateElement(card)">
+											<textarea class="headline" data-ng-model="card.back.text"
+													data-ng-change="change()" ng-auto-expand save-cursor-position></textarea>
+										</h3>
+									</div>
+									<div class="card" data-ng-if="card.back.type == 'Paragraph'">
+										<textarea class="main" data-ng-model="card.back.text"
+												data-ng-click="activateElement(card)"
+												data-ng-change="change()" ng-auto-expand save-cursor-position></textarea>
+									</div>
+								</div>
+								<div data-ng-if="!card.back" class="col-xs-6">
+									<div class="card paragraph cornerLeft">
+										Rückseite anlegen
+										<ul>
+											<li><a data-ng-click="card.back={type:'Paragraph',text:'Neuer Paragraph'};change();">+ Paragraph</a></li>
+											<li><a data-ng-click="card.back={type:'MultipleChoice',text:'Neue MultipleChoice',choices:[]};change();">+ MultipleChoice</a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					
+						<div class="row" data-ng-if="$index < document.cards.length && card.front.type == 'Paragraph' && card.back.type == 'Paragraph' && document.cards[$index+1].front.type == 'Paragraph' && document.cards[$index+1].back.type == 'Paragraph'">
+							<div class="col-xs-12">
+								<!-- Merge -->
+								<div class="merge-bottom merge show-on-focus" data-ng-if="document.cards[$index+1].front.type == 'Paragraph'">
+									<button type="button" class="btn btn-default merge" data-ng-click="mergeWithBottom($index)">
+										<span class="glyphicon glyphicon-arrow-down"></span> Zusammenführen
+									</button>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
