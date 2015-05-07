@@ -105,9 +105,7 @@
 				<div class="row" data-ng-if="$index > 0 && card.front.type == 'Paragraph' && card.back.type == 'Paragraph' && document.cards[$index-1].front.type == 'Paragraph' && document.cards[$index-1].back.type == 'Paragraph'">
 					<div class="col-xs-12">
 						<div class="merge-top merge show-on-focus">
-							<button type="button" class="btn btn-default merge" data-ng-click="mergeWithTop($index)">
-								<span class="glyphicon glyphicon-arrow-up"></span> Zusammenführen p
-							</button>
+							<button type="button" class="btn btnCombine" data-ng-click="mergeWithTop($index)"></button>
 						</div>
 					</div>
 				</div>
@@ -222,9 +220,7 @@
 							<div class="col-xs-12">
 								<!-- Merge -->
 								<div class="merge-bottom merge show-on-focus" data-ng-if="document.cards[$index+1].front.type == 'Paragraph'">
-									<button type="button" class="btn btn-default merge" data-ng-click="mergeWithBottom($index)">
-										<span class="glyphicon glyphicon-arrow-down"></span> Zusammenführen
-									</button>
+									<button type="button" class="btn btnCombine bottom" data-ng-click="mergeWithBottom($index)"></button>
 								</div>
 							</div>
 						</div>

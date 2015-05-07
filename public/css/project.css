@@ -119,6 +119,21 @@ button.btnPlus {
     margin-left: 20px;
 }
 
+button.btnCombine {
+    background: url("../img/icons/b_combine.png") no-repeat scroll center center / auto 100% transparent;
+    left: 10%;
+    height: 100px;
+    position: absolute;
+    top: -80px;
+    z-index:20;
+    width: 80%;
+}
+
+button.btnCombine.bottom {
+	top: -25px;
+}
+
+
 
 .textBg p {
     margin: 0 0 4px;
