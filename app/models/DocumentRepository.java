@@ -12,5 +12,5 @@ import org.springframework.data.repository.CrudRepository;
 @Named
 @Singleton
 public interface DocumentRepository extends CrudRepository<Document, Long> {
-    
+
 }

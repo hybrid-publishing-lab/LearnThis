@@ -10,6 +10,7 @@ import models.Card;
 import models.Document;
 import models.DocumentRepository;
 import models.Headline;
+import models.MultipleChoice;
 import models.Paragraph;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -54,12 +55,24 @@ public class Application extends Controller {
 //        card.document = doc;
 //        doc.cards.add(card);
         
+//        // add paragraph
+//        Paragraph paragraph = new Paragraph();
+//        paragraph.text = "Paragraph";
+//        Card card = new Card();
+//        card.sort = 1;
+//        card.front = paragraph;
+//        card.document = doc;
+//        doc.cards.add(card);
+
         // add paragraph
-        Paragraph paragraph = new Paragraph();
-        paragraph.text = "Paragraph";
+        MultipleChoice mc = new MultipleChoice();
+        MultipleChoice mc2 = new MultipleChoice();
+        mc.text = "Neue Karte";
+        mc.text = "";
         Card card = new Card();
         card.sort = 1;
-        card.front = paragraph;
+        card.front = mc;
+        card.back = mc2;
         card.document = doc;
         doc.cards.add(card);
         
