@@ -1,0 +1,440 @@
+body {
+    font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    background-color: #f8f8f8;
+    font-weight: 400;
+    margin-top: 80px;
+}
+
+/*** Navigation ***/
+
+.navbar-default{
+	background-color: #fff;
+}
+
+@media (min-width: 768px) {
+
+	.navbar-default .navbar-nav >li > a.ownBtn{
+	    -moz-user-select: none;
+	    background-image: none;
+	    border: 1px solid transparent;
+	    border-radius: 4px;
+	    cursor: pointer;
+	    display: inline-block;
+	    font-size: 14px;
+	    font-weight: normal;
+	    line-height: 1.42857;
+	    margin-top: 10px;
+	    margin-right: 10px;
+	    padding: 6px 12px;
+	    text-align: center;
+	    vertical-align: middle;
+	    white-space: nowrap;
+	    background-color: #ebebeb;
+	    border-color: #adadad;
+	    color: #333333;
+	}
+	
+	.navbar-default .navbar-nav > li > a.ownBtn:hover, 
+	.navbar-default .navbar-nav > li > a.ownBtn:focus, 
+	.navbar-default .navbar-nav > li > a.ownBtn:active, 
+	.navbar-default .navbar-nav > li > a.ownBtn.active {
+	    background-color: #fff;
+	    border-color: #ccc;
+	    color: #333333;
+	}
+}
+
+ul.subNavi{
+	border-top: 1px solid #dddddd;	
+	margin: 5px 0 4px;
+}
+
+ul.subNavi li{
+	padding-top:4px;
+}
+
+/*** Übersicht ***/
+
+.thumbnail{
+	position: relative;
+}
+
+.thumbnail.first  {
+   margin-bottom: 10px;
+}
+
+.thumbnail div.svgBg  {
+   background-color: #f8f8f8;
+   width: auto;
+   overflow: hidden;
+   position: relative;	
+}
+
+.previews .thumbnail div.svgBg  {
+   height: 200px;	
+}	
+
+.cardContent div.svgBg  {
+   height: 300px;
+}
+
+.thumbnail div.textBg  {
+   padding:10px;
+}
+
+/*** Karte ***/
+.cardContent .thumbnail{
+	padding:  4px 10px;
+}
+
+
+.btnEdit {
+    background: url("../img/b_edit.png") no-repeat scroll left center  transparent;
+    padding-left: 24px;
+}
+
+.btnLern{
+    background: url("../img/b_select.png") no-repeat scroll left center transparent;
+    padding-left: 26px;
+}
+
+.btnClean {
+    background: url("../img/b_close.png") no-repeat scroll left center transparent;
+    padding-left: 26px;
+}
+
+.textBg p {
+    margin: 0 0 4px;
+}
+
+.textBg .cardNr{
+	text-align: right;
+	font-weight:700;
+	font-size: 16px;
+}
+
+/*** KartenListe ***/
+
+.allCard div.svgBg  {
+   height: 70px;
+}
+
+.allCard .cardNrContainer {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	background: #428bca;
+	font-size: 10px;
+	padding: 1px 4px;
+	font-weight: 700;
+	min-width: 25px;
+	text-align: right;
+	color: #fff;	
+}
+
+.pwContainer{
+	text-align: center;
+	margin: 20px 0;
+}
+
+/*** Edit ***/
+.cardEdit .thumbnail{
+	padding:  4px 10px;
+}
+
+a.filter{
+	background: url("../img/b_arrow_down.png") no-repeat scroll right center transparent;
+	display: block;
+	color:#333333; 
+}
+
+a.filter:hover{
+	text-decoration: none;
+}
+
+.circleLeft,
+.circleRight {
+	background-color: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 100px;
+	position: absolute;
+    z-index: 10;
+    height: 36px;
+    width: 36px;
+}	
+
+.circleLeft {
+    left: -16px;
+	top: -16px;
+}
+
+.circleRight {
+    right: -16px;
+	top: -16px;
+}
+
+.circleLeft.move{
+	background: url("../img/b_move.png") no-repeat scroll center center #ffffff;
+}
+
+.circleRight.delete{
+	background: url("../img/b_close.png") no-repeat scroll center center #ffffff;
+}
+
+/*** learnCard ***/
+.learnCard.row {
+	margin:10px -5px;
+}
+
+
+.learnCard .col-xs-6 {
+	display: table-cell;
+}
+
+.card.cornerRight:before {
+	background: none repeat scroll 0 0 #ffffff;
+	border-color: #ffffff #ffffff #ffffa5 #ffffa5;
+	border-style: solid;
+	border-width: 0 30px 30px 0;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3), -1px 1px 1px rgba(0, 0, 0, 0.2);
+	content: "";
+	display: block;
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 0;
+}
+
+.card.cornerLeft:before {
+	background: none repeat scroll 0 0 #ffffff;
+	border-color: #ffffff #ffffa5 #ffffa5 #ffffff;
+	border-style: solid;
+	border-width: 0px 0px 30px 30px;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3), -1px 1px 1px rgba(0, 0, 0, 0.2);
+	content: "";
+	display: block;
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 0;
+}
+
+.card {
+	background: repeating-linear-gradient( 180deg, #FFFFA5 1.5rem, #FFFFA5 3.3rem, #FFFFA5 3.3rem, #D3D37B 3.5rem );
+	padding: 10px 30px;
+	overflow: hidden;
+    position: relative;
+    height: 100%;
+}
+
+
+/**********************************/
+
+ul {
+	list-style: none;
+}
+
+.hide {
+	display: none;
+}
+
+div.headline {
+	margin-bottom: 40px;
+}
+
+table.documents-overview th {
+	border: 0px;
+	background-color: white;
+	padding: 2px;
+	padding-left: 20px;
+	padding-right: 20px;
+	font-weight: normal;
+}
+
+table.documents-overview td {
+	padding-left: 20px;
+	padding-right: 20px;
+	background-color: #EEEEEE;
+	border: 0px;
+	min-width: 100px;
+}
+
+table.documents-overview td:nth-child(1) {
+	font-size: 20px;
+	font-weight: bold;
+}
+
+table.documents-overview td:nth-child(2) {
+	font-size: 16px;
+}
+
+table.documents-overview td:nth-child(3) {
+	font-size: 16px;
+}
+
+table.documents-overview td:nth-child(4) {
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+div.sidebar-menu-container {
+	max-width: 200px;
+}
+
+.nav-pills a,.nav-pills select,.nav-pills textarea {
+	background-color: #DDDDDD;
+}
+
+textarea {
+	overflow: hidden;
+	resize: none;
+	width: 100%;
+	border: none;
+	padding: 4px;
+}
+
+textarea.comment {
+	width: 100%;
+	resize: both;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+}
+
+.hidden-form-element {
+	background-color: transparent;
+	border-width: 0px;
+}
+
+button.merge {
+	width: 100%;
+}
+
+td {
+	height: 50px;
+}
+
+button.delete-button {
+	height: 46px;
+}
+
+.dimmed {
+	opacity: 0.5;
+}
+
+.edit-mode-active .show-on-focus {
+	display: block;
+}
+
+.show-on-focus {
+	display: none;
+}
+
+/*sortable placeholder css*/
+.ui-state-highlight {
+	height: 3em;
+	border: 1px dashed gray;
+}
+
+.size_1 {
+	font-size: 4rem;
+}
+
+.size_2 {
+	font-size: 3.5rem;
+}
+
+.size_3 {
+	font-size: 3rem;
+}
+
+.size_4 {
+	font-size: 2.5rem;
+}
+
+.size_5 {
+	font-size: 2rem;
+}
+
+.size_6 {
+	font-size: 1.5rem;
+}
+
+.roll-out-menu {
+	position: relative;
+}
+
+.roll-out-menu ul {
+/* 	position: absolute; */
+	width: 100%;
+}
+
+#overlay {
+	z-index: 1000;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	background-color: rgba(0, 0, 0, 0.2);
+	position: fixed;
+}
+
+.alert {
+	z-index: 500;
+	position: fixed;
+	width: 400px;
+	margin-top: 10px;
+	left: 50%;
+	margin-left: -200px;
+}
+
+.alert div.msg {
+	margin-bottom: 10px;
+}
+
+.alert button.save {
+	float: right;
+}
+
+div.metatag-input {
+	margin-bottom: 5px;
+}
+
+.filterbar input {
+	width: 200px;
+	display: inline;
+}
+
+.filterbar select {
+	width: 200px;
+	display: inline;
+}
+
+.filterbar .hashtags {
+	margin-top: 10px;
+}
+
+.filterbar .hashtags h6 {
+	margin-left: 5px;
+	margin-bottom: 1px;
+}
+
+.filterbar button.right {
+	float: right;
+	margin-left: 5px;	
+}
+
+textarea {
+	background: none;
+}
+
+.row {
+	margin-bottom: 1rem;
+}
+
+
+
+.backside {
+	background-color: #FFFFA5;
+	margin-bottom: 2rem;
+	padding: 1rem;
+}
