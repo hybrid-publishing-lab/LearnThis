@@ -1,0 +1,66 @@
+@(document: Document) @main("New Document") {
+<nav role="navigation" class="navbar navbar-default  navbar-fixed-top">  
+    <div class="container">
+    	<div class="navbar-header">
+            <button data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" class="navbar-toggle" type="button">
+                <span class="sr-only">Navigation ein-/ausblenden</span>
+            </button>
+            <a href="/" class="navbar-brand">YouLearn</a>
+        </div>
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				<li><a href="/" class="ownBtn">Übersicht</a></li>
+			</ul>
+		</div>
+    </div>
+</nav>  
+
+
+<div class="container" data-ng-controller="DocumentController" data-ng-init="init(@document.id)">	
+	<div class="row">
+		<div class="cardContent col-md-8">
+			<div class="thumbnail first">
+				<div class="svgBg">
+					<wordcloud data-ng-if="document.combinedTexts" text="{{document.combinedTexts}}"></wordcloud>
+				</div>
+			</div>
+			<div class="thumbnail">
+				<div class="textBg">
+					<h1>{{document.title}}</h1>
+					<p>Autor: {{document.givenname}} {{document.surname}}<br/>
+					erstellt: @document.createdAt.format("dd.MM.yyyy HH:mm")<br/>
+					geändert: @document.changedAt.format("dd.MM.yyyy HH:mm")</p>
+					<p class="cardNr">{{document.cards.length}} Lernkarten</p>
+				</div>
+				<ul class="list-inline subNavi">
+					<li><a href="/document/edit/@document.id" class="btnEdit">Editieren</a></li>
+					<li><a href="/document/learn/@document.id" class="btnLern">Lernen</a></li>
+					<li><a data-ng-click="deleteDoc(@document.id)" class="btnClean">Löschen</a></li>
+				</ul>					
+			</div>
+		</div>		
+		<div class="allCard col-md-4 thumbnail" data-ng-controller="DocumentListController" data-ng-init="init()">
+			<h3>Nächste Lernkarten</h3>
+			<div data-ng-repeat="document in documents">
+				<div class="row" data-ng-if="document.id != @document.id">
+					<div class="col-md-6">
+						<div class=svgBg>
+							<a data-ng-href="/document/{{document.id}}" >
+								<wordcloud data-ng-if="document.combinedTexts" text="{{document.combinedTexts}}">
+							</a>
+							<div class="cardNrContainer">{{document.cards.length}}</div>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<p>
+							<a data-ng-href="/document/{{document.id}}" data-ng-bind="document.title"></a><br />
+							<span data-ng-bind="document.givenname"></span>&nbsp;<span data-ng-bind="document.surname"></span><br />
+							{{ document.changedAt | date:'yyyy-MM-dd HH:mm'}}<br />
+						</p>	
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+}
