@@ -1,5 +1,6 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CollectionTable;
@@ -22,7 +23,7 @@ public class MultipleChoice extends Textelement {
           name="multiplechoice",
           joinColumns=@JoinColumn(name="Textelement_id")
     )
-    public List<EmbeddableChoice> choices;
+    public List<EmbeddableChoice> choices = new ArrayList<EmbeddableChoice>();
     
     @Override
     public String getType() {

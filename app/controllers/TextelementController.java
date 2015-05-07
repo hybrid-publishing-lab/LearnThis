@@ -78,9 +78,11 @@ public class TextelementController extends Controller {
         JpaFixer.removeDuplicatesWorkaround(doc);
         if (doc != null) {
             MultipleChoice mc = new MultipleChoice();
-            mc.text = "Neue MultipleChoice";
+            MultipleChoice mc2 = new MultipleChoice();
+            mc.text = "Neue Karte";
             Card card = new Card();
             card.front = mc;
+            card.back = mc2;
             doc.insertCard(card, index);
             documentRepository.save(doc);
             return ok(Json.toJson(card));
