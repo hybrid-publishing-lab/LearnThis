@@ -24,7 +24,7 @@
 	<div class="row">
 		<div class="col-xs-12">
 <!-- 		TODO: Bitte hier Abfrage ob Vorder- oder Rückseite ist  und dann Klasse cornerRight oder cornerLeft -->
-			<div class="row bgCard card cornerRight">
+			<div class="row bgCard card cornerRight" data-ng-class="{cornerRight: currentSide == 'front', cornerLeft: currentSide == 'back'}">
 				<div class="col-xs-2">
 					<div data-ng-click="prevCard()" class="prev"></div>
 				</div>
