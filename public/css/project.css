@@ -213,6 +213,16 @@ a.filter:hover{
 	background: url("../img/icons/b_close.png") no-repeat scroll center center / 125% auto #ffffff;
 }
 
+.btnChange{
+    background: url("../img/icons/b_exchange.png") no-repeat scroll center center / 100% auto transparent;
+    height: 30px;
+    left: 48.8%;
+    position: absolute;
+    top: 40%;
+    width: 30px;
+    z-index: 100;
+}
+
 .circleLeft.btnMove:hover,
 .circleRight.btnDelete:hover{
 	background-color: #e7e7e7;
