@@ -20,13 +20,13 @@
 <div class="container" data-ng-controller="DocumentEditController" data-ng-init="init(@document.id)">
 	<div id="overlay" class="row" data-ng-show="currentlySaving">
 	</div>
-	<span class="alert alert-danger" ng-hide="saved">
+	<div class="alert alert-danger" ng-hide="saved">
 		<div class="msg">
 			<strong>Achtung!</strong> Das Dokument ist noch nicht gespeichert.
 		</div>
 		<button class="btn btn-default" data-ng-click="reloadPage()"><span class="glyphicon glyphicon-remove"></span> Verwerfen</button>
 		<button class="btn btn-default save" data-ng-click="saveDoc()"><span class="glyphicon glyphicon-floppy-disk"></span> Speichern</button>
-	</span>
+	</div>
 	<div data-ng-if="!passwordCorrect" class="row">
 		<div class="col-md-8 col-md-offset-2">
 			<div class="thumbnail">
@@ -93,6 +93,12 @@
 		<div class="row">
 			<div class="col-xs-6" style="padding:0 35px;"><h4>Vorderseite</h4></div>
 			<div class="col-xs-6"><h4>Rückseite</h4></div>
+		</div>
+		
+		<div class="row" >
+			<div class="col-xs-12">	
+				<button type="button" class="btn btn-default btnPlus" data-ng-click="createParagraph($index+1, document.id)"></button>						
+			</div>
 		</div>
 		
 		<div ng-model="document.cards" 
@@ -229,7 +235,7 @@
 				
 				<div class="row" >
 					<div class="col-xs-12">	
-						<button type="button" class="btn btn-default btnPlus" data-ng-click="mergeWithTop($index)"></button>						
+						<button type="button" class="btn btn-default btnPlus" data-ng-click="createParagraph($index+1, document.id)"></button>						
 					</div>
 				</div>
 			</div>
