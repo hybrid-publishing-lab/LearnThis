@@ -4,16 +4,13 @@
     	<div class="navbar-header">
             <button data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" class="navbar-toggle" type="button">
                 <span class="sr-only">Navigation ein-/ausblenden</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
             </button>
             <a href="/" class="navbar-brand">YouLearn</a>
         </div>
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
 				<li><a href="/" class="ownBtn">Übersicht</a></li>
-				<li><a href="/@document.id" class="ownBtn">Kartenset</a></li>
+				<li><a href="/document/@document.id" class="ownBtn">Kartenset</a></li>
 			</ul>
 		</div>
     </div>
@@ -92,7 +89,12 @@
 				</div>
 			</div>
 		</div>
-	
+		
+		<div class="row">
+			<div class="col-xs-6" style="padding:0 35px;"><h4>Vorderseite</h4></div>
+			<div class="col-xs-6"><h4>Rückseite</h4></div>
+		</div>
+		
 		<div ng-model="document.cards" 
 				ui-sortable="sortableOptions">
 			<div class="text-element"
@@ -101,11 +103,10 @@
 				
 				<!-- Merge -->
 				<div class="row" data-ng-if="$index > 0 && card.front.type == 'Paragraph' && card.back.type == 'Paragraph' && document.cards[$index-1].front.type == 'Paragraph' && document.cards[$index-1].back.type == 'Paragraph'">
-					<div class="col-xs-2"></div>
-					<div class="col-xs-10">
+					<div class="col-xs-12">
 						<div class="merge-top merge show-on-focus">
 							<button type="button" class="btn btn-default merge" data-ng-click="mergeWithTop($index)">
-								<span class="glyphicon glyphicon-arrow-up"></span> Zusammenführen
+								<span class="glyphicon glyphicon-arrow-up"></span> Zusammenführen p
 							</button>
 						</div>
 					</div>
@@ -144,19 +145,18 @@
 						</div>
 					</div>
 				</div>
+		
 				
-				
-				
-				<div class="row">
+				<div class="row learnCardContainer">
 					<div class="col-xs-12">	
 						<div class="thumbnail">
-							<div class="circleLeft move"></div>
-							<div class="circleRight delete"></div>
+							<div class="circleLeft btnMove"></div>
+							<div class="circleRight btnDelete"></div>
 		
 							<div class="row learnCard">
 								<div class="col-xs-6" data-ng-if="card.front">
 									<!-- content -->
-									<div class="card paragraph cornerRight">
+									<div class="bgCard card paragraph cornerRight">
 										<div>
 											<textarea class="main" data-ng-model="card.front.text"
 													data-ng-click="activateElement(card)"
@@ -167,6 +167,9 @@
 								<div class="col-xs-6" data-ng-if="!card.front">
 									Empty Front
 								</div>
+								
+								<div class="exchange"></div>
+								
 								<!--  Rueckseite -->
 								<div data-ng-if="card.back" class="col-xs-6">
 									<div class="input-group input-group-sm metatag-input" ng-hide="!show.metatags">
@@ -174,7 +177,7 @@
 									  <input type="text" class="form-control meta-tags" placeholder="Metainfo" data-ng-model="card.back.metatags" data-ng-change="change()" placeholder="Metatags">
 									</div>
 									<div data-ng-if="card.back.type == 'MultipleChoice'">
-										<div class="card paragraph cornerLeft">
+										<div class="bgCard card paragraph cornerLeft">
 											<div>
 												<textarea class="main" data-ng-model="card.back.text"
 														data-ng-click="activateElement(card)"
@@ -190,21 +193,21 @@
 											</div>
 										</div>
 									</div>
-									<div class="card" data-ng-if="card.back.type == 'Headline'">
+									<div class="card bgCard cornerLeft" data-ng-if="card.back.type == 'Headline'">
 										<h3 data-ng-class="'size_'+card.back.size"
 											data-ng-click="activateElement(card)">
 											<textarea class="headline" data-ng-model="card.back.text"
 													data-ng-change="change()" ng-auto-expand save-cursor-position></textarea>
 										</h3>
 									</div>
-									<div class="card" data-ng-if="card.back.type == 'Paragraph'">
+									<div class="card bgCard cornerLeft" data-ng-if="card.back.type == 'Paragraph'">
 										<textarea class="main" data-ng-model="card.back.text"
 												data-ng-click="activateElement(card)"
 												data-ng-change="change()" ng-auto-expand save-cursor-position></textarea>
 									</div>
 								</div>
 								<div data-ng-if="!card.back" class="col-xs-6">
-									<div class="card paragraph cornerLeft">
+									<div class="bgCard card paragraph cornerLeft">
 										Rückseite anlegen
 										<ul>
 											<li><a data-ng-click="card.back={type:'Paragraph',text:'Neuer Paragraph'};change();">+ Paragraph</a></li>
@@ -225,6 +228,12 @@
 								</div>
 							</div>
 						</div>
+					</div>
+				</div>
+				
+				<div class="row" >
+					<div class="col-xs-12">	
+						<button type="button" class="btn btn-default btnPlus" data-ng-click="mergeWithTop($index)"></button>						
 					</div>
 				</div>
 			</div>
