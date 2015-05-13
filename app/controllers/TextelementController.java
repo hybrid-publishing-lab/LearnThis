@@ -80,6 +80,7 @@ public class TextelementController extends Controller {
             MultipleChoice mc = new MultipleChoice();
             MultipleChoice mc2 = new MultipleChoice();
             mc.text = "Neue Karte";
+            mc2.text = "Rückseite";
             Card card = new Card();
             card.front = mc;
             card.back = mc2;

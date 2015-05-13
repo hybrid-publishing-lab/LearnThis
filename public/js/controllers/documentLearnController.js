@@ -1,5 +1,5 @@
-lhpControllers.controller('DocumentLearnController', [ '$scope', '$http', 'ScoringService',DocumentLearnController ]);
-function DocumentLearnController($scope, $http, scoringService) {
+lhpControllers.controller('DocumentLearnController', [ '$scope', '$http', 'ScoringService', 'LocalStorageService', DocumentLearnController ]);
+function DocumentLearnController($scope, $http, scoringService, localStorageService) {
 	var CARDSIDE_FRONT = 'front';
 	var CARDSIDE_BACK = 'back';
 	
@@ -27,7 +27,6 @@ function DocumentLearnController($scope, $http, scoringService) {
 
 	$scope.init = function(docId) {
 		if (!$scope.isInit && docId) {
-			localStorage.clear();
 			$scope.isInit = true;
 			$http.get('/json/document/' + docId).success(function(data) {
 				$scope.document = data;
@@ -42,15 +41,28 @@ function DocumentLearnController($scope, $http, scoringService) {
 	
 	$scope.populatePager = function() {
 		for (index = 0; index < $scope.document.cards.length; ++index) {
-			if ($scope.document.cards[index].front != null) {
+			if ($scope.hasText($scope.document.cards[index].front) || $scope.hasChoices($scope.document.cards[index].front)) {
 				$scope.pager.push({cardIndex:index, cardSide: CARDSIDE_FRONT});
 			}
-			if ($scope.document.cards[index].back != null){
+			if ($scope.hasText($scope.document.cards[index].back) || $scope.hasChoices($scope.document.cards[index].back)) {
 				$scope.pager.push({cardIndex:index, cardSide: CARDSIDE_BACK});
 			}
 		}
 	} 
-	
+
+
+	$scope.hasText = function(cardSide) {
+	  return cardSide != null && cardSide.text != null && cardSide.text.length > 0;
+	}
+
+	$scope.hasCardChoices = function(card) {
+	  return $scope.hasChoices(card.front) || $scope.hasChoices(card.back);
+	}
+
+	$scope.hasChoices = function(cardSide) {
+    return cardSide != null && cardSide.choices != null && cardSide.choices.length > 0;
+  }
+  
 	$scope.showScorePage = function() {
 		$scope.showScore = true;
 		$scope.score = scoringService.calcScore($scope.document.id);
@@ -58,7 +70,6 @@ function DocumentLearnController($scope, $http, scoringService) {
 	}
 	
 	$scope.nextCard = function() {
-		util.log(localStorage.getItem($scope.document.id));
 		if ($scope.currentPage < $scope.pager.length-1) {
 			$scope.currentPage++;
 			$scope.updateCard();

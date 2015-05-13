@@ -14,17 +14,19 @@ function ScoringService(){
 		}
 		util.log(card.id + ' score is ' + score);
 		
-		var savedResults = JSON.parse(localStorage.getItem(docId));
+		var storageId = "learn" + docId;
+		var savedResults = JSON.parse(localStorage.getItem(storageId));
 		if (!savedResults) {
 			savedResults = {};
 		} 
 		savedResults[card.id] = ""+score;
-		localStorage.setItem(docId, JSON.stringify(savedResults));
+		localStorage.setItem(storageId, JSON.stringify(savedResults));
 	}
 
 	this.scoreText = function(docId, card){
 		util.log("card", card);
-		var savedResults = JSON.parse(localStorage.getItem(docId));
+    var storageId = "learn" + docId;
+		var savedResults = JSON.parse(localStorage.getItem(storageId));
 		if (!savedResults) {
 			savedResults = {};
 		} 
@@ -33,11 +35,12 @@ function ScoringService(){
 		} else {
 			savedResults[card.id] = "0";
 		}
-		localStorage.setItem(docId, JSON.stringify(savedResults));
+		localStorage.setItem(storageId, JSON.stringify(savedResults));
 	}
 	
 	this.calcScore = function(docId) {
-		var savedResults = localStorage.getItem(docId);
+    var storageId = "learn" + docId;
+		var savedResults = localStorage.getItem(storageId);
 		if (savedResults) {
 			console.log("SavedResults: " + savedResults);
 			var results = JSON.parse(savedResults);
@@ -54,9 +57,9 @@ function ScoringService(){
 		var maxScore = 0;
 		var lastIndex = -1;
 		for(page in pager) {
-			if(pager[page].cardIndex != lastIndex) {
+//			if(pager[page].cardIndex != lastIndex) {
 				maxScore++;
-			}
+//			}
 			lastIndex = pager[page].cardIndex; 
 		}
 		return maxScore;
