@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -50,10 +51,10 @@ public class Card {
     public void updateKeywords() {
         this.keywords.clear();
         List<String> newKeywords = new ArrayList<String>();
-        if (front != null) {
+        if (front != null && StringUtils.isNotBlank(front.text)) {
             newKeywords = KeywordParser.parseHashTags(front.text);
         }
-        if (back != null) {
+        if (back != null && StringUtils.isNotBlank(back.text)) {
             newKeywords.addAll(KeywordParser.parseHashTags(back.text));
         }
         

@@ -3,7 +3,6 @@ function DocumentController($scope, $http, saveService) {
 
 	$scope.init = function(docId) {
 		if (!$scope.isInit && docId) {
-			localStorage.clear();
 			$scope.isInit = true;
 			$http.get('/json/document/' + docId).success(function(data) {
 				$scope.document = data;

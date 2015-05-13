@@ -26,19 +26,11 @@
 <!-- 		TODO: Bitte hier Abfrage ob Vorder- oder Rückseite ist  und dann Klasse cornerRight oder cornerLeft -->
 			<div class="row bgCard card cornerRight" data-ng-class="{cornerRight: currentSide == 'front', cornerLeft: currentSide == 'back'}">
 				<div class="col-xs-2">
-					<div data-ng-click="prevCard()" class="prev"></div>
+					<div data-ng-if="$index > 0" data-ng-click="prevCard()" class="prev"></div>
 				</div>
 				<div class="jumbotron col-xs-8">
 					<div data-ng-if="!showScore">
-						<div data-ng-if="currentCard[currentSide].type != 'MultipleChoice'">
-							<p>{{currentCard[currentSide].text}}</p>
-							<!-- if next entry in the pager is not of the same card -->
-							<div data-ng-if="currentIndex != pager[currentPage+1].cardIndex">
-								<button type="button" class="btn btn-default"  data-ng-click="userUnderstood(true)">Habe ich verstanden</button>
-								<button type="button" class="btn btn-default"  data-ng-click="userUnderstood(false)">Habe ich nicht verstanden</button>
-							</div>
-						</div>
-						<div data-ng-if="currentCard[currentSide].type == 'MultipleChoice'">
+						<div>
 							<p>{{currentCard[currentSide].text}}</p>
 							<div>
 								<ul data-ng-repeat="multipleChoice in currentCard[currentSide].choices | orderBy:sort">
@@ -50,9 +42,18 @@
 										</span>
 									</li>
 								</ul>
-								<div>
-									<button type="button" class="btn btn-default" data-ng-if="!currentCard[currentSide].solved" data-ng-click="userSolvesMc()">Auflösen</button>
-									<button type="button" class="btn btn-default"  data-ng-if="currentCard[currentSide].solved" data-ng-click="nextCard()">weiter</button>
+								<div data-ng-if="hasChoices(currentCard[currentSide])">
+									<div>
+										<button type="button" class="btn btn-default" data-ng-if="!currentCard[currentSide].solved" data-ng-click="userSolvesMc()">Auflösen</button>
+										<button type="button" class="btn btn-default" data-ng-if="currentCard[currentSide].solved" data-ng-click="nextCard()">weiter</button>
+									</div>
+								</div>
+								<div data-ng-if="!hasChoices(currentCard[currentSide])">
+									<!-- if next entry in the pager is not of the same card -->
+									<div>
+										<button type="button" class="btn btn-default"  data-ng-click="userUnderstood(true)">Habe ich verstanden</button>
+										<button type="button" class="btn btn-default"  data-ng-click="userUnderstood(false)">Habe ich nicht verstanden</button>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -64,7 +65,7 @@
 					</div>
 				</div>
 				<div class="col-xs-2">
-				<div data-ng-click="nextCard()" class="next"></div>
+					<div data-ng-if="!showScore" data-ng-click="nextCard()" class="next"></div>
 				</div>
 			</div>
 		</div>		

@@ -1,6 +1,6 @@
 lhpControllers.controller('DocumentEditController', [ '$scope', '$http',
-    'SaveService', DocumentEditController ]);
-function DocumentEditController ($scope, $http, saveService) {
+    'SaveService', 'LocalStorageService', DocumentEditController ]);
+function DocumentEditController ($scope, $http, saveService, localStorageService) {
 
   const
   filterAlle = "alle";
@@ -33,12 +33,15 @@ function DocumentEditController ($scope, $http, saveService) {
       $scope.isInit = true;
       $http.get('/json/document/' + docId).success(function (data) {
         $scope.document = data;
+        var savedResult = localStorageService.loadDoc($scope.document.id);
+        if (savedResult.password) {
+          $scope.pwForm = savedResult.password;
+          $scope.submitPw();
+        }
       });
       $http.get('/json/textelement/types').success(function (data) {
         $scope.textelementTypes = data;
       });
-      // in fail
-      // $scope.isInit = false;
     }
   }
 
@@ -47,6 +50,9 @@ function DocumentEditController ($scope, $http, saveService) {
       $http.post('/json/document/checkpw/' + $scope.document.id, $scope.pwForm)
           .success(function (data, status, headers, config) {
             $scope.passwordCorrect = true;
+            var savedResult = localStorageService.loadDoc($scope.document.id);
+            savedResult.password = $scope.pwForm;
+            localStorageService.saveDoc($scope.document.id, savedResult);
           }).error(function (data, status, headers, config) {
             alert("Passwort inkorrekt.");
           });
@@ -61,12 +67,22 @@ function DocumentEditController ($scope, $http, saveService) {
         pwNew : pwNew
       }).success(function (data, status, headers, config) {
         $scope.pwForm.pw = pwNew;
+        var savedResult = localStorageService.loadDoc($scope.document.id);
+        savedResult.password = $scope.pwForm;
+        localStorageService.saveDoc($scope.document.id, savedResult);
       }).error(function (data, status, headers, config) {
         alert("Passwort inkorrekt.");
       });
     }
   }
-
+  
+  $scope.swapFrontAndBack = function(card) {
+    var oldFront = card.front;
+    card.front = card.back;
+    card.back = oldFront;
+    $scope.change();
+  }
+  
   $scope.removeBack = function (card) {
     card.back = null;
     $scope.change();
