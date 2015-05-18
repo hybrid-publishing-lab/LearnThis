@@ -23,9 +23,11 @@
 	
 	<div class="row">
 		<div class="col-xs-12">	
+		<div class="flip-container"  data-ng-class="{hover: currentSide == 'back'}">
+		<div class="flipper">
 			<div class="row bgCard card learning" data-ng-class="{cornerRight: currentSide == 'front', cornerLeft: currentSide == 'back'}">
 				<div class="col-xs-2">
-					<div data-ng-if="$index > 0" data-ng-click="prevCard()" class="prev"></div>
+					<div data-ng-click="prevCard()" class="prev"><img src="/assets/img/icons/b_arrow_backward.png" width="100%"></div>
 				</div>
 				<div class="jumbotron col-xs-8">
 					<div data-ng-if="!showScore">
@@ -64,9 +66,12 @@
 					</div>
 				</div>
 				<div class="col-xs-2">
-					<div data-ng-if="!showScore" data-ng-click="nextCard()" class="next"></div>
+					<div data-ng-if="!showScore" data-ng-click="nextCard()" class="next"><img src="/assets/img/icons/b_arrow_forward.png" width="100%"></div>
 				</div>
 			</div>
+			</div>
+			</div>
+			
 		</div>		
 	</div>
 	<div class="row pager">
