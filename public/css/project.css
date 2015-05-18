@@ -213,15 +213,6 @@ a.filter:hover{
 	background: url("../img/icons/b_close.png") no-repeat scroll center center / 125% auto #ffffff;
 }
 
-.btnChange{
-    background: url("../img/icons/b_exchange.png") no-repeat scroll center center / 100% auto transparent;
-    height: 30px;
-    left: 48.8%;
-    position: absolute;
-    top: 40%;
-    width: 30px;
-    z-index: 100;
-}
 
 .circleLeft.btnMove:hover,
 .circleRight.btnDelete:hover{
@@ -229,35 +220,51 @@ a.filter:hover{
 }
 
 /*** learnCard ***/
+.row.discription div{
+	text-align: center;
+}
+
 .row.learnCardContainer{
 	margin-bottom:0;
 }
 
+.text-element{
+	position: relative;
+}
+
+.row.splitCard{
+	left: 50px;
+    position: absolute;
+    top: -24px;
+    z-index: 100;
+}
+
 .learnCard.row {
 	margin:10px -5px;
+	display: flex;
+    flex-direction: row;
 }
 
-.frontSide{
-	display: table-cell;
-	width: 45%;
+.learnCard .frontbackSide {
+	float: none;
+	width: 48%;
+	min-height: 1px;
+    padding-left: 15px;
+    padding-right: 15px;
+    position: relative;
 }
 
-.exchange{
-	display: table-cell;
-	width: 10%;
+.btnChange{
+    background: url("../img/icons/b_exchange.png") no-repeat scroll center center / 100% auto transparent;
+    width: 4%;
+/*     height: 30%; */
+/*     left: 48.8%; */
+/*     position: absolute; */
+/*     top: 40%; */
+/*     width: 30px; */
+/*     z-index: 100; */
 }
 
-
-
-.backSide{
-	display: table-cell;
-	width: 45%;
-}
-
-
-.learnCard .col-xs-6 {
-	display: table-cell;
-}
 
 .card.cornerRight:before {
 	background: none repeat scroll 0 0 #f8f8f8;
@@ -308,6 +315,10 @@ a.filter:hover{
     height: 100%;
 }
 
+.learning{
+    display: flex;
+}
+
 .learnCard .card {
 	padding: 10px 30px;
 }
@@ -330,24 +341,22 @@ a.filter:hover{
 .prev{
 	background: url("../img/icons/b_arrow_backward.png") no-repeat scroll left center / 100% auto transparent;
     display: block;
-    height: 200px;
+    height: 100%;
     cursor: pointer;
 }
 
 .next{
 	background: url("../img/icons/b_arrow_forward.png") no-repeat scroll right center / 100% auto transparent;
     display: block;
-    height: 200px;
+    height: 100%;
     cursor: pointer;
 
 }
 
 .jumbotron {
 	background-color: transparent;
-}	
-
-
-/**********************************/
+}
+/*****************/
 
 ul {
 	list-style: none;
