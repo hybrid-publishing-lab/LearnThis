@@ -99,24 +99,24 @@ ul.subNavi li{
 
 
 .btnEdit {
-    background: url("../img/icons/b_edit.png") no-repeat scroll left center / 40% auto transparent;
-    padding-left: 30px;
+    background: url("../img/icons/b_edit.png") no-repeat scroll left center / auto 120% transparent;
+    padding: 10px 0px 10px 40px;
 }
 
 .btnLern{
-    background: url("../img/icons/b_learn.png") no-repeat scroll left center / 40% auto transparent;
-    padding-left: 28px;
+    background: url("../img/icons/b_learn.png") no-repeat scroll left center / auto 120% transparent;
+    padding: 10px 0px 10px 40px;
 }
 
 .btnClean {
-    background: url("../img/icons/b_close.png") no-repeat scroll left center / 40% auto transparent;
-    padding-left: 28px;
+    background: url("../img/icons/b_close.png") no-repeat scroll left center / auto 120% transparent;
+    padding: 10px 0px 10px 40px;
     cursor: pointer; 
 }
 
 .btnShare {
-    background: url("../img/icons/b_share.png") no-repeat scroll left center / 44% auto transparent;
-    padding-left: 26px;
+    background: url("../img/icons/b_share.png") no-repeat scroll left center / auto 100% transparent;
+    padding: 10px 0px 10px 30px;
     cursor: pointer;
 }
 
@@ -128,22 +128,18 @@ ul.subNavi li{
 	    width: 100%;
 }
 
-
+.posCenter{
+	text-align: center;
+}
 
 button.btnPlus {
-    background: url("../img/icons/b_zoom_in.png") no-repeat scroll left center / 100% auto #ffffff;
-    padding: 12px;
-    margin-left: 20px;
+    background: url("../img/icons/b_zoom_in.png") no-repeat scroll center center / 130% auto #ffffff;
+    padding: 19px;
 }
 
 button.btnCombine {
-    background: url("../img/icons/b_combine.png") no-repeat scroll center center / auto 100% transparent;
-    left: 10%;
-    height: 100px;
-    position: absolute;
-    top: -80px;
-    z-index:20;
-    width: 80%;
+    background: url("../img/icons/b_combine.png") no-repeat scroll center center / 130% auto #ffffff;
+     padding: 19px;
 }
 
 button.btnCombine.bottom {
@@ -208,18 +204,18 @@ a.filter:hover{
     border-radius: 100px;
 	position: absolute;
     z-index: 10;
-    height: 30px;
-    width: 30px;
+    height: 45px;
+    width: 45px;
 }	
 
 .circleLeft {
-    left: -12px;
-	top: -12px;
+    left: -20px;
+	top: -20px;
 }
 
 .circleRight {
-    right: -12px;
-	top: -12px;
+    right: -20px;
+	top: -20px;
 }	
 
 .circleLeft.btnMove{
@@ -250,11 +246,31 @@ a.filter:hover{
 }
 
 .row.splitCard{
-	left: 50px;
+	text-align: center;
     position: absolute;
-    top: -24px;
+    top: -10px;
+    width: 100%;
+    margin: 0;
     z-index: 100;
 }
+
+.combineContent{
+	position: absolute;
+    top: -60px;
+    z-index: 100;
+	left:30px;
+	margin:0;
+}
+
+.combineContentBottom{
+	position: absolute;
+    bottom: -60px;
+    z-index: 100;
+	left:45px;
+	margin:0;
+}
+
+
 
 .learnCard.row {
 	margin:10px -5px;
@@ -271,17 +287,16 @@ a.filter:hover{
     position: relative;
 }
 
-.btnChange{
-    background: url("../img/icons/b_exchange.png") no-repeat scroll center center / 100% auto transparent;
-    width: 4%;
-/*     height: 30%; */
-/*     left: 48.8%; */
-/*     position: absolute; */
-/*     top: 40%; */
-/*     width: 30px; */
-/*     z-index: 100; */
+.cellCenterSmall{
+	width: 4%;
 }
 
+button.btnChange{
+    background: url("../img/icons/b_exchange.png") no-repeat scroll center center / 130% auto transparent;
+    padding: 19px;
+	position: absolute;
+	top: 40%;
+}
 
 .card.cornerRight:before {
 	background: none repeat scroll 0 0 #f8f8f8;
@@ -615,7 +630,7 @@ textarea {
 }
 
 .row {
-	margin-bottom: 1rem;
+	margin-bottom: 2rem;
 }
 
 .backside {

@@ -96,7 +96,7 @@
 		</div>
 		
 		<div class="row" >
-			<div class="col-xs-12">	
+			<div class="col-xs-12 posCenter">	
 				<button type="button" class="btn btn-default btnPlus" data-ng-click="createMultipleChoice($index+1, document.id)"></button>						
 			</div>
 		</div>
@@ -108,10 +108,10 @@
 				data-ng-repeat="card in document.cards | filter:filterExpression | nonEmptyIntersection:search.hashtags | orderBy:sort">
 				
 				<!-- Merge -->
-				<div class="row" data-ng-if="$index > 0">
+				<div class="row show-on-focus combineContent" data-ng-if="$index > 0">
 					<div class="col-xs-12">
-						<div class="merge-top merge show-on-focus">
-							<button type="button" class="btn btnCombine" data-ng-click="mergeWithTop($index)"></button>
+						<div class="merge-top merge">
+							<button type="button" class="btn btn-default btnCombine" data-ng-click="mergeWithTop($index)"></button>
 						</div>
 					</div>
 				</div>
@@ -120,7 +120,7 @@
 					<div class="col-xs-12">
 						<div class="roll-out-menu">
 							<ul class="nav nav-pills nav-stacked show-on-focus">
-								<li><a data-ng-click="split($index)" href="javascript:void(0)">Aufteilen</a></li>	
+								<li><button type="button" class="btn btn-default" data-ng-click="split($index)">Aufteilen</button></li>	
 							</ul>
 						</div>
 					</div>
@@ -175,7 +175,10 @@
 									Empty Front
 								</div>
 								
-								<div data-ng-click="swapFrontAndBack(card)" class="btnChange"></div>
+								<div class="cellCenterSmall">
+								
+								<button type="button" class="btn btn-default btnChange" data-ng-click="swapFrontAndBack(card)" ></button>	
+								</div>
 								
 								
 								<!--  Rueckseite -->
@@ -203,11 +206,10 @@
 							</div>
 						</div>
 					
-						<div class="row" data-ng-if="$index < document.cards.length-1">
+						<div class="row show-on-focus combineContentBottom" data-ng-if="$index < document.cards.length-1">
 							<div class="col-xs-12">
-								<!-- Merge -->
-								<div class="merge-bottom merge show-on-focus">
-									<button type="button" class="btn btnCombine bottom" data-ng-click="mergeWithBottom($index)"></button>
+								<div class="merge-top merge">
+									<button type="button" class="btn btn-default btnCombine" data-ng-click="mergeWithBottom($index)"></button>
 								</div>
 							</div>
 						</div>
@@ -215,7 +217,7 @@
 				</div>
 				
 				<div class="row" >
-					<div class="col-xs-12">	
+					<div class="col-xs-12 posCenter">	
 						<button type="button" class="btn btn-default btnPlus" data-ng-click="createMultipleChoice($index+1, document.id)"></button>						
 					</div>
 				</div>
