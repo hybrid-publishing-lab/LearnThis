@@ -8,42 +8,43 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
-
 import models.Card;
 import models.Document;
-import models.Headline;
-import models.Paragraph;
+import models.MultipleChoice;
+
+import org.apache.commons.lang3.StringUtils;
 
 public class Importer {
-    public static Document importFromTextfile(File file, String encoding) throws Exception{
+    public static Document importFromTextfile(File file, String encoding, boolean splitText) throws Exception{
         Document doc = new Document();
         BufferedReader br = null;
         try {
             br = new BufferedReader(new InputStreamReader(new FileInputStream(file), encoding));
-            List<String> textelements = parseTextelements(br);
+            List<String> textelements = parseTextelements(br, splitText);
             int i = 0;
             for(String element : textelements){
-                if(element.length() <= 200){
-                    // Headline
-                    Headline hl = new Headline();
-                    hl.text = element;
-                    hl.size = 1;
-                    Card card = new Card();
-                    card.front = hl;
-                    card.sort = i;
-                    doc.cards.add(card);
-                    card.document = doc;
-                }else{
+//                if(element.length() <= 200){
+//                    // Headline
+//                    Headline hl = new Headline();
+//                    hl.text = element;
+//                    hl.size = 1;
+//                    Card card = new Card();
+//                    card.front = hl;
+//                    card.back = new MultipleChoice();
+//                    card.sort = i;
+//                    doc.cards.add(card);
+//                    card.document = doc;
+//                }else{
                     // Paragraph
-                    Paragraph pg = new Paragraph();
-                    pg.text = element;
+                    MultipleChoice mc = new MultipleChoice();
+                    mc.text = element;
                     Card card = new Card();
                     card.sort = i;
-                    card.front = pg;
+                    card.front = mc;
+                    card.back = new MultipleChoice();
                     doc.cards.add(card);
                     card.document = doc;
-                }
+//                }
                 i++;
             }
         }finally {
@@ -57,7 +58,7 @@ public class Importer {
         return doc;
     }
 
-    private static List<String> parseTextelements(BufferedReader br) throws IOException {
+    private static List<String> parseTextelements(BufferedReader br, boolean splitText) throws IOException {
 
         List<String> textelements = new ArrayList<String>();
         String line = null;
@@ -66,8 +67,12 @@ public class Importer {
             if (isEmpty(line)) {
                 // Separator
                 if (!isEmpty(textelement)) {
-                    textelements.add(textelement);
-                    textelement = "";
+                    if (splitText) {
+                        textelements.add(textelement);
+                        textelement = "";
+                    } else {
+                        textelement += "\n" + line;
+                    }
                 }
             } else {
                 // Textelement
