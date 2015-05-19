@@ -111,7 +111,24 @@ ul.subNavi li{
 .btnClean {
     background: url("../img/icons/b_close.png") no-repeat scroll left center / 40% auto transparent;
     padding-left: 28px;
+    cursor: pointer; 
 }
+
+.btnShare {
+    background: url("../img/icons/b_share.png") no-repeat scroll left center / 44% auto transparent;
+    padding-left: 26px;
+    cursor: pointer;
+}
+
+.modal-sm {
+    width: 300px;
+}
+
+.btn-default.long{
+	    width: 100%;
+}
+
+
 
 button.btnPlus {
     background: url("../img/icons/b_zoom_in.png") no-repeat scroll left center / 100% auto #ffffff;

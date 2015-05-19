@@ -36,7 +36,24 @@
 					<li><a href="/document/edit/@document.id" class="btnEdit">Editieren</a></li>
 					<li><a href="/document/learn/@document.id" class="btnLern">Lernen</a></li>
 					<li><a data-ng-click="deleteDoc(@document.id)" class="btnClean">Löschen</a></li>
-				</ul>					
+					<li><a class="btnShare" data-toggle="modal" data-target="#shareModal">Teilen</a></li>
+				</ul>
+				<div aria-hidden="true" id="shareModal" aria-labelledby="ShareModel" role="dialog" tabindex="-1" class="modal fade bs-example-modal-sm">
+				    <div class="modal-dialog modal-sm">
+				      <div class="modal-content">				
+				        <div class="modal-header">
+				          <button aria-label="Schließen" data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span></button>
+				          <h4 id="meinKleinesModalLabel" class="modal-title">Share<a href="#meinKleinesModalLabel" class="anchorjs-link"><span class="anchorjs-icon"></span></a></h4>
+				        </div>
+				        <div class="modal-body">
+				          <p><a data-ng-click="twittershare()"  class="btn btn-default long">Twitter</a></p>
+				           <p><a data-ng-click="fbshare()" class="btn btn-default long">Facebook</a></p>
+				        </div>
+				      </div><!-- /.modal-content -->
+				    </div><!-- /.modal-dialog -->
+				  </div>
+				
+									
 			</div>
 		</div>		
 		<div class="allCard col-md-4 thumbnail" data-ng-controller="DocumentListController" data-ng-init="init()">
