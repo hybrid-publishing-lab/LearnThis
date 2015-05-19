@@ -47,7 +47,8 @@ public class ImportController extends Controller {
             try {
                 Map<String, String[]> postData = body.asFormUrlEncoded();
                 String encoding = getEncoding(postData.get("encoding"));
-                Document doc = Importer.importFromTextfile(file, encoding);
+                boolean splitText = getSplitText(postData.get("splitText"));
+                Document doc = Importer.importFromTextfile(file, encoding, splitText);
                 doc.title = fileName;
                 doc.givenname = "Vorname";
                 doc.surname = "Nachname";
@@ -66,8 +67,18 @@ public class ImportController extends Controller {
 
     }
 
+    private boolean getSplitText(String[] postData) {
+        if (postData != null && postData.length == 1) {
+            if ("true".equalsIgnoreCase(postData[0])) {
+                return true;
+            }
+        }
+        return false;
+            
+    }
+
     private static String getEncoding(String[] encoding) {
-        if (encoding.length == 1) {
+        if (encoding != null && encoding.length == 1) {
             if ("UTF-8".equals(encoding[0])) {
                 return "UTF-8";
             } else {
