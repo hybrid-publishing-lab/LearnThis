@@ -34,4 +34,15 @@ function DocumentController($scope, $http, saveService) {
 	    	alert("Passwort inkorrekt.");
 	    });
 	}
+		
+	
+	$scope.fbshare = function(){ 
+		var sharer = "#"; 
+		window.open(sharer,'sharer', 'width=626,height=436'); 
+	}
+
+	$scope.twittershare = function (){ 
+		var sharer = "#"; 
+		window.open(sharer,'sharer', 'width=626,height=486'); 
+	}
 }
