@@ -1,0 +1,24 @@
+@(doc: Document) @main("Dokument Schlüsselbegriffe") {
+<div class="container">
+    <ol class="breadcrumb">
+      <li><a href="/"> < Übersicht </a></li>
+    </ol>  
+    <h1>Schlüsselbegriffe</h1>
+    <div class="content-container">
+      <div class="content-head"></div>
+      <div class="content-body-container">
+		<ul>
+			@for(card <- doc.cards) {
+				<li>
+				<ul>
+				@for(keyword <- card.keywords) {
+				  <li>@keyword</li>
+				}	
+				</ul>
+				</li>
+			}
+		</ul>
+      </div>
+    </div>
+  </div>
+}
