@@ -85,8 +85,8 @@ public class TextelementController extends Controller {
             card.front = mc;
             card.back = mc2;
             doc.insertCard(card, index);
-            documentRepository.save(doc);
-            return ok(Json.toJson(card));
+            doc = documentRepository.save(doc);
+            return ok(Json.toJson(doc.cards.get(index)));
         } else {
             return notFound();
         }

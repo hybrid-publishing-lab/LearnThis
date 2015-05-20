@@ -1,20 +1,11 @@
 package models;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
-
-import util.KeywordParser;
 
 @Entity
 // @MappedSuperclass
@@ -24,7 +15,7 @@ public abstract class Textelement {
     public Long id;
 
     @Column(length = 5000)
-    public String text;
+    public String text = "";
 
     @Enumerated(EnumType.STRING)
     public TextelementType textelementType;

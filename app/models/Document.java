@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -36,6 +37,11 @@ public class Document {
     public Date createdAt;
     
     public Date changedAt;
+    
+    public String description;
+    
+    @Column(columnDefinition="bigint(20) default '0'")
+    public Long visits = 0L;
     
     @JsonIgnore
     public String password;

@@ -59,6 +59,7 @@ public class DocumentController extends Controller {
             doc.title = json.get("title").asText();
             doc.surname = json.get("surname").asText();
             doc.givenname = json.get("givenname").asText();
+            doc.description = json.get("description").asText();
 
             JsonNode cards = json.get("cards");
             doc.cards.clear();
@@ -157,7 +158,7 @@ public class DocumentController extends Controller {
     }
 
     public Result findAll() {
-        Iterable<Document> docs = documentRepository.findAll();
+        Iterable<Document> docs = documentRepository.findByIdNotNullOrderByVisitsDesc();
         List<Document> result = new ArrayList<Document>();
         for (Document doc : docs) {
             result.add(doc);

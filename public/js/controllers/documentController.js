@@ -1,5 +1,5 @@
-lhpControllers.controller('DocumentController', [ '$scope', '$http', 'SaveService', DocumentController ]);
-function DocumentController($scope, $http, saveService) {
+lhpControllers.controller('DocumentController', [ '$scope', '$http', '$location', 'SaveService', DocumentController ]);
+function DocumentController($scope, $http, $location, saveService) {
 
 	$scope.init = function(docId) {
 		if (!$scope.isInit && docId) {
@@ -37,12 +37,14 @@ function DocumentController($scope, $http, saveService) {
 		
 	
 	$scope.fbshare = function(){ 
-		var sharer = "#"; 
+	  var url =  $location.absUrl();
+		var sharer = "https://www.facebook.com/sharer/sharer.php?u="+url; 
 		window.open(sharer,'sharer', 'width=626,height=436'); 
 	}
 
 	$scope.twittershare = function (){ 
-		var sharer = "#"; 
+	  var text = $scope.document.title + " " + $location.absUrl();
+		var sharer = "https://twitter.com/intent/tweet?text="+text; 
 		window.open(sharer,'sharer', 'width=626,height=486'); 
 	}
 }
