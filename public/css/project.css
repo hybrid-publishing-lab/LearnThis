@@ -669,3 +669,7 @@ textarea {
   background-color: #e7e7e7;
   border-color: #adadad;
 }
+
+a.noUnderline:hover {
+	text-decoration: none;
+}

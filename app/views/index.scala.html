@@ -21,7 +21,7 @@
 		<div class="col-xs-12 col-sm-6 col-md-3"  data-ng-repeat="document in documents">
 			<div class="thumbnail">
 				<div class=svgBg>
-				<a data-ng-href="/document/{{document.id}}" >
+				<a data-ng-href="/document/{{document.id}}" class="noUnderline">
 					<wordcloud data-ng-if="document.combinedTexts" text="{{document.combinedTexts}}">
 				</a>
 				</div>	
