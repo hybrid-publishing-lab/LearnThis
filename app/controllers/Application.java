@@ -9,9 +9,7 @@ import javax.inject.Singleton;
 import models.Card;
 import models.Document;
 import models.DocumentRepository;
-import models.Headline;
 import models.MultipleChoice;
-import models.Paragraph;
 import play.mvc.Controller;
 import play.mvc.Result;
 import util.JpaFixer;
@@ -110,6 +108,7 @@ public class Application extends Controller {
     
     public Result learn(Long id){
         Document doc = documentRepository.findOne(id);
+        documentRepository.incrementLearnCount(id);
         JpaFixer.removeDuplicatesWorkaround(doc);
         return ok(views.html.documentLearn.render(doc));
     }

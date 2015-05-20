@@ -118,6 +118,11 @@ lhpApp.directive('wordcloud', function () {
 				var rootElement = element[0];
 				var svg = d3.select(rootElement).append("svg").attr("width", w).attr("height", h);
 
+//        var svg = d3.select(rootElement).append("svg");
+//        w = d3.select(rootElement).node().getBoundingClientRect().width;
+//        h = d3.select(rootElement).node().getBoundingClientRect().height;
+//        svg.attr("width", w).attr("height", h);
+
 				var background = svg.append("g"), vis = svg.append("g").attr("transform", "translate(" + [ w >> 1, h >> 1 ] + ")");
 				
 				function parseText(text) {

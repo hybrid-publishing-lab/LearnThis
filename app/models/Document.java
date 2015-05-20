@@ -42,6 +42,9 @@ public class Document {
     
     @Column(columnDefinition="bigint(20) default '0'")
     public Long visits = 0L;
+
+    @Column(columnDefinition="bigint(20) default '0'")
+    public Long learnCount = 0L;
     
     @JsonIgnore
     public String password;

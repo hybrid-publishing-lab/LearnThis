@@ -24,9 +24,17 @@ public interface DocumentRepository extends CrudRepository<Document, Long> {
     @Query("update Document set visits = visits+1 where id = ?1")
     void incrementVisits(Long id);
 
-    List<Document> findByIdNotNullOrderByVisitsDesc();
+    @Modifying
+    @Transactional
+    @Query("update Document set learnCount = learnCount+1 where id = ?1")
+    void incrementLearnCount(Long id);
 
     @Query("select d from Document d order by RAND()")
     List<Document> findRandom(Pageable pageable);
+
+    List<Document> findByIdNotNullOrderByVisitsDesc();
+    
+    List<Document> findByIdNotNullOrderByCreatedAtDesc(Pageable page);
+
 
 }

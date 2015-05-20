@@ -161,8 +161,12 @@ public class DocumentController extends Controller {
         return ok(Json.toJson(doc));
     }
 
-    public Result findAll() {
-        Iterable<Document> docs = documentRepository.findByIdNotNullOrderByVisitsDesc();
+    public Result findAll(Integer page) {
+        if (page == null || page < 0) {
+            page = 0;
+        }
+        Pageable pageable = new PageRequest(page, 20);
+        Iterable<Document> docs = documentRepository.findByIdNotNullOrderByCreatedAtDesc(pageable);
         List<Document> result = new ArrayList<Document>();
         for (Document doc : docs) {
             result.add(doc);
@@ -172,7 +176,9 @@ public class DocumentController extends Controller {
     }
 
     public Result findRandom(Integer count) {
-        if (count > 100) {
+        if (count == null || count < 0) {
+            count = 5;
+        } else if (count > 100) {
             count = 100;
         }
         Pageable page = new PageRequest(0, count);
