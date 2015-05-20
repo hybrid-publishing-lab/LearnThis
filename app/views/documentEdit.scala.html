@@ -51,6 +51,7 @@
 							<p>Nachname: <input type="text" value="{{document.surname}}" class="hidden-form-element" data-ng-model="document.surname" data-ng-change="change()" /></p>
 							<p>erstellt: @document.createdAt.format("dd.MM.yyyy HH:mm")</p>
 							<p>geändert: @document.changedAt.format("dd.MM.yyyy HH:mm")</p>
+							<p><textarea class="hidden-form-element" data-ng-model="document.description" data-ng-change="change()" placeholder="Kurzbeschreibung">{{document.description}}</textarea></p>
 							<div class="cardNr">{{document.cards.length}} Lernkarten</div>
 						</div>
 					</div>
@@ -158,7 +159,7 @@
 									<div class="bgCard card paragraph cornerRight">
 										<div>
 											<textarea class="main" data-ng-model="card.front.text"
-													data-ng-click="activateElement(card)"
+													data-ng-click="activateElement(card); $event.stopPropagation();"
 													data-ng-change="change()" ng-auto-expand save-cursor-position></textarea>
 										</div>
 										<div data-ng-repeat="multipleChoice in card.front.choices | orderBy:sort">
@@ -192,7 +193,7 @@
 									<div class="bgCard card paragraph cornerLeft">
 										<div>
 											<textarea class="main" data-ng-model="card.back.text"
-													data-ng-click="activateElement(card)"
+													data-ng-click="activateElement(card); $event.stopPropagation();"
 													data-ng-change="change()" ng-auto-expand save-cursor-position></textarea>
 										</div>
 										<div data-ng-repeat="multipleChoice in card.back.choices | orderBy:sort">

@@ -4,22 +4,30 @@
  */
 
 
-lhpApp.directive('ngAutoExpand', function() {
+lhpApp.directive('ngAutoExpand', ['$timeout', function($timeout) {
     return {
         restrict: 'A',
         link: function( $scope, elem, attrs) {
+            var resize = function(element) {
+              $(element).height(0);
+              var height = $(element)[0].scrollHeight;
+
+              // 8 is for the padding
+              if (height < 20) {
+                  height = 28;
+              }
+//              $(element).height(height-8);
+              $(element).height(height);
+            }
+
+            $scope.$on(EVENT_TRIGGER_AUTOGROW, function(event, data) {
+              // wrapped in timeout, so resize runs after the DOM has completed rendering
+              $timeout(function () {resize(elem)} );
+            });
+            
             elem.bind('keyup', function($event) {
                 var element = $event.target;
-
-                $(element).height(0);
-                var height = $(element)[0].scrollHeight;
-
-                // 8 is for the padding
-                if (height < 20) {
-                    height = 28;
-                }
-//                $(element).height(height-8);
-                $(element).height(height);
+                resize(element);
             });
 
             // Expand the textarea as soon as it is added to the DOM
@@ -38,7 +46,8 @@ lhpApp.directive('ngAutoExpand', function() {
             }, 0)
         }
     };
-});
+}]);
+
 
 lhpApp.directive('saveCursorPosition', function() {
     return {
@@ -54,6 +63,7 @@ lhpApp.directive('saveCursorPosition', function() {
         }
     };
 });
+
 
 lhpApp.directive('wordcloud', function () {
     return {

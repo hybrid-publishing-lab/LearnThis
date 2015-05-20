@@ -18,7 +18,6 @@ public class MultipleChoice extends Textelement {
     
     @LazyCollection(LazyCollectionOption.FALSE)
     @ElementCollection
-//    @ElementCollection(fetch=FetchType.EAGER)
     @CollectionTable(
           name="multiplechoice",
           joinColumns=@JoinColumn(name="Textelement_id")

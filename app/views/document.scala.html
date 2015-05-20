@@ -31,6 +31,7 @@
 						<p>Autor: {{document.givenname}} {{document.surname}}<br/>
 						erstellt: @document.createdAt.format("dd.MM.yyyy HH:mm")<br/>
 						geändert: @document.changedAt.format("dd.MM.yyyy HH:mm")</p>
+						<p>{{document.description}}</p>
 					</div>
 					<div class="cardNr">{{document.cards.length}} Lernkarten</div>	
 				</div>
