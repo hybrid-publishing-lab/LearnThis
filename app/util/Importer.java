@@ -1,0 +1,93 @@
+package util;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+
+import models.Card;
+import models.Document;
+import models.MultipleChoice;
+
+import org.apache.commons.lang3.StringUtils;
+
+public class Importer {
+    public static Document importFromTextfile(File file, String encoding, boolean splitText) throws Exception{
+        Document doc = new Document();
+        BufferedReader br = null;
+        try {
+            br = new BufferedReader(new InputStreamReader(new FileInputStream(file), encoding));
+            List<String> textelements = parseTextelements(br, splitText);
+            int i = 0;
+            for(String element : textelements){
+//                if(element.length() <= 200){
+//                    // Headline
+//                    Headline hl = new Headline();
+//                    hl.text = element;
+//                    hl.size = 1;
+//                    Card card = new Card();
+//                    card.front = hl;
+//                    card.back = new MultipleChoice();
+//                    card.sort = i;
+//                    doc.cards.add(card);
+//                    card.document = doc;
+//                }else{
+                    // Paragraph
+                    MultipleChoice mc = new MultipleChoice();
+                    mc.text = element;
+                    Card card = new Card();
+                    card.sort = i;
+                    card.front = mc;
+                    card.back = new MultipleChoice();
+                    doc.cards.add(card);
+                    card.document = doc;
+//                }
+                i++;
+            }
+        }finally {
+            if (br != null) {
+                try {
+                    br.close();
+                } catch (IOException e) {
+                }
+            }
+        }
+        return doc;
+    }
+
+    private static List<String> parseTextelements(BufferedReader br, boolean splitText) throws IOException {
+
+        List<String> textelements = new ArrayList<String>();
+        String line = null;
+        String textelement = "";
+        while ((line = br.readLine()) != null) {
+            if (isEmpty(line)) {
+                // Separator
+                if (!isEmpty(textelement)) {
+                    if (splitText) {
+                        textelements.add(textelement);
+                        textelement = "";
+                    } else {
+                        textelement += "\n" + line;
+                    }
+                }
+            } else {
+                // Textelement
+                textelement += line;
+            }
+        }
+        // add last element
+        if(StringUtils.isNotEmpty(textelement)){
+            textelements.add(textelement);
+        }
+        return textelements;
+    }
+
+    private static Boolean isEmpty(String s) {
+        return s.matches("\\s*");
+    }
+
+}

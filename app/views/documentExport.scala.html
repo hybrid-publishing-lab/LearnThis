@@ -1,0 +1,36 @@
+@(doc: Document) @main("New Document"){
+<div>
+	<div class="jumbotron">
+		<h1>@doc.title</h1>
+		<p>Autor: @doc.givenname @doc.surname</p>
+		<p>erstellt: @doc.createdAt.format("dd.MM.yyyy HH:mm")</p>
+		<p>geändert: @doc.changedAt.format("dd.MM.yyyy HH:mm")</p>
+	</div>
+	@for(card <- doc.cards) {
+		@if(card.front.getType == "Paragraph") {
+			@Html({
+				var para:Paragraph = card.front.asInstanceOf[Paragraph]
+				var output : String = "<p>"
+				output += para.text
+				output += "</p>"
+				if(null != para.comment){
+					output += "<p style=\"font-size: 0.8em; font-style: italic;\">"
+					output += para.comment
+					output += "</p>"
+				}
+				output
+			})
+		} else {
+			@Html({
+				var headline:Headline = card.front.asInstanceOf[Headline]
+				var output : String = "<h3 class=\"size_"
+				output += headline.size
+				output += "\">"
+				output += headline.text
+				output += "</h3>"
+				output
+			})
+		}
+	}
+</div>
+}
