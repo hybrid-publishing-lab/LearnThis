@@ -5,7 +5,25 @@ body {
     margin-top: 80px;
 }
 
+.container{
+	position: relative;
+}
+
 /*** Navigation ***/
+
+.nav li.right{
+	position: absolute;
+    right: 0;
+}
+
+.nav li.right a{
+	color: #428bca;
+}
+
+.nav li.right a:hover{
+	color: #2a6496;
+	text-decoration: underline;
+}
 
 .navbar-default{
 	background-color: #fff;
@@ -561,7 +579,8 @@ textarea {
 	resize: none;
 	width: 100%;
 	border: none;
-	padding: 4px;
+/* 	padding: 4px; */
+	color:#333333;
 }
 
 textarea.comment {
