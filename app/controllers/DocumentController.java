@@ -15,6 +15,10 @@ import models.Headline;
 import models.MultipleChoice;
 import models.Paragraph;
 import models.Textelement;
+
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+
 import play.Logger;
 import play.data.Form;
 import play.libs.Json;
@@ -159,6 +163,20 @@ public class DocumentController extends Controller {
 
     public Result findAll() {
         Iterable<Document> docs = documentRepository.findByIdNotNullOrderByVisitsDesc();
+        List<Document> result = new ArrayList<Document>();
+        for (Document doc : docs) {
+            result.add(doc);
+        }
+        JpaFixer.removeDuplicatesWorkaround(result);
+        return ok(Json.toJson(result));
+    }
+
+    public Result findRandom(Integer count) {
+        if (count > 100) {
+            count = 100;
+        }
+        Pageable page = new PageRequest(0, count);
+        Iterable<Document> docs = documentRepository.findRandom(page);
         List<Document> result = new ArrayList<Document>();
         for (Document doc : docs) {
             result.add(doc);

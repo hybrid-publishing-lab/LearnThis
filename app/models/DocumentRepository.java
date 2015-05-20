@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -24,5 +25,8 @@ public interface DocumentRepository extends CrudRepository<Document, Long> {
     void incrementVisits(Long id);
 
     List<Document> findByIdNotNullOrderByVisitsDesc();
+
+    @Query("select d from Document d order by RAND()")
+    List<Document> findRandom(Pageable pageable);
 
 }
