@@ -1,0 +1,675 @@
+body {
+    font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    background-color: #f8f8f8;
+    font-weight: 400;
+    margin-top: 80px;
+}
+
+/*** Navigation ***/
+
+.navbar-default{
+	background-color: #fff;
+}
+
+@media (min-width: 768px) {
+
+	.navbar-default .navbar-nav >li > a.ownBtn{
+	    -moz-user-select: none;
+	    background-image: none;
+	    border: 1px solid #cccccc;
+	    border-radius: 4px;
+	    cursor: pointer;
+	    display: inline-block;
+	    font-size: 14px;
+	    font-weight: normal;
+	    line-height: 1.42857;
+	    margin-top: 10px;
+	    margin-right: 10px;
+	    padding: 6px 12px;
+	    text-align: center;
+	    vertical-align: middle;
+	    white-space: nowrap;
+	    background-color: #ffffff;
+	    color: #333333;
+	}
+	
+	.navbar-default .navbar-nav > li > a.ownBtn:hover, 
+	.navbar-default .navbar-nav > li > a.ownBtn:focus, 
+	.navbar-default .navbar-nav > li > a.ownBtn:active, 
+	.navbar-default .navbar-nav > li > a.ownBtn.active {
+	    background-color: #e7e7e7;
+	    border-color: #cccccc;
+	    color: #333333;
+	}
+	
+}
+
+.navbar-toggle{
+	background: url("../img/icons/b_select.png") no-repeat scroll left center / 100% auto transparent;
+	width: 40px;
+	height:34px;
+}
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+  background-color: #e7e7e7;
+}
+
+ul.subNavi{
+	border-top: 1px solid #dddddd;	
+	margin: 5px 0 4px;
+}
+
+ul.subNavi li{
+	padding-top:4px;
+}
+
+/*** Übersicht ***/
+
+.thumbnail{
+	position: relative;
+}
+
+.thumbnail.first  {
+   margin-bottom: 10px;
+}
+
+.thumbnail div.svgBg  {
+   background-color: #f8f8f8;
+   width: auto;
+   overflow: hidden;
+   position: relative;	
+}
+
+.previews .thumbnail div.svgBg  {
+   height: 200px;	
+}	
+
+.cardContent div.svgBg  {
+   height: 300px;
+}
+
+.thumbnail div.textBg  {
+   padding:10px;
+}
+
+/*** Karte ***/
+.cardContent .thumbnail{
+	padding:  4px 10px;
+}
+
+
+.btnEdit {
+    background: url("../img/icons/b_edit.png") no-repeat scroll left center / auto 120% transparent;
+    padding: 10px 0px 10px 40px;
+}
+
+.btnLern{
+    background: url("../img/icons/b_learn.png") no-repeat scroll left center / auto 120% transparent;
+    padding: 10px 0px 10px 40px;
+}
+
+.btnClean {
+    background: url("../img/icons/b_close.png") no-repeat scroll left center / auto 120% transparent;
+    padding: 10px 0px 10px 40px;
+    cursor: pointer; 
+}
+
+.btnShare {
+    background: url("../img/icons/b_share.png") no-repeat scroll left center / auto 100% transparent;
+    padding: 10px 0px 10px 30px;
+    cursor: pointer;
+}
+
+.glyphicon.grey{
+	color: #a7a9ac;
+	padding-right: 20px;
+}
+
+.modal-sm {
+    width: 300px;
+}
+
+.btn-default.long{
+	    width: 100%;
+}
+
+.posCenter{
+	text-align: center;
+}
+
+button.btnPlus {
+    background: url("../img/icons/b_zoom_in.png") no-repeat scroll center center / 130% auto #ffffff;
+    padding: 19px;
+}
+
+button.btnCombine {
+    background: url("../img/icons/b_combine.png") no-repeat scroll center center / 130% auto #ffffff;
+     padding: 19px;
+}
+
+button.btnCombine.bottom {
+	top: -25px;
+}
+
+
+
+.textBg p {
+    margin: 0 0 4px;
+}
+
+.textBg .cardNr{
+	text-align: right;
+	font-weight:700;
+	font-size: 16px;
+}
+
+/*** KartenListe ***/
+
+.allCard div.svgBg  {
+   height: 70px;
+}
+
+.allCard .cardNrContainer {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	background: #428bca;
+	font-size: 10px;
+	padding: 1px 4px;
+	font-weight: 700;
+	min-width: 25px;
+	text-align: right;
+	color: #fff;	
+}
+
+.pwContainer{
+	text-align: center;
+	margin: 20px 0;
+}
+
+/*** Edit ***/
+.cardEdit .thumbnail{
+	padding:  4px 10px;
+}
+
+a.filter{
+	background: url("../img/icons/b_arrow_back.png") no-repeat scroll right center /  auto 100% transparent;
+	display: block;
+	color:#333333; 
+}
+
+a.filter:hover{
+	text-decoration: none;
+}
+
+.circleLeft,
+.circleRight {
+	background-color: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 100px;
+	position: absolute;
+    z-index: 10;
+    height: 45px;
+    width: 45px;
+}	
+
+.circleLeft {
+    left: -20px;
+	top: -20px;
+}
+
+.circleRight {
+    right: -20px;
+	top: -20px;
+}	
+
+.circleLeft.btnMove{
+	background: url("../img/icons/b_move.png") no-repeat scroll center center / 125% auto #ffffff;
+}
+
+.circleRight.btnDelete{
+	background: url("../img/icons/b_close.png") no-repeat scroll center center / 125% auto #ffffff;
+}
+
+
+.circleLeft.btnMove:hover,
+.circleRight.btnDelete:hover{
+	background-color: #e7e7e7;
+}
+
+/*** learnCard ***/
+.row.discription div{
+	text-align: center;
+}
+
+.row.learnCardContainer{
+	margin-bottom:0;
+}
+
+.learning .thumbnail{
+	width:100%;
+}
+
+.text-element{
+	position: relative;
+}
+
+.row.splitCard{
+	text-align: center;
+    position: absolute;
+    top: -10px;
+    width: 100%;
+    margin: 0;
+    z-index: 100;
+}
+
+.combineContent{
+	position: absolute;
+    top: -60px;
+    z-index: 100;
+	left:30px;
+	margin:0;
+}
+
+.combineContentBottom{
+	position: absolute;
+    bottom: -60px;
+    z-index: 100;
+	left:45px;
+	margin:0;
+}
+
+
+
+.learnCard.row {
+	margin:10px -5px;
+	display: flex;
+    flex-direction: row;
+}
+
+.learnCard .frontbackSide {
+	float: none;
+	width: 48%;
+	min-height: 1px;
+    padding-left: 15px;
+    padding-right: 15px;
+    position: relative;
+}
+
+.cellCenterSmall{
+	width: 4%;
+}
+
+button.btnChange{
+    background: url("../img/icons/b_exchange.png") no-repeat scroll center center / 130% auto transparent;
+    padding: 19px;
+	position: absolute;
+	top: 40%;
+}
+
+.card.cornerRight:before {
+	background: none repeat scroll 0 0 #f8f8f8;
+	border-color: #f8f8f8 #f8f8f8 #ffffa5 #ffffa5;
+	border-style: solid;
+	border-width: 0 30px 30px 0;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3), -1px 1px 1px rgba(0, 0, 0, 0.2);
+	content: "";
+	display: block;
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 0;
+}
+
+.learnCard .card.cornerRight:before {
+	background-color: #ffffff;
+	border-color: #ffffff #ffffff #ffffa5 #ffffa5;
+}
+
+.card.cornerLeft:before {
+	background: none repeat scroll 0 0 #f8f8f8;
+	border-color: #f8f8f8 #ffffa5 #ffffa5 #f8f8f8;
+	border-style: solid;
+	border-width: 0px 0px 30px 30px;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3), -1px 1px 1px rgba(0, 0, 0, 0.2);
+	content: "";
+	display: block;
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 0;
+}
+
+.learnCard .card.cornerLeft:before {
+	background-color: #ffffff;
+	border-color: #ffffff #ffffa5 #ffffa5 #ffffff;
+}
+
+.bgCard {
+	background: -webkit-repeating-linear-gradient( 180deg, #FFFFA5 1.5rem, #FFFFA5 3.3rem, #FFFFA5 3.3rem, #D3D37B 3.5rem );
+	background: -moz-repeating-linear-gradient( 180deg, #FFFFA5 1.5rem, #FFFFA5 3.3rem, #FFFFA5 3.3rem, #D3D37B 3.5rem );
+	background: repeating-linear-gradient( 180deg, #FFFFA5 1.5rem, #FFFFA5 3.3rem, #FFFFA5 3.3rem, #D3D37B 3.5rem );
+	    padding: 0;
+}
+
+.card {	
+	overflow: hidden;
+    position: relative;
+    height: 100%;
+}
+
+.learning{
+    display: flex;
+}
+
+.learnCard .card {
+	padding: 10px 30px;
+}
+
+
+/* background container */
+.backgrounds { 
+    position:absolute;
+    width:100%;
+    height:100%;
+}
+ 
+/* background columns */
+.backgrounds .column {
+    height:100%;
+}
+
+/*** ***/
+/* .row.learning{ */
+/* display: flex; */
+/*     flex-direction: row; */
+/* } */
+
+.learning .col-xs-2{
+	min-width: 50px;
+/* 	position: relative; */
+/* 	float: none; */
+}
+
+
+.prev{
+/* 	background: url("../img/icons/b_arrow_backward.png") no-repeat scroll left center / 100% auto transparent;
+    display: block; */
+    cursor: pointer;
+    position: absolute;
+    left:0;
+    top:20%;
+}
+
+.next{
+/* 	background: url("../img/icons/b_arrow_forward.png") no-repeat scroll right center / 100% auto transparent;
+    display: block; */
+    cursor: pointer;
+    position: absolute;
+    right:0;
+    top:20%;
+}
+
+.jumbotron {
+	background-color: transparent;
+}
+/*****************/
+ /* entire container, keeps perspective */
+.flip-container {
+	perspective: 1000;
+}
+	/* flip the pane when hovered */
+	.flip-container.hover .flipper {
+		transform: rotateY(180deg);
+	}
+
+.flip-container, .front, .back {
+	width: 100%;
+/* 	height: 480px; */
+}
+
+/* flip speed goes here */
+.flipper {
+	transition: 0.6s;
+	transform-style: preserve-3d;
+	position: relative;
+	height: auto;
+}
+
+/* hide back of pane during swap */
+.flipper .cornerLeft, 
+.flipper .cornerRight {
+	backface-visibility: hidden;
+}
+
+/* front pane, placed above back */
+.flipper .cornerRight {
+	z-index: 2;
+	/* for firefox 31 */
+	transform: rotateY(0deg);
+}
+
+/* back, initially hidden pane */
+.flipper .cornerLeft {
+	transform: rotateY(180deg);
+}
+/**************/
+ul {
+	list-style: none;
+}
+
+.hide {
+	display: none;
+}
+
+div.headline {
+	margin-bottom: 40px;
+}
+
+table.documents-overview th {
+	border: 0px;
+	background-color: white;
+	padding: 2px;
+	padding-left: 20px;
+	padding-right: 20px;
+	font-weight: normal;
+}
+
+table.documents-overview td {
+	padding-left: 20px;
+	padding-right: 20px;
+	background-color: #EEEEEE;
+	border: 0px;
+	min-width: 100px;
+}
+
+table.documents-overview td:nth-child(1) {
+	font-size: 20px;
+	font-weight: bold;
+}
+
+table.documents-overview td:nth-child(2) {
+	font-size: 16px;
+}
+
+table.documents-overview td:nth-child(3) {
+	font-size: 16px;
+}
+
+table.documents-overview td:nth-child(4) {
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+div.sidebar-menu-container {
+	max-width: 200px;
+}
+
+.nav-pills a,.nav-pills select,.nav-pills textarea {
+	background-color: #DDDDDD;
+}
+
+textarea {
+	overflow: hidden;
+	resize: none;
+	width: 100%;
+	border: none;
+	padding: 4px;
+}
+
+textarea.comment {
+	width: 100%;
+	resize: both;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+}
+
+.hidden-form-element {
+	background-color: transparent;
+	border-width: 0px;
+}
+
+button.merge {
+	width: 100%;
+}
+
+td {
+	height: 50px;
+}
+
+button.delete-button {
+	height: 46px;
+}
+
+.dimmed {
+	opacity: 0.5;
+}
+
+.edit-mode-active .show-on-focus {
+	display: block;
+}
+
+.show-on-focus {
+	display: none;
+}
+
+/*sortable placeholder css*/
+.ui-state-highlight {
+	height: 3em;
+	border: 1px dashed gray;
+}
+
+.size_1 {
+	font-size: 4rem;
+}
+
+.size_2 {
+	font-size: 3.5rem;
+}
+
+.size_3 {
+	font-size: 3rem;
+}
+
+.size_4 {
+	font-size: 2.5rem;
+}
+
+.size_5 {
+	font-size: 2rem;
+}
+
+.size_6 {
+	font-size: 1.5rem;
+}
+
+.roll-out-menu {
+	position: relative;
+}
+
+.roll-out-menu ul {
+/* 	position: absolute; */
+	width: 100%;
+}
+
+#overlay {
+	z-index: 1000;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	background-color: rgba(0, 0, 0, 0.2);
+	position: fixed;
+}
+
+.alert {
+	position: fixed;
+	width: 400px;
+	right: 0;
+	top:50px;
+	z-index: 1030;
+}
+
+.alert div.msg {
+	margin-bottom: 10px;
+}
+
+.alert button.save {
+	float: right;
+}
+
+div.metatag-input {
+	margin-bottom: 5px;
+}
+
+.filterbar input {
+	width: 200px;
+	display: inline;
+}
+
+.filterbar select {
+	width: 200px;
+	display: inline;
+}
+
+.filterbar .hashtags {
+	margin-top: 10px;
+}
+
+.filterbar .hashtags h6 {
+	margin-left: 5px;
+	margin-bottom: 1px;
+}
+
+.filterbar button.right {
+	float: right;
+	margin-left: 5px;	
+}
+
+textarea {
+	background: none;
+}
+
+.row {
+	margin-bottom: 2rem;
+}
+
+.backside {
+	background-color: #FFFFA5;
+	margin-bottom: 2rem;
+	padding: 1rem;
+}
+
+.btn-default:hover,
+.btn-default:focus,
+.btn-default:active,
+.btn-default.active,
+.open .dropdown-toggle.btn-default {
+  color: #333333;
+  background-color: #e7e7e7;
+  border-color: #adadad;
+}
+
+a.noUnderline:hover {
+	text-decoration: none;
+}
