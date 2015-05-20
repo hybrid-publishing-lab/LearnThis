@@ -83,6 +83,7 @@ public class Application extends Controller {
     
     public Result findById(Long id){
         Document doc = documentRepository.findOne(id);
+        documentRepository.incrementVisits(id);
         JpaFixer.removeDuplicatesWorkaround(doc);
         return ok(views.html.document.render(doc));
     }

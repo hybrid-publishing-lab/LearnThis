@@ -1,6 +1,6 @@
-lhpControllers.controller('DocumentEditController', [ '$scope', '$http',
+lhpControllers.controller('DocumentEditController', [ '$scope', '$http', '$document', '$timeout',
     'SaveService', 'LocalStorageService', DocumentEditController ]);
-function DocumentEditController ($scope, $http, saveService, localStorageService) {
+function DocumentEditController ($scope, $http, $document, $timeout, saveService, localStorageService) {
 
   const
   filterAlle = "alle";
@@ -27,7 +27,14 @@ function DocumentEditController ($scope, $http, saveService, localStorageService
   };
   $scope.pwForm = {};
   $scope.passwordCorrect = false;
+  
 
+  $document.on('click', function (e) {
+    util.log('$document click caught');
+    $timeout(function () {$scope.activeEle = null;} );
+  });
+
+  
   $scope.init = function (docId) {
     if (!$scope.isInit && docId) {
       $scope.isInit = true;
@@ -81,6 +88,8 @@ function DocumentEditController ($scope, $http, saveService, localStorageService
     card.front = card.back;
     card.back = oldFront;
     $scope.change();
+
+    $scope.$broadcast(EVENT_TRIGGER_AUTOGROW, 1);
   }
   
   $scope.removeBack = function (card) {
@@ -176,6 +185,7 @@ function DocumentEditController ($scope, $http, saveService, localStorageService
   }
 
   $scope.isActive = function (textelement) {
+    console.log('checking isActive');
     return $scope.activeEle === textelement;
   }
 
@@ -205,6 +215,7 @@ function DocumentEditController ($scope, $http, saveService, localStorageService
       
       cards.splice(index, 1);
       $scope.change();
+      $scope.$broadcast(EVENT_TRIGGER_AUTOGROW, 1);
     }
   }
 
@@ -233,6 +244,7 @@ function DocumentEditController ($scope, $http, saveService, localStorageService
 
       cards.splice(index + 1, 1);
       $scope.change();
+      $scope.$broadcast(EVENT_TRIGGER_AUTOGROW, 1);
     }
   }
 
@@ -246,6 +258,7 @@ function DocumentEditController ($scope, $http, saveService, localStorageService
       cards[index].front.text = firstPart;
       $scope.createParagraph(index + 1, doc.id, secondPart);
       $scope.change();
+      $scope.$broadcast(EVENT_TRIGGER_AUTOGROW, 1);
     }
   }
 

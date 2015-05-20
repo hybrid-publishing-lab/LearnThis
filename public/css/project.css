@@ -57,7 +57,6 @@ body {
 ul.subNavi{
 	border-top: 1px solid #dddddd;	
 	margin: 5px 0 4px;
-	clear:both;
 }
 
 ul.subNavi li{
@@ -716,4 +715,8 @@ textarea {
   color: #333333;
   background-color: #e7e7e7;
   border-color: #adadad;
+}
+
+a.noUnderline:hover {
+	text-decoration: none;
 }
