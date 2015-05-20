@@ -7,6 +7,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
+import org.apache.commons.lang3.StringUtils;
+
 import models.Document;
 import models.DocumentRepository;
 import play.Logger;
@@ -39,32 +41,46 @@ public class ImportController extends Controller {
 
         MultipartFormData body = request().body().asMultipartFormData();
         FilePart filePart = body.getFile("file");
+        Map<String, String[]> postData = body.asFormUrlEncoded();
+        String freitext = getFreitext(postData.get("freitext"));
+        File file = null;
+        String fileName = null;
         if (filePart != null) {
-            String fileName = filePart.getFilename();
-//            String contentType = filePart.getContentType();
-            File file = filePart.getFile();
-
-            try {
-                Map<String, String[]> postData = body.asFormUrlEncoded();
-                String encoding = getEncoding(postData.get("encoding"));
-                boolean splitText = getSplitText(postData.get("splitText"));
-                Document doc = Importer.importFromTextfile(file, encoding, splitText);
-                doc.title = fileName;
-                doc.givenname = "Vorname";
-                doc.surname = "Nachname";
-                documentRepository.save(doc);
-                return redirect(routes.Application.findById(doc.id));
-            } catch (Exception e) {
-                Logger.warn("Datei liegt nicht im richtigen Format vor.", e);
-                flash("error", "Datei liegt nicht im richtigen Format vor.");
-                return redirect(routes.ImportController.form());
-            }
-
+            fileName = filePart.getFilename();
+            file = filePart.getFile();
+        } else if(StringUtils.isNotBlank(freitext)) {
+            // do nothing
         } else {
             flash("error", "Missing file");
             return redirect(routes.ImportController.form());
         }
 
+        try {
+            String encoding = getEncoding(postData.get("encoding"));
+            boolean splitText = getSplitText(postData.get("splitText"));
+            Document doc;
+            if (file != null) {
+                doc = Importer.importFromTextfile(file, encoding, splitText);
+            } else {
+                doc = Importer.importFromText(freitext, encoding, splitText);
+            }
+            doc.title = fileName;
+            doc.givenname = "Vorname";
+            doc.surname = "Nachname";
+            documentRepository.save(doc);
+            return redirect(routes.Application.findById(doc.id));
+        } catch (Exception e) {
+            Logger.warn("Datei liegt nicht im richtigen Format vor.", e);
+            flash("error", "Datei liegt nicht im richtigen Format vor.");
+            return redirect(routes.ImportController.form());
+        }
+    }
+
+    private String getFreitext(String[] postData) {
+        if (postData != null && postData.length == 1) {
+            return postData[0];
+        }
+        return null;
     }
 
     private boolean getSplitText(String[] postData) {
@@ -74,7 +90,6 @@ public class ImportController extends Controller {
             }
         }
         return false;
-            
     }
 
     private static String getEncoding(String[] encoding) {
