@@ -1,22 +1,7 @@
 @(document: Document) @main("New Document") {
 
-<nav role="navigation" class="navbar navbar-default  navbar-fixed-top">  
-    <div class="container">
-    	<div class="navbar-header">
-            <button data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" class="navbar-toggle" type="button">
-                <span class="sr-only">Navigation ein-/ausblenden</span>
-            </button>
-            <a href="/" class="navbar-brand">LernThis</a>
-        </div>
-		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav">
-				<li><a href="/" class="ownBtn">Übersicht</a></li>
-				<li><a href="/document/@document.id" class="ownBtn">Kartenset</a></li>
-			</ul>
-		</div>
-    </div>
-</nav> 
-
+@_navi() 
+ 
 <div class="container" data-ng-controller="DocumentLearnController"
 	data-ng-init="init(@document.id)">
 	
