@@ -20,3 +20,5 @@ lhp.sendEvent = function($scope, event, arg0){
 	var args = Array.prototype.slice.call(arguments);
 	$scope.$broadcast.apply($scope, args.slice(1));
 }
+
+var EVENT_TRIGGER_AUTOGROW = 'EVENT_TRIGGER_AUTOGROW';

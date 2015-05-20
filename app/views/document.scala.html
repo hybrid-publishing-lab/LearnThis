@@ -30,6 +30,7 @@
 					<p>Autor: {{document.givenname}} {{document.surname}}<br/>
 					erstellt: @document.createdAt.format("dd.MM.yyyy HH:mm")<br/>
 					geändert: @document.changedAt.format("dd.MM.yyyy HH:mm")</p>
+					<p>{{document.description}}</p>
 					<p class="cardNr">{{document.cards.length}} Lernkarten</p>
 				</div>
 				<ul class="list-inline subNavi">
