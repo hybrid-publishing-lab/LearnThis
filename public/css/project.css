@@ -5,7 +5,25 @@ body {
     margin-top: 80px;
 }
 
+.container{
+	position: relative;
+}
+
 /*** Navigation ***/
+
+.nav li.right{
+	position: absolute;
+    right: 0;
+}
+
+.nav li.right a{
+	color: #428bca;
+}
+
+.nav li.right a:hover{
+	color: #2a6496;
+	text-decoration: underline;
+}
 
 .navbar-default{
 	background-color: #fff;
@@ -90,7 +108,15 @@ ul.subNavi li{
 
 .thumbnail div.textBg  {
    padding:10px;
+   display: table;
+   position: relative;
+   width: 100%;
 }
+
+.thumbnail div.textBg div:nth-child(1)  {
+   float:left;
+}
+
 
 /*** Karte ***/
 .cardContent .thumbnail{
@@ -152,15 +178,17 @@ button.btnCombine.bottom {
 }
 
 
-
 .textBg p {
     margin: 0 0 4px;
 }
 
 .textBg .cardNr{
-	text-align: right;
-	font-weight:700;
-	font-size: 16px;
+	bottom: 13px;
+    font-size: 16px;
+    font-weight: 700;
+    position: absolute;
+    right: 0px;	
+    min-width: 100px;
 }
 
 /*** KartenListe ***/
@@ -283,29 +311,65 @@ a.filter:hover{
 
 .learnCard.row {
 	margin:10px -5px;
-	display: flex;
-    flex-direction: row;
 }
+
 
 .learnCard .frontbackSide {
 	float: none;
-	width: 48%;
 	min-height: 1px;
     padding-left: 15px;
     padding-right: 15px;
     position: relative;
-}
-
-.cellCenterSmall{
-	width: 4%;
+    width: 48%;
 }
 
 button.btnChange{
     background: url("../img/icons/b_exchange.png") no-repeat scroll center center / 130% auto transparent;
     padding: 19px;
-	position: absolute;
-	top: 40%;
 }
+
+
+@media (max-width: 767px) {	
+  .learnCard.row {
+		display: block;
+	}
+
+	.learnCard .frontbackSide {
+		width: 100%;
+	}
+	
+	 .cellCenterSmall{
+		width: 100%;
+		text-align: center;
+		margin: 10px 0;
+	}
+	
+	button.btnChange{
+		position: relative;
+		top: 40%;
+	}
+}
+
+@media (min-width: 768px) {		
+	.learnCard.row {
+	    display: flex;
+		display: -webkit-flex;
+	}
+	
+	.learnCard .frontbackSide {
+		width: 48%;
+	}
+	
+  	.cellCenterSmall{
+		width: 4%;
+	}
+	
+	button.btnChange{
+		position: absolute;
+		top: 40%;
+	}
+}
+
 
 .card.cornerRight:before {
 	background: none repeat scroll 0 0 #f8f8f8;
@@ -360,6 +424,7 @@ button.btnChange{
 
 .learning{
     display: flex;
+    display: -webkit-flex;
 }
 
 .learnCard .card {
@@ -514,7 +579,8 @@ textarea {
 	resize: none;
 	width: 100%;
 	border: none;
-	padding: 4px;
+/* 	padding: 4px; */
+	color:#333333;
 }
 
 textarea.comment {

@@ -19,3 +19,5 @@ syntax: regexp
 ^.*\.eml$
 ^activator*.sbt$
 ^conf/local\.conf$
+syntax: glob
+*.orig
