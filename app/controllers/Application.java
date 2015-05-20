@@ -45,7 +45,7 @@ public class Application extends Controller {
     
     public Result newDoc(){
         final Document doc = new Document();
-        doc.title = "Document";
+        doc.title = "Thema";
         doc.givenname = "Vorname";
         doc.surname = "Nachname";
         doc.createdAt = new Date();
