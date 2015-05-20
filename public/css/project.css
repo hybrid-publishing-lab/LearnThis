@@ -120,6 +120,11 @@ ul.subNavi li{
     cursor: pointer;
 }
 
+.glyphicon.grey{
+	color: #a7a9ac;
+	padding-right: 20px;
+}
+
 .modal-sm {
     width: 300px;
 }
