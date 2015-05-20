@@ -16,14 +16,17 @@
 		</div>
     </div>
 </nav>    
-<div class="container" data-ng-controller="DocumentListController" data-ng-init="init()">
+<div class="container" data-ng-controller="DocumentListController" data-ng-init="init(true)">
   	<div class="row previews">
 		<div class="col-xs-12 col-sm-6 col-md-3"  data-ng-repeat="document in documents">
 			<div class="thumbnail">
 				<div class=svgBg>
-				<a data-ng-href="/document/{{document.id}}" class="noUnderline">
-					<wordcloud data-ng-if="document.combinedTexts" text="{{document.combinedTexts}}">
-				</a>
+					<a data-ng-href="/document/{{document.id}}" class="noUnderline">
+						<wordcloud data-ng-if="document.combinedTexts" text="{{document.combinedTexts}}">
+					</a>
+					<div class="allCard">
+						<div class="cardNrContainer">{{document.cards.length}}</div>
+					</div>
 				</div>	
 				<p>
 					<a data-ng-href="/document/{{document.id}}" data-ng-bind="document.title"></a><br />

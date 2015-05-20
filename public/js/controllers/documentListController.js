@@ -5,10 +5,14 @@ function DocumentListController($scope, $http, saveService){
 	$scope.saved = true;
 	$scope.isInit = false;
 	
-	$scope.init = function(){
+	$scope.init = function(fetchAll){
 		if (!$scope.isInit) {
 			$scope.isInit = true;
-			$http.get('/json/document/all').success(function(data){
+			var url = '/json/document/random/5';
+			if (fetchAll) {
+			  url = '/json/document/all';
+      }
+			$http.get(url).success(function(data){
 				$scope.documents = data;
 				for(j = 0; j < $scope.documents.length; ++j) {
 					var combinedTexts = "" + $scope.documents[j].title;
