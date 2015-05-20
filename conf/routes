@@ -5,6 +5,8 @@
 # Home page - we use the @controllers syntax here so that the router knows we are referring to a class. In turn it
 # will call on the GlobalSettings.getController method to resolve the actual controller instance.
 GET     /                           						@controllers.Application.index
+GET     /help                          						@controllers.Application.help
+GET     /imprint                       						@controllers.Application.imprint
 GET		/document/new										@controllers.Application.newDoc
 GET     /document/:id                 						@controllers.Application.findById(id: Long)
 GET		/document/:id/keywords								@controllers.Application.keywords(id: Long)

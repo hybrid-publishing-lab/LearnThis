@@ -35,6 +35,14 @@ public class Application extends Controller {
         return ok(views.html.index.render(""));
     }
     
+    public Result help() {
+        return ok(views.html.help.render(""));
+    }
+
+    public Result imprint() {
+        return ok(views.html.imprint.render(""));
+    }
+    
     public Result newDoc(){
         final Document doc = new Document();
         doc.title = "Document";

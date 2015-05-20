@@ -1,22 +1,7 @@
 @(msg: String) @main("Dokument Index") {
 
-<nav role="navigation" class="navbar navbar-default  navbar-fixed-top">  
-    <div class="container">
-    	<div class="navbar-header">
-            <button data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" class="navbar-toggle" type="button">
-                <span class="sr-only">Navigation ein-/ausblenden</span>
-            </button>
-            <a href="/" class="navbar-brand">LernThis</a>
-        </div>
-		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav">
-				<li><a class="ownBtn" href="/document/new" role="button">Neues Kartenset</a></li>
-				<li><a class="ownBtn" href="/import/form" role="button">Importieren</a></li>
-				<li class="right"><a href="/import/form" role="button">Hilfe</a></li>
-			</ul>
-		</div>
-    </div>
-</nav>    
+@_navi()
+ 
 <div class="container" data-ng-controller="DocumentListController" data-ng-init="init(true)">
   	<div class="row previews">
 		<div class="col-xs-12 col-sm-6 col-md-3"  data-ng-repeat="document in documents">
