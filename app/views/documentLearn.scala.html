@@ -1,0 +1,68 @@
+@(document: Document) @main("New Document") {
+
+@_navi() 
+ 
+<div class="container" data-ng-controller="DocumentLearnController"
+	data-ng-init="init(@document.id)">
+	
+	
+	<div class="row">
+		<div class="col-xs-12">	
+		<div class="flip-container" data-ng-class="{hover: currentSide == 'back'}">
+		<div class="flipper">
+			<div class="row learning" data-ng-class="{cornerRight: currentSide == 'front', cornerLeft: currentSide == 'back', bgCard: !showScore, card: !showScore,thumbnail: showScore}">
+				<div class="col-xs-2">
+					<div data-ng-if="currentPage > 0" data-ng-click="prevCard()" class="prev"><img src="/assets/img/icons/b_arrow_backward.png" width="100%"></div>
+				</div>
+				<div class="jumbotron col-xs-8">
+					<div data-ng-if="!showScore">
+						<div>
+							<p>{{currentCard[currentSide].text}}</p>
+							<div>
+								<ul data-ng-repeat="multipleChoice in currentCard[currentSide].choices | orderBy:sort">
+									<li>
+										<input type="checkbox" data-ng-model="multipleChoice.userChecked" data-ng-disabled="{{currentCard[currentSide].solved}}">
+										{{multipleChoice.text}}
+										<span data-ng-if="currentCard[currentSide].solved">
+											{{(multipleChoice.userChecked && multipleChoice.correct) || (!multipleChoice.userChecked && !multipleChoice.correct)}}
+										</span>
+									</li>
+								</ul>
+								<div data-ng-if="hasChoices(currentCard[currentSide])">
+									<div>
+										<button type="button" class="btn btn-default" data-ng-if="!currentCard[currentSide].solved" data-ng-click="userSolvesMc()">Auflösen</button>
+										<button type="button" class="btn btn-default" data-ng-if="currentCard[currentSide].solved" data-ng-click="nextCard()">weiter</button>
+									</div>
+								</div>
+								<div data-ng-if="!hasChoices(currentCard[currentSide])">
+									<!-- if next entry in the pager is not of the same card -->
+									<div>
+										<button type="button" class="btn btn-default"  data-ng-click="userUnderstood(true)">Habe ich verstanden</button>
+										<button type="button" class="btn btn-default"  data-ng-click="userUnderstood(false)">Habe ich nicht verstanden</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div data-ng-if="showScore">
+						<p>Punktzahl: {{score}} / {{maxScore}}</p>
+						<a href="/" class="btn btn-default">Übersicht</a>
+						<a data-ng-click="restart()" class="btn btn-default">nochmal lernen</a>
+					</div>
+				</div>
+				<div class="col-xs-2">
+					<div data-ng-if="!showScore" data-ng-click="nextCard()" class="next"><img src="/assets/img/icons/b_arrow_forward.png" width="100%"></div>
+				</div>
+			</div>
+			</div>
+			</div>
+			
+		</div>		
+	</div>
+	<div class="row pager">
+		<div class="col-xs-12">
+			Karte {{currentPage+1}} / {{pager.length}}
+		</div>
+	</div>
+</div>
+}
