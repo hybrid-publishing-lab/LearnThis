@@ -697,7 +697,7 @@ button.delete-button {
 
 .alert {
 	position: fixed;
-	width: 400px;
+	width: auto;
 	right: 0;
 	top:50px;
 	z-index: 1030;
