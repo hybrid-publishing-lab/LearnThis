@@ -5,25 +5,39 @@ body {
     margin-top: 80px;
 }
 
+
+/*** FOOTER ***/
+.footer {
+    background-color: #ffffff;
+    bottom: 0;
+    height: 50px;
+    position: fixed;
+    width: 100%;
+    border-top: 1px solid #e7e7e7;
+}
+
+.textFooter{
+	margin: 5px 0;	
+}
+
+.textFooter div:nth-child(1){
+	float:left;
+	width: 60%;
+}
+
+footer .nav > li > a:hover,
+footer .nav > li > a:focus {
+  text-decoration: underline;
+  background-color: #fff;
+}
+
 .container{
 	position: relative;
 }
 
 /*** Navigation ***/
 
-.nav li.right{
-	position: absolute;
-    right: 0;
-}
 
-.nav li.right a{
-	color: #428bca;
-}
-
-.nav li.right a:hover{
-	color: #2a6496;
-	text-decoration: underline;
-}
 
 .navbar-default{
 	background-color: #fff;
@@ -350,7 +364,16 @@ button.btnChange{
 	}
 }
 
-@media (min-width: 768px) {		
+@media (min-width: 768px) {	
+	.nav li.right a{
+		color: #428bca;
+	}
+
+	.nav li.right a:hover{
+		color: #2a6496;
+		text-decoration: underline;
+	}
+	
 	.learnCard.row {
 	    display: flex;
 		display: -webkit-flex;
