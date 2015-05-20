@@ -246,6 +246,10 @@ a.filter:hover{
 	margin-bottom:0;
 }
 
+.learning .thumbnail{
+	width:100%;
+}
+
 .text-element{
 	position: relative;
 }
@@ -376,22 +380,34 @@ button.btnChange{
 }
 
 /*** ***/
+/* .row.learning{ */
+/* display: flex; */
+/*     flex-direction: row; */
+/* } */
+
+.learning .col-xs-2{
+	min-width: 50px;
+/* 	position: relative; */
+/* 	float: none; */
+}
+
 
 .prev{
 /* 	background: url("../img/icons/b_arrow_backward.png") no-repeat scroll left center / 100% auto transparent;
     display: block; */
-    height: 100%;
     cursor: pointer;
-    margin: 50% 0;
+    position: absolute;
+    left:0;
+    top:20%;
 }
 
 .next{
 /* 	background: url("../img/icons/b_arrow_forward.png") no-repeat scroll right center / 100% auto transparent;
     display: block; */
-    height: 100%;
     cursor: pointer;
-    margin: 50% 0;
-
+    position: absolute;
+    right:0;
+    top:20%;
 }
 
 .jumbotron {
