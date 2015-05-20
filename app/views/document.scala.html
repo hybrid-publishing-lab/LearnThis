@@ -7,7 +7,9 @@
 		<div class="cardContent col-md-8">
 			<div class="thumbnail first">
 				<div class="svgBg">
-					<a data-ng-href="/document/learn/@document.id" class="noUnderline"><wordcloud data-ng-if="document.combinedTexts" text="{{document.combinedTexts}}"></wordcloud></a>
+					<a data-ng-href="/document/learn/@document.id" class="noUnderline">
+						<wordcloud data-ng-if="document.combinedTexts" text="{{document.combinedTexts}}"></wordcloud>
+					</a>
 				</div>
 			</div>
 			<div class="thumbnail">
@@ -19,7 +21,10 @@
 						geändert: @document.changedAt.format("dd.MM.yyyy HH:mm")</p>
 						<p>{{document.description}}</p>
 					</div>
-					<div class="cardNr">{{document.cards.length}} Lernkarten</div>	
+					<div class="cardNr">
+						{{document.cards.length}} Lernkarten <br>
+  						<span style="font-weight:normal">{{document.learnCount}} mal gelernt</span>
+					</div>	
 				</div>
 
 				<ul class="list-inline subNavi">

@@ -79,7 +79,34 @@ footer .nav > li > a:focus {
 	}
 	
 }
+a.ownBtn {
+    -moz-user-select: none;
+    background-image: none;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.42857;
+    margin-top: 10px;
+    margin-right: 10px;
+    padding: 6px 12px;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+    background-color: #ffffff;
+    color: #333333;
+}
 
+.fetchNextContainer {
+	padding-bottom: 4rem;
+}
+
+.fetchNext {
+	text-align: center;
+}
+	
 .navbar-toggle{
 	background: url("../img/icons/b_select.png") no-repeat scroll left center / 100% auto transparent;
 	width: 40px;
