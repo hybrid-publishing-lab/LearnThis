@@ -25,6 +25,10 @@ body {
 	width: 60%;
 }
 
+footer .navbar-nav > li > a{
+	padding: 20px 15px 10px;
+}
+
 footer .nav > li > a:hover,
 footer .nav > li > a:focus {
   text-decoration: underline;
