@@ -26,12 +26,15 @@
 			</div>
 			<div class="thumbnail">
 				<div class="textBg">
-					<h1>{{document.title}}</h1>
-					<p>Autor: {{document.givenname}} {{document.surname}}<br/>
-					erstellt: @document.createdAt.format("dd.MM.yyyy HH:mm")<br/>
-					geändert: @document.changedAt.format("dd.MM.yyyy HH:mm")</p>
-					<p class="cardNr">{{document.cards.length}} Lernkarten</p>
+					<div>
+						<h1>{{document.title}}</h1>
+						<p>Autor: {{document.givenname}} {{document.surname}}<br/>
+						erstellt: @document.createdAt.format("dd.MM.yyyy HH:mm")<br/>
+						geändert: @document.changedAt.format("dd.MM.yyyy HH:mm")</p>
+					</div>
+					<div class="cardNr">{{document.cards.length}} Lernkarten</div>	
 				</div>
+
 				<ul class="list-inline subNavi">
 					<li><a href="/document/edit/@document.id" class="btnEdit">Editieren</a></li>
 					<li><a href="/document/learn/@document.id" class="btnLern">Lernen</a></li>
