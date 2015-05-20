@@ -1,6 +1,6 @@
 @(document: Document) @main("New Document") {
 
-@_navi() 
+@_navi(document.id)
 
 <div class="container" data-ng-controller="DocumentEditController" data-ng-init="init(@document.id)">
 	<div id="overlay" class="row" data-ng-show="currentlySaving">
