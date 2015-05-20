@@ -1,3 +1,4 @@
+@(docId: Long)
 <nav role="navigation" class="navbar navbar-default  navbar-fixed-top">  
     <div class="container">
     	<div class="navbar-header">
@@ -10,9 +11,11 @@
 			<ul class="nav navbar-nav">
 				<li><a class="ownBtn" href="/document/new" role="button">Neues Kartenset</a></li>
 				<li><a class="ownBtn" href="/import/form" role="button">Importieren</a></li>
-				<!-- Lernen / Edit -->
-				<li><a href="/" class="ownBtn">Übersicht</a></li>
-				<li><a href="/document/" class="ownBtn">Kartenset</a></li>
+				@if(docId != null) {
+					<!-- Lernen / Edit -->
+					<li><a href="/" class="ownBtn">Übersicht</a></li>
+					<li><a href="/document/@docId" class="ownBtn">Kartenset</a></li>
+				}
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="right"><a href="/help">Hilfe</a></li>
