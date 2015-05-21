@@ -47,4 +47,23 @@ function DocumentController($scope, $http, $location, saveService) {
 		var sharer = "https://twitter.com/intent/tweet?text="+text; 
 		window.open(sharer,'sharer', 'width=626,height=486'); 
 	}
+	
+
+	$scope.whatsappshare = function (){ 
+		 var text = "Kartenset: " + $scope.document.title + " : " + $location.absUrl();
+		var sharer = "whatsapp://send?text="+text; 
+		document.location.href=sharer;
+	}
+	
+	
+	$scope.mailtoshare = function (){ 
+		 var text = "Kartenset: " + $scope.document.title + "&body=" + $location.absUrl();
+		var sharer = "mailto:?subject="+text; 
+		document.location.href=sharer; 
+
+
+	}
+	
+
+
 }

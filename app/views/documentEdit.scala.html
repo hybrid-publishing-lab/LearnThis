@@ -156,10 +156,10 @@
 										<div data-ng-repeat="multipleChoice in card.front.choices | orderBy:sort">
 											<input type="checkbox" data-ng-model="multipleChoice.correct" data-ng-change="change()">
 											<input type="text" data-ng-model="multipleChoice.text" data-ng-change="change()">
-											<a data-ng-click="deleteOption(card.front.choices, $index)">- Option</a>
+											<a data-ng-click="deleteOption(card.front.choices, $index)" class="circleSmall">- Option</a>
 										</div>
 										<div>
-											<a data-ng-click="addOption(card.front.choices)">+ Option</a>
+											<a data-ng-click="addOption(card.front.choices)">Option hinzufügen</a>
 										</div>
 									</div>
 								</div>
@@ -190,10 +190,10 @@
 										<div data-ng-repeat="multipleChoice in card.back.choices | orderBy:sort">
 											<input type="checkbox" data-ng-model="multipleChoice.correct" data-ng-change="change()">
 											<input type="text" data-ng-model="multipleChoice.text" data-ng-change="change()">
-											<a data-ng-click="deleteOption(card.back.choices, $index)">- Option</a>
+											<a data-ng-click="deleteOption(card.back.choices, $index)" class="circleSmall" title="Option löschen"></a>
 										</div>
 										<div>
-											<a data-ng-click="addOption(card.back.choices)">+ Option</a>
+											<a data-ng-click="addOption(card.back.choices)">Option hinzufügen</a>
 										</div>
 									</div>
 								</div>
