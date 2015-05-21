@@ -1,0 +1,222 @@
+@(document: Document) @main("New Document") {
+
+@_navi(document.id)
+
+<div class="container" data-ng-controller="DocumentEditController" data-ng-init="init(@document.id)">
+	<div id="overlay" class="row" data-ng-show="currentlySaving">
+	</div>
+	<div class="alert alert-danger" ng-hide="saved">
+		<div class="msg">
+			<strong>Achtung!</strong> Das Dokument ist noch nicht gespeichert.
+		</div>
+		<button class="btn btn-default" data-ng-click="reloadPage()"><span class="glyphicon glyphicon-remove"></span> Verwerfen</button>
+		<button class="btn btn-default save" data-ng-click="saveDoc()"><span class="glyphicon glyphicon-floppy-disk"></span> Speichern</button>
+	</div>
+	<div data-ng-if="!passwordCorrect" class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<div class="thumbnail">
+				<div class="pwContainer">
+					<h4>Zum bearbeiten wird das Password benötigt.</h4>
+					<form data-ng-submit="submitPw()">
+						<input type="text" data-ng-model="pwForm.pw">
+						<input type="submit" value="Submit">
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div data-ng-if="passwordCorrect"> 
+		<div class="row cardEdit">
+			<div class="col-xs-12">
+				<div class="thumbnail">
+					<div class="textBg">
+						<div>
+							<h1><textarea class="hidden-form-element" data-ng-model="document.title" data-ng-change="change()">{{document.title}}</textarea></h1>
+							<p>Vorname: <input type="text" value="{{document.givenname}}" class="hidden-form-element" data-ng-model="document.givenname" data-ng-change="change()" /></p>
+							<p>Nachname: <input type="text" value="{{document.surname}}" class="hidden-form-element" data-ng-model="document.surname" data-ng-change="change()" /></p>
+							<p>erstellt: @document.createdAt.format("dd.MM.yyyy HH:mm")</p>
+							<p>geändert: @document.changedAt.format("dd.MM.yyyy HH:mm")</p>
+							<p><textarea class="hidden-form-element" data-ng-model="document.description" data-ng-change="change()" placeholder="Kurzbeschreibung">{{document.description}}</textarea></p>
+							<div class="cardNr">{{document.cards.length}} Lernkarten</div>
+						</div>
+					</div>
+					<ul class="list-inline subNavi">
+						<li><a data-ng-click="changePw()">Passwort ändern</a></li>
+					</ul>
+					<div class="exportContent">
+						<ul class="list-inline exportLink">
+							<li><a data-toggle="collapse" href="#exportNavi">Exportieren</a></li>
+						</ul>
+							
+						<ul class="list-inline collapse" id="exportNavi">
+							<li><a href="/export/epub/document/{{document.id}}" class="btn btn-default">EPub</a></li>
+							<li><a href="/export/html/document/{{document.id}}" class="btn btn-default">HTML</a></li>
+							<li><a href="/export/pdf/document/{{document.id}}" class="btn btn-default">PDF</a></li>
+							<li><a href="#" class="btn btn-default">XML</a></li>
+						</ul>
+					</div>	
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12">
+	<!-- 		########	FILTER    ####### -->
+				<div class="filterbar panel panel-default">
+				  <div class="panel-heading">
+				  	<h5><a class="filter" data-toggle="collapse" href="#cardFilter" aria-expanded="false" aria-controls="cardFilter">Filter</a></h5>
+				  </div>
+				  <div class="panel-body collapse" id="cardFilter">
+				    <button class="btn btn-default" data-ng-class="{'active': filter == 'alle'}" data-ng-click="filterAlle()">Alle</button>
+	                <button class="btn btn-default" data-ng-class="{'active': filter == 'nurRueckseite'}" data-ng-click="filterNurRueckseite()">Nur mit Rückseite</button>
+				    <input type="text" class="form-control" placeholder="Metainfo" ng-model="search.metatags" data-ng-change="filterNachMetatag()" ng-focus="filterNachMetatag()"/>
+	                <button class="btn btn-default right" data-ng-class="{'active': show.comments == true}" data-ng-click="showComments()">Rückseite anzeigen</button>
+	                <button class="btn btn-default right" data-ng-class="{'active': show.metatags == true}" data-ng-click="showMetatags()">Metainfos anzeigen</button>
+	                <div class="hashtags">
+	                	<h6>Hashtags:</h6>
+		                <select multiple size="3" class="form-control" ng-model="search.hashtags" ng-options="kw for kw in document.keywords"  data-ng-click="filterNachHashTags()"></select>
+		                <div class="btn-group-vertical">
+		                	<button class="btn btn-default" data-ng-click="selectAllHashTags()"><span class="glyphicon grey glyphicon-align-justify"></span> Alle auswählen</button>
+		                	<button class="btn btn-default" data-ng-click="clearSelectedHashTags()"><span class="btnClean"></span> Auswahl löschen</button>
+						</div>
+					</div>
+				  </div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="row discription">
+			<div class="hidden-xs col-sm-6"><h4>Vorderseite</h4></div>
+			<div class="hidden-xs col-sm-6"><h4>Rückseite</h4></div>
+		</div>
+		
+		<div class="row" >
+			<div class="col-xs-12 posCenter">	
+				<button type="button" class="btn btn-default btnPlus" data-ng-click="createMultipleChoice($index+1, document.id)"></button>						
+			</div>
+		</div>
+		
+		<div ng-model="document.cards" 
+				ui-sortable="sortableOptions">
+			<div class="text-element"
+				data-ng-class="{'edit-mode-active': isActive(card)}"
+				data-ng-repeat="card in document.cards | filter:filterExpression | nonEmptyIntersection:search.hashtags | orderBy:sort">
+				
+				<!-- Merge -->
+				<div class="row show-on-focus combineContent" data-ng-if="$index > 0">
+					<div class="col-xs-12">
+						<div class="merge-top merge">
+							<button type="button" class="btn btn-default btnCombine" data-ng-click="mergeWithTop($index)"></button>
+						</div>
+					</div>
+				</div>
+				
+				<div class="row splitCard" data-ng-if="card.front.type == 'Paragraph' || card.front.type == 'MultipleChoice'">
+					<div class="col-xs-12">
+						<div class="roll-out-menu">
+							<ul class="nav nav-pills nav-stacked show-on-focus">
+								<li><button type="button" class="btn btn-default" data-ng-click="split($index)">Aufteilen</button></li>	
+							</ul>
+						</div>
+					</div>
+				</div>
+				
+				<div class="row" data-ng-if="card.front.type == 'Headline'">
+					<div class="col-xs-12">	
+						<div class="roll-out-menu">
+							<ul class="nav nav-pills nav-stacked show-on-focus">
+								<li class="sort-handle"><a href="javascript:void(0)">Verschieben</a></li>
+								<li ng-disabled="card.front.size < 2"><a data-ng-click="changeSize($event, textelement, -1)" href="javascript:void(0)">Vergrößern</a></li>
+								<li ng-disabled="card.front.size > 5"><a data-ng-click="changeSize($event, textelement, 1)" href="javascript:void(0)">Verkleinern</a></li>
+								<li><a data-ng-click="createMultipleChoice($index+1, document.id)" href="javascript:void(0)">+ Paragraph</a></li>
+		<!-- 						<li><a data-ng-click="createHeadline($index, document.id)" href="javascript:void(0)">+ Überschrift</a></li> -->
+								<li><a data-ng-click="deleteCard(card, $index)" href="javascript:void(0)"> Löschen</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+		
+				
+				<div class="row learnCardContainer">
+					<div class="col-xs-12">	
+						<div class="thumbnail">
+							<div class="circleLeft btnMove sort-handle"  title="Karte verschieben"></div>
+							<div data-ng-click="deleteCard(card, $index)" class="circleRight btnDelete" title="Karte löschen"></div>
+							
+							
+		
+							<div class="row learnCard">
+								<div class="frontbackSide" data-ng-if="card.front">
+									<!-- content -->
+									<div class="bgCard card paragraph cornerRight">
+										<div>
+											<textarea class="main" data-ng-model="card.front.text"
+													data-ng-click="activateElement(card); $event.stopPropagation();"
+													data-ng-change="change()" ng-auto-expand save-cursor-position></textarea>
+										</div>
+										<div data-ng-repeat="multipleChoice in card.front.choices | orderBy:sort">
+											<input type="checkbox" data-ng-model="multipleChoice.correct" data-ng-change="change()">
+											<input type="text" data-ng-model="multipleChoice.text" data-ng-change="change()">
+											<a data-ng-click="deleteOption(card.front.choices, $index)" class="circleSmall">- Option</a>
+										</div>
+										<div>
+											<a data-ng-click="addOption(card.front.choices)">Option hinzufügen</a>
+										</div>
+									</div>
+								</div>
+							
+								
+								<div class="frontbackSide" data-ng-if="!card.front">
+									Empty Front
+								</div>
+								
+								<div class="cellCenterSmall">
+								
+								<button type="button" class="btn btn-default btnChange" data-ng-click="swapFrontAndBack(card)" ></button>	
+								</div>
+								
+								
+								<!--  Rueckseite -->
+								<div class="frontbackSide">
+									<div class="input-group input-group-sm metatag-input" ng-hide="!show.metatags">
+									  <span class="input-group-addon">i</span>
+									  <input type="text" class="form-control meta-tags" placeholder="Metainfo" data-ng-model="card.back.metatags" data-ng-change="change()" placeholder="Metatags">
+									</div>
+									<div class="bgCard card paragraph cornerLeft">
+										<div>
+											<textarea class="main" data-ng-model="card.back.text"
+													data-ng-click="activateElement(card); $event.stopPropagation();"
+													data-ng-change="change()" ng-auto-expand save-cursor-position></textarea>
+										</div>
+										<div data-ng-repeat="multipleChoice in card.back.choices | orderBy:sort">
+											<input type="checkbox" data-ng-model="multipleChoice.correct" data-ng-change="change()">
+											<input type="text" data-ng-model="multipleChoice.text" data-ng-change="change()">
+											<a data-ng-click="deleteOption(card.back.choices, $index)" class="circleSmall" title="Option löschen"></a>
+										</div>
+										<div>
+											<a data-ng-click="addOption(card.back.choices)">Option hinzufügen</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					
+						<div class="row show-on-focus combineContentBottom" data-ng-if="$index < document.cards.length-1">
+							<div class="col-xs-12">
+								<div class="merge-top merge">
+									<button type="button" class="btn btn-default btnCombine" data-ng-click="mergeWithBottom($index)"></button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="row" >
+					<div class="col-xs-12 posCenter">	
+						<button type="button" class="btn btn-default btnPlus" data-ng-click="createMultipleChoice($index+1, document.id)"></button>						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+}

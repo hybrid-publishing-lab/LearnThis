@@ -1,0 +1,55 @@
+@(title: String)(content: Html)
+
+<!DOCTYPE html>
+<html data-ng-app="lhpApp">
+    <head>
+        <title>@title  - LearnThis</title>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("lib/bootstrap-3.0.3/css/bootstrap.css")">        
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("css/project.css")">
+
+        <!-- <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")"> -->
+        <script src="@routes.Assets.at("lib/jquery-ui-1.10.3/jquery-1.9.1.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("lib/jquery-ui-1.10.3/ui/jquery-ui.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("lib/bootstrap-3.0.3/js//bootstrap.min.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("lib/angular-1.2/angular1-2-7.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("lib/angular-1.2/modules/sortable.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("lib/d3js/d3.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("lib/d3js/d3.layout.cloud.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("lib/d3js/unicode.js")" type="text/javascript"></script>
+        
+        <script src="@routes.Assets.at("js/f3.util.js")" type="text/javascript"></script>
+<!--         <script src="@routes.Assets.at("js/autogrow.js")" type="text/javascript"></script> -->
+<!--         <script src="@routes.Assets.at("js/project.js")" type="text/javascript"></script> -->
+        <script src="@routes.Assets.at("js/services/saveService.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("js/services/scoringService.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("js/services/localStorageService.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("js/angular.services.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("js/angular.init.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("js/controllers/documentController.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("js/controllers/documentEditController.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("js/controllers/documentLearnController.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("js/controllers/documentListController.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("js/directives/directives.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("js/filters/filters.js")" type="text/javascript"></script>
+    </head>
+    <body>
+        @content
+        
+        <footer class="footer">
+	      <div class="container">
+			<div class="textFooter">
+				<div>
+					LearnThis.de ist lizenziert unter einer
+					<a href="http://creativecommons.org/licenses/by-sa/4.0/" rel="license" target="_blank">CC BY-SA 4.0 Lizenz</a>
+		      	</div> 
+		      	<ul class="nav navbar-nav navbar-right">
+					<li><a href="/imprint">Impressum/Kontakt</a></li>
+					<li><a href="https://github.com/hybrid-publishing-lab/HybridDocs"target="_blank">Quellcode</a></li>
+				</ul>	
+			</div>	
+	      </div>
+	    </footer>
+    </body>
+</html>
