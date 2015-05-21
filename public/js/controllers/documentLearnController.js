@@ -107,7 +107,8 @@ function DocumentLearnController($scope, $http, scoringService, localStorageServ
 	$scope.userSolvesMc = function() {
 		var card = $scope.currentCard[$scope.currentSide];
 		card.solved = true;
-		scoringService.scoreMc($scope.document.id, card);
+		var score = scoringService.scoreMc($scope.document.id, card);
+		card.score = score;
 	}
 	
 	$scope.restart = function() {

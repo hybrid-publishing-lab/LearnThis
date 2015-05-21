@@ -21,6 +21,8 @@ function ScoringService(){
 		} 
 		savedResults[card.id] = ""+score;
 		localStorage.setItem(storageId, JSON.stringify(savedResults));
+		
+		return score;
 	}
 
 	this.scoreText = function(docId, card){
@@ -57,9 +59,9 @@ function ScoringService(){
 		var maxScore = 0;
 		var lastIndex = -1;
 		for(page in pager) {
-//			if(pager[page].cardIndex != lastIndex) {
+			if(pager[page].cardIndex != lastIndex) {
 				maxScore++;
-//			}
+			}
 			lastIndex = pager[page].cardIndex; 
 		}
 		return maxScore;
