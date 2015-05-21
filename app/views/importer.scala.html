@@ -1,8 +1,8 @@
 @(msg: String) @main("Dokumentimport") {
-  <div class="container">
-      <ol class="breadcrumb">
-          <li><a href="/"> < Übersicht </a></li>
-      </ol>  
+
+@_navi(null)
+
+  <div class="container"> 
     <h1>Dokumentimport</h1>
       <form class="form-horizontal" role="form" action="upload" method="post" enctype="multipart/form-data">
           <div class="form-group">

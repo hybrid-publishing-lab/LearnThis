@@ -19,10 +19,10 @@
 						<div>
 							<p>{{currentCard[currentSide].text}}</p>
 							<div>
-								<ul data-ng-repeat="multipleChoice in currentCard[currentSide].choices | orderBy:sort">
-									<li>
-										<input type="checkbox" data-ng-model="multipleChoice.userChecked" data-ng-disabled="{{currentCard[currentSide].solved}}">
-										{{multipleChoice.text}}
+								<ul>
+									<li class="{{currentCard[currentSide].solved}}" data-ng-repeat="multipleChoice in currentCard[currentSide].choices | orderBy:sort">
+										<label class=" {{(multipleChoice.userChecked && multipleChoice.correct) || (!multipleChoice.userChecked && !multipleChoice.correct)}}"><input type="checkbox" data-ng-model="multipleChoice.userChecked" data-ng-disabled="{{currentCard[currentSide].solved}}">
+										{{multipleChoice.text}}</label>
 										<span data-ng-if="currentCard[currentSide].solved">
 											{{(multipleChoice.userChecked && multipleChoice.correct) || (!multipleChoice.userChecked && !multipleChoice.correct)}}
 										</span>
