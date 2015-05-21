@@ -6,7 +6,9 @@ body {
     margin-bottom: 50px;
 }
 
-
+a {
+	cursor: pointer;
+}
 /*** FOOTER ***/
 .footer {
     background-color: #ffffff;
@@ -226,7 +228,7 @@ button.btnPlus {
 }
 
 button.btnCombine {
-    background: url("../img/icons/b_combine.png") no-repeat scroll center center / 130% auto #ffffff;
+    background: url("../img/icons/b_combine.png") no-repeat scroll center center / 80% auto #ffffff;
      padding: 19px;
 }
 
@@ -396,6 +398,17 @@ button.btnChange{
     padding: 19px;
 }
 
+
+.circleSmall {
+	background: #ffffff url("../img/icons/b_close.png") no-repeat scroll center center / 100% auto;
+    border: 1px solid #dddddd;
+    border-radius: 100px;
+    height: 20px;
+    position: absolute;
+    width: 20px;
+    z-index: 10;
+    margin-left: 10px;
+}
 
 @media (max-width: 767px) {	
 	
