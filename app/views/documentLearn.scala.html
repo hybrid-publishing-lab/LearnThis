@@ -33,9 +33,13 @@
 								</ul>
 								<div data-ng-if="hasChoices(currentCard[currentSide])">
 									<div>
-									<div data-ng-if="currentCard[currentSide].solved">
-									Super, alles richtig!
-									</div>
+										<div data-ng-if="currentCard[currentSide].solved && currentCard[currentSide].score > 0">
+								           Super, alles richtig!
+								         </div>
+								          
+								         <div data-ng-if="currentCard[currentSide].solved && currentCard[currentSide].score == 0">
+								           Leider nicht ganz richtig...
+								         </div>
 									
 										<button type="button" class="btn btn-default" data-ng-if="!currentCard[currentSide].solved" data-ng-click="userSolvesMc()">Auflösen</button>
 										<button type="button" class="btn btn-default" data-ng-if="currentCard[currentSide].solved" data-ng-click="nextCard()">weiter</button>
