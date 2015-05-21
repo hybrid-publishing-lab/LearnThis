@@ -139,7 +139,7 @@ ul.subNavi li{
 	position: relative;
 }
 
-button.extra{
+a.extra{
 	width: 100%;
 	margin-bottom: 10px;
 }
@@ -398,6 +398,18 @@ button.btnChange{
 
 
 @media (max-width: 767px) {	
+	
+	.textBg .cardNr {
+		display: block;
+		position: relative;
+		text-align: right;
+		padding-top: 10px;
+	}
+	
+	.thumbnail div.textBg div:nth-child(1) {
+		float: none;
+	}
+	
 	
 	.allCard {
 	 margin: 0 15px;

@@ -8,6 +8,12 @@
 	
 	<div class="row">
 		<div class="col-xs-12">	
+		<h4>{{document.title}}</h4>
+		</div>
+	
+	
+	
+		<div class="col-xs-12">	
 		<div class="flip-container" data-ng-class="{hover: currentSide == 'back'}">
 		<div class="flipper">
 			<div class="row learning" data-ng-class="{cornerRight: currentSide == 'front', cornerLeft: currentSide == 'back', bgCard: !showScore, card: !showScore,thumbnail: showScore}">
@@ -23,13 +29,14 @@
 									<li class="{{currentCard[currentSide].solved}}" data-ng-repeat="multipleChoice in currentCard[currentSide].choices | orderBy:sort">
 										<label class=" {{(multipleChoice.userChecked && multipleChoice.correct) || (!multipleChoice.userChecked && !multipleChoice.correct)}}"><input type="checkbox" data-ng-model="multipleChoice.userChecked" data-ng-disabled="{{currentCard[currentSide].solved}}">
 										{{multipleChoice.text}}</label>
-										<span data-ng-if="currentCard[currentSide].solved">
-											{{(multipleChoice.userChecked && multipleChoice.correct) || (!multipleChoice.userChecked && !multipleChoice.correct)}}
-										</span>
 									</li>
 								</ul>
 								<div data-ng-if="hasChoices(currentCard[currentSide])">
 									<div>
+									<div data-ng-if="currentCard[currentSide].solved">
+									Super, alles richtig!
+									</div>
+									
 										<button type="button" class="btn btn-default" data-ng-if="!currentCard[currentSide].solved" data-ng-click="userSolvesMc()">Auflösen</button>
 										<button type="button" class="btn btn-default" data-ng-if="currentCard[currentSide].solved" data-ng-click="nextCard()">weiter</button>
 									</div>
