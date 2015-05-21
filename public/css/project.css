@@ -3,6 +3,7 @@ body {
     background-color: #f8f8f8;
     font-weight: 400;
     margin-top: 80px;
+    margin-bottom: 50px;
 }
 
 
@@ -23,10 +24,16 @@ body {
 .textFooter div:nth-child(1){
 	float:left;
 	width: 60%;
+	padding-top: 10px;
 }
 
+footer .navbar-nav{
+	margin-top:0;
+}
+
+
 footer .navbar-nav > li > a{
-	padding: 20px 15px 10px;
+	padding: 10px 15px;
 }
 
 footer .nav > li > a:hover,
@@ -132,6 +139,11 @@ ul.subNavi li{
 	position: relative;
 }
 
+button.extra{
+	width: 100%;
+	margin-bottom: 10px;
+}
+
 .thumbnail.first  {
    margin-bottom: 10px;
 }
@@ -165,7 +177,7 @@ ul.subNavi li{
 
 /*** Karte ***/
 .cardContent .thumbnail{
-	padding:  4px 10px;
+	padding: 10px;
 }
 
 
@@ -237,6 +249,15 @@ button.btnCombine.bottom {
 }
 
 /*** KartenListe ***/
+.allCard.thumbnail{
+	padding: 10px;
+}
+
+
+.allCard h3{
+	margin-top: 10px;
+}
+
 
 .allCard div.svgBg  {
    height: 70px;
@@ -298,10 +319,12 @@ a.filter:hover{
 
 .circleLeft.btnMove{
 	background: url("../img/icons/b_move.png") no-repeat scroll center center / 125% auto #ffffff;
+	cursor: pointer;
 }
 
 .circleRight.btnDelete{
 	background: url("../img/icons/b_close.png") no-repeat scroll center center / 125% auto #ffffff;
+	cursor: pointer;
 }
 
 
@@ -375,6 +398,11 @@ button.btnChange{
 
 
 @media (max-width: 767px) {	
+	
+	.allCard {
+	 margin: 0 15px;
+	}
+	
   .learnCard.row {
 		display: block;
 	}
@@ -393,6 +421,23 @@ button.btnChange{
 		position: relative;
 		top: 40%;
 	}
+	
+	.textFooter div:nth-child(1) {
+	    padding-top: 0px;
+	}
+	
+	footer .navbar-right{
+		float: right;
+	}
+	
+	footer .navbar-nav > li{
+		text-align: right;
+	}
+	
+	footer .navbar-nav > li > a{
+		padding: 0px 15px;
+	}
+
 }
 
 @media (min-width: 768px) {	
@@ -479,6 +524,7 @@ button.btnChange{
 .learning{
     display: flex;
     display: -webkit-flex;
+    min-height: 300px;
 }
 
 .learnCard .card {
@@ -498,22 +544,12 @@ button.btnChange{
     height:100%;
 }
 
-/*** ***/
-/* .row.learning{ */
-/* display: flex; */
-/*     flex-direction: row; */
-/* } */
-
 .learning .col-xs-2{
 	min-width: 50px;
-/* 	position: relative; */
-/* 	float: none; */
 }
 
 
 .prev{
-/* 	background: url("../img/icons/b_arrow_backward.png") no-repeat scroll left center / 100% auto transparent;
-    display: block; */
     cursor: pointer;
     position: absolute;
     left:0;
@@ -521,8 +557,6 @@ button.btnChange{
 }
 
 .next{
-/* 	background: url("../img/icons/b_arrow_forward.png") no-repeat scroll right center / 100% auto transparent;
-    display: block; */
     cursor: pointer;
     position: absolute;
     right:0;
@@ -532,6 +566,44 @@ button.btnChange{
 .jumbotron {
 	background-color: transparent;
 }
+
+.learning .true label.true{
+	color:green;
+}
+
+.learning .true label.false{
+	color:red;
+}
+
+.exportContent{
+	overflow:hidden; 
+	border-top: 1px solid #dddddd;
+	 margin-top:2px
+}
+
+.exportLink{
+	float:left;
+	margin: 5px 0;
+}
+
+#exportNavi{
+	float:right;
+	padding-top:10px;
+}
+
+
+#select-file.form-control {
+	background-color: transparent;
+    border: medium none;
+    box-shadow: none;
+    height: auto;
+    padding-left: 0;
+}
+
+#check-split-text.form-control {
+	width: 24px;
+}
+
 /*****************/
  /* entire container, keeps perspective */
 .flip-container {
@@ -572,6 +644,13 @@ button.btnChange{
 .flipper .cornerLeft {
 	transform: rotateY(180deg);
 }
+
+
+
+
+
+
+
 /**************/
 ul {
 	list-style: none;

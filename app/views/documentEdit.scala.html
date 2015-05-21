@@ -41,14 +41,20 @@
 						</div>
 					</div>
 					<ul class="list-inline subNavi">
-						<li><a href="/export/epub/document/{{document.id}}" class="btn btn-default">EPub</a></li>
-						<li><a href="/export/html/document/{{document.id}}" class="btn btn-default">HTML</a></li>
-						<li><a href="/export/pdf/document/{{document.id}}" class="btn btn-default">PDF</a></li>
-						<li><a href="#" class="btn btn-default">XML</a></li>
-					</ul>
-					<ul class="list-inline subNavi">
 						<li><a data-ng-click="changePw()">Passwort ändern</a></li>
-					</ul>		
+					</ul>
+					<div class="exportContent">
+						<ul class="list-inline exportLink">
+							<li><a data-toggle="collapse" href="#exportNavi">Exportieren</a></li>
+						</ul>
+							
+						<ul class="list-inline collapse" id="exportNavi">
+							<li><a href="/export/epub/document/{{document.id}}" class="btn btn-default">EPub</a></li>
+							<li><a href="/export/html/document/{{document.id}}" class="btn btn-default">HTML</a></li>
+							<li><a href="/export/pdf/document/{{document.id}}" class="btn btn-default">PDF</a></li>
+							<li><a href="#" class="btn btn-default">XML</a></li>
+						</ul>
+					</div>	
 				</div>
 			</div>
 		</div>
@@ -133,8 +139,8 @@
 				<div class="row learnCardContainer">
 					<div class="col-xs-12">	
 						<div class="thumbnail">
-							<div class="circleLeft btnMove sort-handle"></div>
-							<div data-ng-click="deleteCard(card, $index)" class="circleRight btnDelete"></div>
+							<div class="circleLeft btnMove sort-handle"  title="Karte verschieben"></div>
+							<div data-ng-click="deleteCard(card, $index)" class="circleRight btnDelete" title="Karte löschen"></div>
 							
 							
 		
