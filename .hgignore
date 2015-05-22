@@ -21,3 +21,5 @@ syntax: regexp
 ^conf/local\.conf$
 syntax: glob
 *.orig
+syntax: regexp
+^RUNNING_PID$

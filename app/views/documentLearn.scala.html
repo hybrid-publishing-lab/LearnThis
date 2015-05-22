@@ -34,18 +34,18 @@
 								<div data-ng-if="hasChoices(currentCard[currentSide])">
 									<div>
 										<div data-ng-if="currentCard[currentSide].solved && currentCard[currentSide].score > 0">
-								           Super, alles richtig!
-								         </div>
-								          
-								         <div data-ng-if="currentCard[currentSide].solved && currentCard[currentSide].score == 0">
-								           Leider nicht ganz richtig...
-								         </div>
+											Super, alles richtig!
+										</div>
+										
+										<div data-ng-if="currentCard[currentSide].solved && currentCard[currentSide].score == 0">
+											Leider nicht ganz richtig...
+										</div>
 									
 										<button type="button" class="btn btn-default" data-ng-if="!currentCard[currentSide].solved" data-ng-click="userSolvesMc()">Auflösen</button>
 										<button type="button" class="btn btn-default" data-ng-if="currentCard[currentSide].solved" data-ng-click="nextCard()">weiter</button>
 									</div>
 								</div>
-								<div data-ng-if="!hasChoices(currentCard[currentSide])">
+								<div data-ng-if="!hasChoices(currentCard[currentSide]) && pager[currentPage+1].cardIndex != currentIndex">
 									<!-- if next entry in the pager is not of the same card -->
 									<div>
 										<button type="button" class="btn btn-default"  data-ng-click="userUnderstood(true)">Habe ich verstanden</button>

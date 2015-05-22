@@ -27,10 +27,11 @@ function DocumentEditController ($scope, $http, $document, $timeout, saveService
   };
   $scope.pwForm = {};
   $scope.passwordCorrect = false;
+  $scope.stillLoading = true;
+  $scope.formValid = true;
   
-
+  // register click anywhere to remove activeEle
   $document.on('click', function (e) {
-    util.log('$document click caught');
     $timeout(function () {$scope.activeEle = null;} );
   });
 
@@ -57,29 +58,50 @@ function DocumentEditController ($scope, $http, $document, $timeout, saveService
       $http.post('/json/document/checkpw/' + $scope.document.id, $scope.pwForm)
           .success(function (data, status, headers, config) {
             $scope.passwordCorrect = true;
+            $scope.stillLoading = false;
+            //email is not conained in the normal document data for privacy reasons
+            $scope.document.email = data;
             var savedResult = localStorageService.loadDoc($scope.document.id);
             savedResult.password = $scope.pwForm;
             localStorageService.saveDoc($scope.document.id, savedResult);
           }).error(function (data, status, headers, config) {
-            alert("Passwort inkorrekt.");
+            if (!$scope.stillLoading) {
+              alert("Passwort inkorrekt.");
+            }
+            $scope.stillLoading = false;
           });
     }
   }
 
+  $scope.resetPw = function () {
+    $http.post('/json/document/resetpw/' + $scope.document.id, {})
+      .success(function (data, status, headers, config) { 
+        alert("Das Passwort wurde per Mail versendet.");
+      })
+      .error(function (data, status, headers, config) {
+        alert("Es ist ein Fehler aufgetreten.");
+    });
+  }
+  
   $scope.changePw = function () {
-    if ($scope.isInit) {
-      var pwNew = prompt("Neues Passwort", "");
-      $http.post('/json/document/changepw/' + $scope.document.id, {
-        pw : $scope.pwForm.pw,
-        pwNew : pwNew
-      }).success(function (data, status, headers, config) {
-        $scope.pwForm.pw = pwNew;
-        var savedResult = localStorageService.loadDoc($scope.document.id);
-        savedResult.password = $scope.pwForm;
-        localStorageService.saveDoc($scope.document.id, savedResult);
-      }).error(function (data, status, headers, config) {
-        alert("Passwort inkorrekt.");
-      });
+    if ($scope.document.email && $scope.document.email.length > 3 && $scope.formValid) {
+      if ($scope.isInit) {
+        var pwNew = prompt("Neues Passwort", "");
+        $http.post('/json/document/changepw/' + $scope.document.id, {
+          pw : $scope.pwForm.pw,
+          pwNew : pwNew
+        }).success(function (data, status, headers, config) {
+          $scope.pwForm.pw = pwNew;
+          var savedResult = localStorageService.loadDoc($scope.document.id);
+          savedResult.password = $scope.pwForm;
+          localStorageService.saveDoc($scope.document.id, savedResult);
+        }).error(function (data, status, headers, config) {
+          alert("Passwort inkorrekt.");
+        });
+      }
+    } else {
+      alert("Bitte zuerst eine valide Email angeben.");
+      $('#docEmail').focus();
     }
   }
   
@@ -102,7 +124,7 @@ function DocumentEditController ($scope, $http, $document, $timeout, saveService
   }
 
   $scope.saveDoc = function () {
-    if (!$scope.saved) {
+    if (!$scope.saved && $scope.formValid) {
       saveService.saveDocument($scope, $scope.document, $scope.pwForm.pw);
     }
   }
@@ -185,7 +207,6 @@ function DocumentEditController ($scope, $http, $document, $timeout, saveService
   }
 
   $scope.isActive = function (textelement) {
-    console.log('checking isActive');
     return $scope.activeEle === textelement;
   }
 
