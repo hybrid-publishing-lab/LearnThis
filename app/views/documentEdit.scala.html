@@ -5,7 +5,7 @@
 <div class="container" data-ng-controller="DocumentEditController" data-ng-init="init(@document.id)">
 	<div id="overlay" class="row" data-ng-show="currentlySaving">
 	</div>
-	<div class="alert alert-danger" ng-hide="saved">
+	<div class="alert alert-danger" ng-hide="saved || !formValid">
 		<div class="msg">
 			<strong>Achtung!</strong> Das Dokument ist noch nicht gespeichert.
 		</div>
@@ -16,11 +16,22 @@
 		<div class="col-md-8 col-md-offset-2">
 			<div class="thumbnail">
 				<div class="pwContainer">
-					<h4>Zum bearbeiten wird das Password benötigt.</h4>
-					<form data-ng-submit="submitPw()">
-						<input type="text" data-ng-model="pwForm.pw">
-						<input type="submit" value="Submit">
-					</form>
+					<div data-ng-if="stillLoading">
+						<img src="@routes.Assets.at("img/icons/loader.gif")"/>
+					</div>
+					<div data-ng-if="!stillLoading">
+						<h4>Zum bearbeiten wird das Password benötigt.</h4>
+						<form data-ng-submit="submitPw()">
+							<input type="text" data-ng-model="pwForm.pw">
+							<input type="submit" value="Submit">
+						</form>
+						<p>
+							Wenn du dein Kennwort vergessen hast, kannst du es hier anfordern. Das Kennwort wird an die E-Mail-Adresse geschickt, die du im Dokument angegeben hast.
+							<form data-ng-submit="resetPw()">
+								<input type="submit" value="Kennwort anfordern">
+							</form>
+						</p>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -31,13 +42,19 @@
 				<div class="thumbnail">
 					<div class="textBg">
 						<div>
-							<h1><textarea class="hidden-form-element" data-ng-model="document.title" data-ng-change="change()">{{document.title}}</textarea></h1>
-							<p>Vorname: <input type="text" value="{{document.givenname}}" class="hidden-form-element" data-ng-model="document.givenname" data-ng-change="change()" /></p>
-							<p>Nachname: <input type="text" value="{{document.surname}}" class="hidden-form-element" data-ng-model="document.surname" data-ng-change="change()" /></p>
-							<p>erstellt: @document.createdAt.format("dd.MM.yyyy HH:mm")</p>
-							<p>geändert: @document.changedAt.format("dd.MM.yyyy HH:mm")</p>
-							<p><textarea class="hidden-form-element" data-ng-model="document.description" data-ng-change="change()" placeholder="Kurzbeschreibung">{{document.description}}</textarea></p>
-							<div class="cardNr">{{document.cards.length}} Lernkarten</div>
+							<form name="docForm" novalidate >
+								<h1><textarea class="hidden-form-element" data-ng-model="document.title" data-ng-change="change()">{{document.title}}</textarea></h1>
+								<p>Vorname: <input type="text" value="{{document.givenname}}" class="hidden-form-element" data-ng-model="document.givenname" data-ng-change="change()" /></p>
+								<p>Nachname: <input type="text" value="{{document.surname}}" class="hidden-form-element" data-ng-model="document.surname" data-ng-change="change()" /></p>
+								<p>
+									Email: <input type="email" value="{{document.email}}" class="hidden-form-element" data-ng-model="document.email" name="docEmail" id="docEmail" data-ng-change="$parent.formValid = !docForm.docEmail.$error.email; change();" />
+									<span ng-show="docForm.docEmail.$error.email">Dies ist keine valide Email.</span>
+								</p>
+								<p>erstellt: @document.createdAt.format("dd.MM.yyyy HH:mm")</p>
+								<p>geändert: @document.changedAt.format("dd.MM.yyyy HH:mm")</p>
+								<p><textarea class="hidden-form-element" data-ng-model="document.description" data-ng-change="change()" placeholder="Kurzbeschreibung">{{document.description}}</textarea></p>
+								<div class="cardNr">{{document.cards.length}} Lernkarten</div>
+							</form>
 						</div>
 					</div>
 					<ul class="list-inline subNavi">
