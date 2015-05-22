@@ -22,6 +22,7 @@ GET		/json/document/random/:count						@controllers.DocumentController.findRando
 GET		/json/document/:id									@controllers.DocumentController.findById(id: Long)
 POST	/json/document/checkpw/:id							@controllers.DocumentController.checkPassword(id: Long)
 POST	/json/document/changepw/:id							@controllers.DocumentController.changePassword(id: Long)
+POST	/json/document/resetpw/:id							@controllers.DocumentController.resetPassword(id: Long)
 POST	/json/document/delete/:id							@controllers.DocumentController.delete(id: Long)
 
 GET		/export/epub/document/:id							@controllers.ExportController.exportEpub(id: Long)
