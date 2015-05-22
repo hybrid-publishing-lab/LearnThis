@@ -10,7 +10,7 @@ function DocumentListController($scope, $http, saveService){
 	$scope.init = function(fetchAll){
 		if (!$scope.isInit) {
 			$scope.isInit = true;
-			$scope.fetchData(true);
+			$scope.fetchData(fetchAll);
 		}
 	}
 	

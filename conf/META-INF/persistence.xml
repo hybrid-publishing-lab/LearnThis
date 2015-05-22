@@ -7,9 +7,13 @@
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
         <non-jta-data-source>DefaultDS</non-jta-data-source>
         <properties>
-            <!-- <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/> -->
-<!--             <property name="hibernate.hbm2ddl.auto" value="create-drop"/> -->
             <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <!-- <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/> -->
+<!--             <property name="hibernate.hbm2ddl.auto" value="create-drop"/> 
+			<property name="hibernate.cache.use_query_cache" value="true"/>
+			<property name="hibernate.cache.use_second_level_cache" value="true"/>
+			<property name="hibernate.cache.region.factory_class" value="net.sf.ehcache.hibernate.EhCacheRegionFactory" />
+-->
         </properties>
     </persistence-unit>
 

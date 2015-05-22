@@ -1,4 +1,4 @@
-@(document: Document) @main("New Document") {
+@(document: Document) @main(document.title) {
 
 @_navi(null)
 
@@ -54,7 +54,7 @@
 									
 			</div>
 		</div>		
-		<div class="allCard col-md-4 thumbnail" data-ng-controller="DocumentListController" data-ng-init="init()">
+		<div class="allCard col-md-4 thumbnail" data-ng-controller="DocumentListController" data-ng-init="init(false)">
 			<h3>Weitere Lernkarten</h3>
 			<div data-ng-repeat="document in documents">
 				<div class="row" data-ng-if="document.id != @document.id">
