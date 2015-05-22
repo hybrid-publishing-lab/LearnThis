@@ -1,4 +1,13 @@
 
+import java.util.Arrays;
+
+import models.DocumentKeyGenerator;
+import net.sf.ehcache.hibernate.management.impl.EhcacheHibernate;
+
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cache.concurrent.ConcurrentMapCache;
+import org.springframework.cache.support.SimpleCacheManager;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -70,6 +79,7 @@ public class Global extends GlobalSettings {
      */
     @Configuration
     @EnableJpaRepositories("models")
+    @EnableCaching
     public static class SpringDataJpaConfiguration {
 
         @Bean
@@ -86,5 +96,20 @@ public class Global extends GlobalSettings {
         public JpaTransactionManager transactionManager() {
             return new JpaTransactionManager();
         }
+
+        @Bean
+        public CacheManager cacheManager() {
+            SimpleCacheManager cacheManager = new SimpleCacheManager();
+            cacheManager.setCaches(Arrays.asList(
+                new ConcurrentMapCache("documents"), 
+                new ConcurrentMapCache("document")));
+            return cacheManager;
+        }
+        
+        @Bean
+        public DocumentKeyGenerator documentKeyGenerator() {
+            return new DocumentKeyGenerator();
+        }
+
     }
 }

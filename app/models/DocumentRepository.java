@@ -5,6 +5,9 @@ import java.util.List;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -33,8 +36,19 @@ public interface DocumentRepository extends CrudRepository<Document, Long> {
     List<Document> findRandom(Pageable pageable);
 
     List<Document> findByIdNotNullOrderByVisitsDesc();
+
+    @Cacheable(value = "documents")
+    List<Document> findByIdNotNullOrderByChangedAtDesc(Pageable page);
     
-    List<Document> findByIdNotNullOrderByCreatedAtDesc(Pageable page);
+    @Override
+    @Cacheable(value = "document")
+    Document findOne(Long id);
 
+    @Override
+    @Caching(evict = { @CacheEvict(value="documents", allEntries=true), @CacheEvict(value="document", keyGenerator="documentKeyGenerator") })
+    Document save(Document savedDoc);
 
+    @Override
+    @Caching(evict = { @CacheEvict(value="documents", allEntries=true), @CacheEvict(value="document", keyGenerator="documentKeyGenerator") })
+    void delete(Document savedDoc);
 }

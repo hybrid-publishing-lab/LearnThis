@@ -1,15 +1,11 @@
 package controllers;
 
-import java.util.Date;
-
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
-import models.Card;
 import models.Document;
 import models.DocumentRepository;
-import models.MultipleChoice;
 import play.mvc.Controller;
 import play.mvc.Result;
 import util.JpaFixer;
@@ -42,49 +38,9 @@ public class Application extends Controller {
     }
     
     public Result newDoc(){
-        final Document doc = new Document();
-        doc.title = "Thema";
-        doc.givenname = "Vorname";
-        doc.surname = "Nachname";
-        doc.createdAt = new Date();
-        doc.changedAt = new Date();
-        doc.password = "";
-        documentRepository.save(doc);
-        
-//        // add headline
-//        Headline headline = new Headline();
-//        headline.text = "Headline";
-//        headline.size = 2;
-//        Card card = new Card();
-//        card.sort = 0;
-//        card.front = headline;
-//        card.document = doc;
-//        doc.cards.add(card);
-        
-//        // add paragraph
-//        Paragraph paragraph = new Paragraph();
-//        paragraph.text = "Paragraph";
-//        Card card = new Card();
-//        card.sort = 1;
-//        card.front = paragraph;
-//        card.document = doc;
-//        doc.cards.add(card);
-
-        // add paragraph
-        MultipleChoice mc = new MultipleChoice();
-        MultipleChoice mc2 = new MultipleChoice();
-        mc.text = "Neue Karte";
-        mc.text = "";
-        Card card = new Card();
-        card.sort = 1;
-        card.front = mc;
-        card.back = mc2;
-        card.document = doc;
-        doc.cards.add(card);
-        
-        documentRepository.save(doc);
-        
-        return redirect(routes.Application.findById(doc.id));
+        Document doc = new Document();
+        doc.id = -1L;
+        return ok(views.html.documentEdit.render(doc));
     }
     
     public Result findById(Long id){

@@ -57,7 +57,12 @@ public class DocumentController extends Controller {
             // Form<Document> docForm = Form.form(Document.class);
             // docForm.bind(json);
             Long id = json.get("id").asLong();
-            Document doc = documentRepository.findOne(id);
+            Document doc = null;
+            if (id == -1L) {
+                doc = new Document();
+            } else {
+                doc = documentRepository.findOne(id);
+            }
             
             if (doc.password != null && doc.password.length() > 0 && !doc.password.equals(pw)) {
                 return badRequest("Invalid password");
@@ -94,7 +99,7 @@ public class DocumentController extends Controller {
         }
         return badRequest("Expecting Json data");
     }
-
+    
     private Textelement buildTextelement(JsonNode textelement) {
 
         Form<MultipleChoice> mcForm = Form.form(MultipleChoice.class);
@@ -154,6 +159,11 @@ public class DocumentController extends Controller {
     }
 
     public Result checkPassword(Long id) {
+        if (id == -1L) {
+            // new Document
+            return ok("");
+        }
+        
         String pw = getPwFromRequest();
         Document doc = documentRepository.findOne(id);
         if (doc.password == null || doc.password.length() == 0 || doc.password.equals(pw)) {
@@ -178,9 +188,39 @@ public class DocumentController extends Controller {
     }
 
     public Result findById(Long id) {
-        Document doc = documentRepository.findOne(id);
-        JpaFixer.removeDuplicatesWorkaround(doc);
-        return ok(Json.toJson(doc));
+        if (id == -1L) {
+            // new Document
+            return ok(Json.toJson(newDocument()));
+        } else {
+            Document doc = documentRepository.findOne(id);
+            JpaFixer.removeDuplicatesWorkaround(doc);
+            return ok(Json.toJson(doc));
+        }
+    }
+
+    private Document newDocument() {
+        final Document doc = new Document();
+        doc.id = -1L;
+        doc.title = "Thema";
+        doc.givenname = "Vorname";
+        doc.surname = "Nachname";
+        doc.createdAt = new Date();
+        doc.changedAt = new Date();
+        doc.password = "";
+        documentRepository.save(doc);
+
+        // add paragraph
+        MultipleChoice mc = new MultipleChoice();
+        MultipleChoice mc2 = new MultipleChoice();
+        mc.text = "Neue Karte";
+        mc.text = "";
+        Card card = new Card();
+        card.sort = 1;
+        card.front = mc;
+        card.back = mc2;
+        card.document = doc;
+        doc.cards.add(card);
+        return doc;
     }
 
     public Result findAll(Integer page) {
@@ -188,7 +228,7 @@ public class DocumentController extends Controller {
             page = 0;
         }
         Pageable pageable = new PageRequest(page, 20);
-        Iterable<Document> docs = documentRepository.findByIdNotNullOrderByCreatedAtDesc(pageable);
+        Iterable<Document> docs = documentRepository.findByIdNotNullOrderByChangedAtDesc(pageable);
         List<Document> result = new ArrayList<Document>();
         for (Document doc : docs) {
             result.add(doc);
