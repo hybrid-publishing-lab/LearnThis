@@ -19,8 +19,8 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import comparator.CardSortComparator;
 
-import util.CardSortComparator;
 
 @Entity
 public class Document {
@@ -48,6 +48,8 @@ public class Document {
     
     @JsonIgnore
     public String password;
+    @JsonIgnore 
+    public String email;
     
     @OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL, mappedBy="document", orphanRemoval=true)
     @OrderBy("sort ASC")
@@ -106,7 +108,7 @@ public class Document {
             card.document = this;
             card.sort = sort;
             this.cards.add(index, card);
-        }else{
+        } else {
             appendCard(card);
         }
     }

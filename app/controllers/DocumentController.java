@@ -16,15 +16,19 @@ import models.MultipleChoice;
 import models.Paragraph;
 import models.Textelement;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
 import play.Logger;
 import play.data.Form;
 import play.libs.Json;
+import play.mvc.Content;
 import play.mvc.Controller;
 import play.mvc.Result;
 import util.JpaFixer;
+import util.MailUtil;
+import util.Mailer;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.NullNode;
@@ -64,6 +68,7 @@ public class DocumentController extends Controller {
             doc.surname = json.get("surname").asText();
             doc.givenname = json.get("givenname").asText();
             doc.description = json.get("description").asText();
+            doc.email = json.get("email").asText();
 
             JsonNode cards = json.get("cards");
             doc.cards.clear();
@@ -125,6 +130,19 @@ public class DocumentController extends Controller {
         return badRequest();
     }
 
+    public Result resetPassword(Long id) {
+        Document doc = documentRepository.findOne(id);
+        if (StringUtils.isNotBlank(doc.email)) {
+//            routes.DocumentController.findById().absoluteURL(request());
+            String mailText = "Das Passwort für die Lernkarte \"" + doc.title + "\" lautet: \n"+doc.password;
+            MailUtil.sendMail(mailText, "Lernkarten Passwort", doc.email);
+            return ok();
+        } else {
+            
+        }
+        return badRequest();
+    }
+
     public Result delete(Long id) {
         String pw = getPwFromRequest();
         Document doc = documentRepository.findOne(id);
@@ -139,7 +157,11 @@ public class DocumentController extends Controller {
         String pw = getPwFromRequest();
         Document doc = documentRepository.findOne(id);
         if (doc.password == null || doc.password.length() == 0 || doc.password.equals(pw)) {
-            return ok();
+            String result = "";
+            if (StringUtils.isNotBlank(doc.email)) {
+                result += doc.email;
+            }
+            return ok(result);
         }
         return badRequest();
     }

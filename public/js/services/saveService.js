@@ -9,9 +9,11 @@ function SaveService($http){
 		$scope.saved = false;
 		
 		document.pw = pw;
+		var email = document.email;
 		$http.post('/json/document/save', document)
 		.success(function(data, status, header, config){
 			$scope.document = data;
+			$scope.document.email = email;
 			$scope.saved = true;
 			$scope.currentlySaving = false;
 		})
