@@ -44,7 +44,7 @@
 										<button type="button" class="btn btn-default" data-ng-if="!currentCard[currentSide].solved" data-ng-click="userSolvesMc()">Auflösen</button>
 									</div>
 								</div>
-								<div data-ng-if="!hasChoices(currentCard[currentSide]) && pager[currentPage+1].cardIndex != currentIndex">
+								<div data-ng-if="!hasChoices(currentCard[currentSide]) && pager[currentPage+1].cardIndex != currentIndex" style="margin-top: 34px;">
 									<!-- if next entry in the pager is not of the same card -->
 									<div>
 										<button type="button" class="btn btn-default"  data-ng-click="userUnderstood(true)">Habe ich verstanden</button>
