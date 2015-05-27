@@ -114,4 +114,10 @@ function DocumentLearnController($scope, $http, scoringService, localStorageServ
 	$scope.restart = function() {
 		location.reload();
 	}
+	
+	if ( $("#learnContainer").length) {
+		$("footer").addClass("hidden");
+		$(".navbar ").addClass("hidden");
+		$("body ").addClass("lernContainer");
+	}
 }
