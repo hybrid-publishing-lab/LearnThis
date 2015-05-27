@@ -58,8 +58,7 @@
 									<span class="error" ng-show="docForm.docEmail.$error.email">Dies ist keine valide E-Mail.</span>
 								</p>
 								<p>
-								<p class="inline dist"><span>erstellt:</span> @document.createdAt.format("dd.MM.yyyy HH:mm")</p>
-								<p class="inline"><span>geändert</span>: @document.changedAt.format("dd.MM.yyyy HH:mm")</p>
+								<p class="inline"><span>erstellt:</span> @document.createdAt.format("dd.MM.yyyy HH:mm")</p>, <p class="inline"><span>geändert</span>: @document.changedAt.format("dd.MM.yyyy HH:mm")</p>
 								</p>
 								<p><textarea class="hidden-form-element" data-ng-model="document.description" data-ng-change="change()" placeholder="Kurzbeschreibung">{{document.description}}</textarea></p>
 								<div class="cardNr">{{document.cards.length}} Lernkarten</div>

@@ -449,6 +449,7 @@ button.btnChange{
     width: 20px;
     z-index: 10;
     margin-left: 10px;
+    margin-top: 5px;
 }
 
 @media (max-width: 767px) {	
@@ -491,6 +492,11 @@ button.btnChange{
 	button.btnChange{
 		position: relative;
 		top: 40%;
+	}
+	
+	.prev img,
+	.next img{
+		width:75%;
 	}
 	
 	.textFooter div:nth-child(1) {
@@ -543,14 +549,13 @@ button.btnChange{
 		top: 40%;
 	}
 	
-	
+	.prev img,
+	.next img{
+		width:40%;
+	}
 	
 	.thumbnail div.textBg p.inline {
   		display: inline;
-	}
-	
-	.thumbnail div.textBg p.inline.dist{
-		padding-right: 20px;
 	}
 }
 
@@ -630,7 +635,7 @@ h4.headlineLearn{
 .learning .jumbotron{
 	line-height: 36px;
 	font-size: 22px;
-	padding-top: 44px;
+	padding-top: 37px;
 }
 
 .learning .jumbotron p {
@@ -659,7 +664,7 @@ h4.headlineLearn{
 }
 
 .learnCard .card {
-	padding: 29px 30px;
+	padding: 25px 35px 23px
 }
 
 
@@ -683,14 +688,14 @@ h4.headlineLearn{
 .prev{
     cursor: pointer;
     position: absolute;
-    left:2%;
+    left:5%;
     top:30%;
 }
 
 .next{
     cursor: pointer;
     position: absolute;
-    right:2%;
+    right:5%;
     text-align: right;
     top:30%;
 }
