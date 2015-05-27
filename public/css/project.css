@@ -6,6 +6,11 @@ body {
     margin-bottom: 50px;
 }
 
+body.lernContainer {
+	    margin-top: 0px;
+    margin-bottom: 0px;
+}	
+
 input[type=checkbox],
 label,
 a {
