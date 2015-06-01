@@ -20,6 +20,7 @@ import play.mvc.Result;
 import util.JpaFixer;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.NullNode;
 
 /**
  * The main set of web services.
@@ -75,33 +76,47 @@ public class TextelementController extends Controller {
 
     public Result newMultipleChoice(Long id, Integer index) {
         Document doc = documentRepository.findOne(id);
-        JpaFixer.removeDuplicatesWorkaround(doc);
-        if (doc != null) {
-            MultipleChoice mc = new MultipleChoice();
-            MultipleChoice mc2 = new MultipleChoice();
-            mc.text = "Neue Karte";
-            mc2.text = "Rückseite";
-            Card card = new Card();
-            card.front = mc;
-            card.back = mc2;
-            doc.insertCard(card, index);
-            doc = documentRepository.save(doc);
-            return ok(Json.toJson(doc.cards.get(index)));
-        } else {
-            return notFound();
+
+        JsonNode json = request().body().asJson();
+        MultipleChoice mc = new MultipleChoice();
+        MultipleChoice mc2 = new MultipleChoice();
+        mc.text = "Neue Karte";
+        mc2.text = "Rückseite";
+        if (json != null) {
+            JsonNode front = json.get("front");
+            if (front != null && !(front instanceof NullNode)) {
+                mc.text = front.asText();
+            }
+            JsonNode back = json.get("back");
+            if (back != null && !(back instanceof NullNode)) {
+                mc2.text = back.asText();
+            }
         }
+        Card card = new Card();
+        card.front = mc;
+        card.back = mc2;
+        
+//        if (doc != null) {
+//            JpaFixer.removeDuplicatesWorkaround(doc);
+//            doc.insertCard(card, index);
+//            doc = documentRepository.save(doc);
+//            return ok(Json.toJson(doc.cards.get(index)));
+//        } else {
+            return ok(Json.toJson(card));
+//        }
     }
 
     public Result delete(Long docId, Long cardId) {
         Document doc = documentRepository.findOne(docId);
-        JpaFixer.removeDuplicatesWorkaround(doc);
-        boolean removed = doc.removeCard(cardId);
-        documentRepository.save(doc);
-        if (removed) {
-            return ok();
-        } else {
-            return notFound();
+        if (doc != null) {
+            JpaFixer.removeDuplicatesWorkaround(doc);
+            boolean removed = doc.removeCard(cardId);
+            documentRepository.save(doc);
+            if (removed) {
+                return ok();
+            }
         }
+        return notFound();
     }
 
     public Result getTypes() {

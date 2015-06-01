@@ -25,36 +25,9 @@ function DocumentController($scope, $http, $location, saveService, localStorageS
 	}
 	
 	$scope.deleteDoc = function(id) {
-    // get doc from localStorage to check password
-    var savedResult = localStorageService.loadDoc($scope.document.id);
-    var password = '';
-    if (savedResult.password) {
-      password = savedResult.password;
-    }
-
-    // check if password matches
-    $http.post('/json/document/checkpw/' + id, {pw:password})
-      .success(function (data, status, headers, config) {
-        // TODO JD Abfrage ob wirklich gelöscht werden soll
-        if (confirmation("")) {
-          $scope.deleteDocument(password);
-        }
-      }).error(function (data, status, headers, config) {
-        password = prompt("Zum Löschen wird das Passwort benötigt.", "");
-        $scope.deleteDocument(password);
-      });
+	  saveService.deleteDoc(id, $scope.document.title);
 	}
 		
-  $scope.deleteDocument = function(pw) {
-    $http.post('/json/document/delete/'+id, {pw:pw}).
-    success(function(data, status, headers, config) {
-      window.location.replace("/");
-    }).
-    error(function(data, status, headers, config) {
-      alert("Passwort inkorrekt.");
-    });
-  }
-	
 	$scope.fbshare = function(){ 
 	  var url =  $location.absUrl();
 		var sharer = "https://www.facebook.com/sharer/sharer.php?u="+url; 

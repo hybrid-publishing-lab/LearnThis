@@ -129,6 +129,11 @@ function DocumentEditController ($scope, $http, $document, $timeout, saveService
       saveService.saveDocument($scope, $scope.document, $scope.pwForm.pw);
     }
   }
+  
+  $scope.isPersisted = function() {
+    var path = location.pathname;
+    return path.indexOf("/new", path.length - 4) == -1;
+  }
 
   $scope.reloadPage = function () {
     window.location.reload();
@@ -156,24 +161,31 @@ function DocumentEditController ($scope, $http, $document, $timeout, saveService
     var docId = $scope.document.id;
     // ele wird nur mitgegeben, damit es einem post request entspricht,
     // wird nicht benutzt
-    $http
-        .post('/json/document/' + docId + '/card/' + ele.id + '/delete', ele)
-        .success(
-            function (data) {
-              $scope.saved = true;
-              if ($scope.document.cards[index] == ele) {
+//    $http
+//        .post('/json/document/' + docId + '/card/' + ele.id + '/delete', ele)
+//        .success(
+//            function (data) {
+//              $scope.saved = true;
+//              if ($scope.document.cards[index] == ele) {
                 $scope.document.cards.splice(index, 1);
-              } else {
-                alert('das element am index entspricht nicht dem zu löschenden element');
-              }
-            });
+//              } else {
+//                alert("Es ist ein Fehler aufgetreten.");
+//                util.log('Das Element am Index entspricht nicht dem zu löschenden Element');
+//              }
+//            });
+    $scope.change();
   }
 
-  $scope.createMultipleChoice = function (index, docId, text) {
-    $http.post('/json/document/' + docId + '/multiplechoice/new/' + index, JSON.stringify(text))
+  $scope.deleteDoc = function(id) {
+    saveService.deleteDoc(id, $scope.document.title);
+  }
+
+  $scope.createMultipleChoice = function (index, docId, newCard) {
+    $http.post('/json/document/' + docId + '/multiplechoice/new/' + index, newCard)
         .success(function (data) {
-      $scope.document.cards.splice(index, 0, data);
-    });
+          $scope.change();
+          $scope.document.cards.splice(index, 0, data);
+        });
   }
 
   $scope.createParagraph = function (index, docId, text) {
@@ -274,11 +286,16 @@ function DocumentEditController ($scope, $http, $document, $timeout, saveService
     var cards = $scope.document.cards;
     var doc = $scope.document;
     if (index >= 0 && cards.length > index) {
+      var card = cards[index];
       var cursorPosition = $scope.lastCursor.position;
-      var firstPart = cards[index].front.text.substring(0, cursorPosition);
-      var secondPart = cards[index].front.text.substring(cursorPosition);
-      cards[index].front.text = firstPart;
-      $scope.createMultipleChoice(index + 1, doc.id, secondPart);
+      var cardSide = $scope.lastCursor.cardSide;
+      
+      var firstPart = card[cardSide].text.substring(0, cursorPosition);
+      var secondPart = card[cardSide].text.substring(cursorPosition);
+      card[cardSide].text = firstPart;
+      var newCard = {};
+      newCard[cardSide] = secondPart; 
+      $scope.createMultipleChoice(index + 1, doc.id, newCard);
       $scope.change();
       $scope.$broadcast(EVENT_TRIGGER_AUTOGROW, 1);
     }

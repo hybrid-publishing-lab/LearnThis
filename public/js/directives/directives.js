@@ -56,11 +56,11 @@ lhpApp.directive('saveCursorPosition', function() {
         	var saveCursorPosition = function($event) {
         		var element = $event.target;
         		$scope.lastCursor.position = element.selectionStart;
-            $scope.lastCursor.cardSide = element.selectionStart;
+            $scope.lastCursor.cardSide = attrs.saveCursorPosition;
         		util.log("Last Cursor Position: "+$scope.lastCursor.position);
         	}
-            elem.bind('keyup', saveCursorPosition);
-            elem.bind('mouseup', saveCursorPosition);
+          elem.bind('keyup', saveCursorPosition);
+          elem.bind('mouseup', saveCursorPosition);
         }
     };
 });
