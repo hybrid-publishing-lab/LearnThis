@@ -49,7 +49,6 @@
 									<li><a href="/document/@document.id">Zur Übersicht</a></li>
 									<li data-ng-if="isPersisted()"><a href="/document/learn/@document.id" class="btnLern">Lernen</a></li>
 									<li data-ng-if="isPersisted()"><a data-ng-click="deleteDoc(@document.id)" class="btnClean">Löschen</a></li>
-									<li data-ng-if="isPersisted()"><a class="btnShare" data-toggle="modal" data-target="#shareModal">Teilen</a></li>
 								</ul>
 								
 								<p class="inline"><span>Vorname:</span> <input type="text" value="{{document.givenname}}" class="hidden-form-element" data-ng-model="document.givenname" data-ng-change="change()" /></p>
