@@ -1,0 +1,25 @@
+syntax: regexp
+^.settings$
+^.target$
+^.classpath$
+^.project$
+^eclipse$
+#^lib$
+^log$
+^logs$
+^modules$
+^precompiled$
+^project/project$
+^project/target$
+^target$
+^tmp$
+^test-result$
+^server.pid$
+^.*\.iml$
+^.*\.eml$
+^activator*.sbt$
+^conf/local\.conf$
+syntax: glob
+*.orig
+syntax: regexp
+^RUNNING_PID$

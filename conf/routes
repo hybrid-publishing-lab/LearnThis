@@ -1,0 +1,39 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page - we use the @controllers syntax here so that the router knows we are referring to a class. In turn it
+# will call on the GlobalSettings.getController method to resolve the actual controller instance.
+GET     /                           						@controllers.Application.index
+GET     /help                          						@controllers.Application.help
+GET     /imprint                       						@controllers.Application.imprint
+GET		/document/new										@controllers.Application.newDoc
+GET     /document/:id                 						@controllers.Application.findById(id: Long)
+GET		/document/:id/keywords								@controllers.Application.keywords(id: Long)
+GET     /document/edit/:id                 					@controllers.Application.edit(id: Long)
+GET     /document/learn/:id                 				@controllers.Application.learn(id: Long)
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               						controllers.Assets.at(path="/public", file)
+
+POST	/json/document/save									@controllers.DocumentController.saveDoc
+GET		/json/document/all/:page							@controllers.DocumentController.findAll(page: Integer)
+GET		/json/document/random/:count						@controllers.DocumentController.findRandom(count: Integer)
+GET		/json/document/:id									@controllers.DocumentController.findById(id: Long)
+POST	/json/document/checkpw/:id							@controllers.DocumentController.checkPassword(id: Long)
+POST	/json/document/changepw/:id							@controllers.DocumentController.changePassword(id: Long)
+POST	/json/document/resetpw/:id							@controllers.DocumentController.resetPassword(id: Long)
+POST	/json/document/delete/:id							@controllers.DocumentController.delete(id: Long)
+
+GET		/export/epub/document/:id							@controllers.ExportController.exportEpub(id: Long)
+GET		/export/html/document/:id							@controllers.ExportController.exportHtml(id: Long)
+GET		/export/pdf/document/:id							@controllers.ExportController.exportPdf(id: Long)
+
+POST	/json/document/:docId/card/:id/delete				@controllers.TextelementController.delete(docId: Long, id: Long)
+GET		/json/document/:id/headline/new/:index				@controllers.TextelementController.newHeadline(id: Long, index: Integer)
+POST	/json/document/:id/paragraph/new/:index				@controllers.TextelementController.newParagraph(id: Long, index: Integer)
+POST	/json/document/:id/multiplechoice/new/:index		@controllers.TextelementController.newMultipleChoice(id: Long, index: Integer)
+GET		/json/textelement/types								@controllers.TextelementController.getTypes
+
+GET     /import/form	             						@controllers.ImportController.form
+POST    /import/upload	             						@controllers.ImportController.upload
