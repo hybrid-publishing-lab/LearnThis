@@ -210,6 +210,7 @@ public class DocumentController extends Controller {
         doc.title = "Thema";
         doc.givenname = "Vorname";
         doc.surname = "Nachname";
+        doc.description = "";
         doc.createdAt = new Date();
         doc.changedAt = new Date();
         doc.password = "";

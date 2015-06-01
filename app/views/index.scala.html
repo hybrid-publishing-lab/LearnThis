@@ -2,7 +2,7 @@
 
 @_navi(null)
  
-<div class="container" data-ng-controller="DocumentListController" data-ng-init="init(true)">
+<div class="container" data-ng-controller="DocumentListController" data-ng-init="init(true)"  onload="myFunction()">
   	<div class="row previews">
 		<div class="col-xs-12 col-sm-6 col-md-3"  data-ng-repeat="document in documents">
 			<div class="thumbnail">
@@ -26,8 +26,9 @@
 	</div>
 	<div class="row fetchNextContainer" data-ng-if="!hasAll">
 		<div class="col-xs-4"></div>
-		<div class="col-xs-4 fetchNext">
-			<a class="ownBtn" data-ng-click="fetchNext()">weitere laden</a>
+		<div class="col-xs-4 fetchNext">			
+			<img src="@routes.Assets.at("img/icons/loader.gif")" data-ng-if="!stillloadmore"/>		
+			<a class="ownBtn" data-ng-click="fetchNext()" data-ng-if="stillloadmore">weitere laden</a>
 		</div>
 		<div class="col-xs-4"></div>
 		<div class="clearfix visible-xs-block"></div>

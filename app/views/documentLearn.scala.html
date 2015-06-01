@@ -2,13 +2,13 @@
 
 @_navi(null)
 
-<div class="container" data-ng-controller="DocumentLearnController"
+<div id="learnContainer" class="container" data-ng-controller="DocumentLearnController"
 	data-ng-init="init(@document.id)">
 	
 	
 	<div class="row">
 		<div class="col-xs-12">	
-		<h4>{{document.title}}</h4>
+		<h4 class="headlineLearn"><a href="/document/@document.id">{{document.title}}</a></h4>
 		</div>
 	
 	
@@ -18,7 +18,7 @@
 		<div class="flipper">
 			<div class="row learning" data-ng-class="{cornerRight: currentSide == 'front', cornerLeft: currentSide == 'back', bgCard: !showScore, card: !showScore,thumbnail: showScore}">
 				<div class="col-xs-2">
-					<div data-ng-if="currentPage > 0" data-ng-click="prevCard()" class="prev"><img src="/assets/img/icons/b_arrow_backward.png" width="100%"></div>
+					<div data-ng-if="currentPage > 0" data-ng-click="prevCard()" class="prev"><img src="/assets/img/icons/b_arrow_backward_circle.png"></div>
 				</div>
 				<div class="jumbotron col-xs-8">
 					<div data-ng-if="!showScore">
@@ -31,7 +31,7 @@
 										{{multipleChoice.text}}</label>
 									</li>
 								</ul>
-								<div data-ng-if="hasChoices(currentCard[currentSide])">
+								<div data-ng-if="hasChoices(currentCard[currentSide])"  style="margin-top: 26px;">
 									<div>
 										<div data-ng-if="currentCard[currentSide].solved && currentCard[currentSide].score > 0">
 											Super, alles richtig!
@@ -42,10 +42,9 @@
 										</div>
 									
 										<button type="button" class="btn btn-default" data-ng-if="!currentCard[currentSide].solved" data-ng-click="userSolvesMc()">Auflösen</button>
-										<button type="button" class="btn btn-default" data-ng-if="currentCard[currentSide].solved" data-ng-click="nextCard()">weiter</button>
 									</div>
 								</div>
-								<div data-ng-if="!hasChoices(currentCard[currentSide]) && pager[currentPage+1].cardIndex != currentIndex">
+								<div data-ng-if="!hasChoices(currentCard[currentSide]) && pager[currentPage+1].cardIndex != currentIndex" style="margin-top: 34px;">
 									<!-- if next entry in the pager is not of the same card -->
 									<div>
 										<button type="button" class="btn btn-default"  data-ng-click="userUnderstood(true)">Habe ich verstanden</button>
@@ -62,7 +61,7 @@
 					</div>
 				</div>
 				<div class="col-xs-2">
-					<div data-ng-if="!showScore" data-ng-click="nextCard()" class="next"><img src="/assets/img/icons/b_arrow_forward.png" width="100%"></div>
+					<div data-ng-if="!showScore" data-ng-click="nextCard()" class="next"><img src="/assets/img/icons/b_arrow_forward_circle.png"></div>
 				</div>
 			</div>
 			</div>
