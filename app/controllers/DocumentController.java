@@ -23,12 +23,10 @@ import org.springframework.data.domain.Pageable;
 import play.Logger;
 import play.data.Form;
 import play.libs.Json;
-import play.mvc.Content;
 import play.mvc.Controller;
 import play.mvc.Result;
 import util.JpaFixer;
 import util.MailUtil;
-import util.Mailer;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.NullNode;
@@ -84,11 +82,15 @@ public class DocumentController extends Controller {
                 c.sort = i;
                 JsonNode textelement = card.get("front");
                 if (textelement != null && !(textelement instanceof NullNode)) {
-                    c.front = buildTextelement(textelement);
+                        c.front = buildTextelement(textelement);
                 }
                 textelement = card.get("back");
                 if (textelement != null && !(textelement instanceof NullNode)) {
-                    c.back = buildTextelement(textelement);
+                    try {
+                        c.back = buildTextelement(textelement);
+                    } catch (Exception e) {
+                        Logger.error("Error while building Textelement for back", e);
+                    }
                 }
                 doc.cards.add(c);
                 c.updateKeywords();
@@ -101,21 +103,25 @@ public class DocumentController extends Controller {
     }
     
     private Textelement buildTextelement(JsonNode textelement) {
-
-        Form<MultipleChoice> mcForm = Form.form(MultipleChoice.class);
-        Form<Headline> headlineForm = Form.form(Headline.class);
-        Form<Paragraph> paraForm = Form.form(Paragraph.class);
-        
-        if ("MultipleChoice".equals(textelement.get("type").asText())) {
-            Logger.info("saving MultipleChoice", textelement.toString());
-            return mcForm.bind(textelement).get();
-        } else if("Headline".equals(textelement.get("type").asText())) {
-            Logger.info("saving Headline", textelement.toString());
-            return headlineForm.bind(textelement).get();
-        } else {
-            Logger.info("saving Para ", textelement.toString());
-            return paraForm.bind(textelement).get();
+        try {
+            Form<MultipleChoice> mcForm = Form.form(MultipleChoice.class);
+            Form<Headline> headlineForm = Form.form(Headline.class);
+            Form<Paragraph> paraForm = Form.form(Paragraph.class);
+            
+            if ("Paragraph".equalsIgnoreCase(textelement.get("type").asText())) {
+                Logger.info("saving Para ", textelement.toString());
+                return paraForm.bind(textelement).get();
+            } else if("Headline".equals(textelement.get("type").asText())) {
+                Logger.info("saving Headline", textelement.toString());
+                return headlineForm.bind(textelement).get();
+            } else {
+                Logger.info("saving MultipleChoice", textelement.toString());
+                return mcForm.bind(textelement).get();
+            }
+        } catch (Exception e) {
+            Logger.error("Error while building Textelement", e);
         }
+        return new MultipleChoice();
     }
 
     public Result changePassword(Long id) {
@@ -207,7 +213,6 @@ public class DocumentController extends Controller {
         doc.createdAt = new Date();
         doc.changedAt = new Date();
         doc.password = "";
-        documentRepository.save(doc);
 
         // add paragraph
         MultipleChoice mc = new MultipleChoice();

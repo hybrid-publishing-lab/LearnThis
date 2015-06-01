@@ -56,6 +56,7 @@ lhpApp.directive('saveCursorPosition', function() {
         	var saveCursorPosition = function($event) {
         		var element = $event.target;
         		$scope.lastCursor.position = element.selectionStart;
+            $scope.lastCursor.cardSide = element.selectionStart;
         		util.log("Last Cursor Position: "+$scope.lastCursor.position);
         	}
             elem.bind('keyup', saveCursorPosition);

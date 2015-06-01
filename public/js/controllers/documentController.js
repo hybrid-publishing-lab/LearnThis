@@ -1,5 +1,5 @@
-lhpControllers.controller('DocumentController', [ '$scope', '$http', '$location', 'SaveService', DocumentController ]);
-function DocumentController($scope, $http, $location, saveService) {
+lhpControllers.controller('DocumentController', [ '$scope', '$http', '$location', 'SaveService', 'LocalStorageService', DocumentController ]);
+function DocumentController($scope, $http, $location, saveService, localStorageService) {
 
 	$scope.init = function(docId) {
 		if (!$scope.isInit && docId) {
@@ -25,16 +25,35 @@ function DocumentController($scope, $http, $location, saveService) {
 	}
 	
 	$scope.deleteDoc = function(id) {
-	    var pw = prompt("Zum löschen wird das Passwort benötigt.", "");
-	    $http.post('/json/document/delete/'+id, {pw:pw}).
-	    success(function(data, status, headers, config) {
-	    	window.location.replace("/");
-	    }).
-	    error(function(data, status, headers, config) {
-	    	alert("Passwort inkorrekt.");
-	    });
+    // get doc from localStorage to check password
+    var savedResult = localStorageService.loadDoc($scope.document.id);
+    var password = '';
+    if (savedResult.password) {
+      password = savedResult.password;
+    }
+
+    // check if password matches
+    $http.post('/json/document/checkpw/' + id, {pw:password})
+      .success(function (data, status, headers, config) {
+        // TODO JD Abfrage ob wirklich gelöscht werden soll
+        if (confirmation("")) {
+          $scope.deleteDocument(password);
+        }
+      }).error(function (data, status, headers, config) {
+        password = prompt("Zum Löschen wird das Passwort benötigt.", "");
+        $scope.deleteDocument(password);
+      });
 	}
 		
+  $scope.deleteDocument = function(pw) {
+    $http.post('/json/document/delete/'+id, {pw:pw}).
+    success(function(data, status, headers, config) {
+      window.location.replace("/");
+    }).
+    error(function(data, status, headers, config) {
+      alert("Passwort inkorrekt.");
+    });
+  }
 	
 	$scope.fbshare = function(){ 
 	  var url =  $location.absUrl();

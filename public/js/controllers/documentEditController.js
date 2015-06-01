@@ -41,6 +41,7 @@ function DocumentEditController ($scope, $http, $document, $timeout, saveService
       $scope.isInit = true;
       $http.get('/json/document/' + docId).success(function (data) {
         $scope.document = data;
+        // get doc from localStorage to check password
         var savedResult = localStorageService.loadDoc($scope.document.id);
         if (savedResult.password) {
           $scope.pwForm = savedResult.password;
@@ -169,8 +170,8 @@ function DocumentEditController ($scope, $http, $document, $timeout, saveService
   }
 
   $scope.createMultipleChoice = function (index, docId, text) {
-    $http.post('/json/document/' + docId + '/multiplechoice/new/' + index,
-        JSON.stringify(text)).success(function (data) {
+    $http.post('/json/document/' + docId + '/multiplechoice/new/' + index, JSON.stringify(text))
+        .success(function (data) {
       $scope.document.cards.splice(index, 0, data);
     });
   }
@@ -277,7 +278,7 @@ function DocumentEditController ($scope, $http, $document, $timeout, saveService
       var firstPart = cards[index].front.text.substring(0, cursorPosition);
       var secondPart = cards[index].front.text.substring(cursorPosition);
       cards[index].front.text = firstPart;
-      $scope.createParagraph(index + 1, doc.id, secondPart);
+      $scope.createMultipleChoice(index + 1, doc.id, secondPart);
       $scope.change();
       $scope.$broadcast(EVENT_TRIGGER_AUTOGROW, 1);
     }
