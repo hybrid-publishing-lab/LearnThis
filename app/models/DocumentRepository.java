@@ -51,4 +51,8 @@ public interface DocumentRepository extends CrudRepository<Document, Long> {
     @Override
     @Caching(evict = { @CacheEvict(value="documents", allEntries=true), @CacheEvict(value="document", keyGenerator="documentKeyGenerator") })
     void delete(Document savedDoc);
+
+    @Override
+    @Caching(evict = { @CacheEvict(value="documents", allEntries=true), @CacheEvict(value="document") })
+    void delete(Long id);
 }
