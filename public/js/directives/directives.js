@@ -82,7 +82,8 @@ lhpApp.directive('wordcloud', function () {
 	            onHover: "&"
 	        },
 	    link: function postLink(scope, element, attrs) {
-			// Default Values
+	    
+	    // Default Values
 			var w             =   300;
 			var h            =   200;
 			var fontFamily        =   "Impact";
@@ -98,6 +99,10 @@ lhpApp.directive('wordcloud', function () {
 			if(angular.isDefined(attrs.text))         text            = attrs.text;
 			
 			var cloudFactory = function(text){
+
+	      w = $(element).closest('.svgBg').width();
+	      h = $(element).closest('.svgBg').height();
+	      
 				var WORD_MAXLENGTH = 30;
 				var stopWords = /^(aber|als|am|an|auch|auf|aus|bei|bin|bis|bist|da|dadurch|daher|darum|das|daß|dass|dein|deine|dem|den|der|des|dessen|deshalb|die|dies|dieser|dieses|doch|dort|du|durch|ein|eine|einem|einen|einer|eines|er|es|euer|eure|für|hatte|hatten|hattest|hattet|hier	hinter|ich|ihr|ihre|im|in|ist|ja|jede|jedem|jeden|jeder|jedes|jener|jenes|jetzt|kann|kannst|können|könnt|machen|mein|meine|mit|muß|mußt|musst|müssen|müßt|nach|nachdem|nein|nicht|nun|oder|seid|sein|seine|sich|sie|sind|soll|sollen|sollst|sollt|sonst|soweit|sowie|und|unser	unsere|unter|vom|von|vor|wann|warum|was|weiter|weitere|wenn|wer|werde|werden|werdet|weshalb|wie|wieder|wieso|wir|wird|wirst|wo|woher|wohin|zu|zum|zur|über|i|me|my|myself|we|us|our|ours|ourselves|you|your|yours|yourself|yourselves|he|him|his|himself|she|her|hers|herself|it|its|itself|they|them|their|theirs|themselves|what|which|who|whom|whose|this|that|these|those|am|is|are|was|were|be|been|being|have|has|had|having|do|does|did|doing|will|would|should|can|could|ought|i'm|you're|he's|she's|it's|we're|they're|i've|you've|we've|they've|i'd|you'd|he'd|she'd|we'd|they'd|i'll|you'll|he'll|she'll|we'll|they'll|isn't|aren't|wasn't|weren't|hasn't|haven't|hadn't|doesn't|don't|didn't|won't|wouldn't|shan't|shouldn't|can't|cannot|couldn't|mustn't|let's|that's|who's|what's|here's|there's|when's|where's|why's|how's|a|an|the|and|but|if|or|because|as|until|while|of|at|by|for|with|about|against|between|into|through|during|before|after|above|below|to|from|up|upon|down|in|out|on|off|over|under|again|further|then|once|here|there|when|where|why|how|all|any|both|each|few|more|most|other|some|such|no|nor|not|only|own|same|so|than|too|very|say|says|said|shall)$/;
 				var punctuation = new RegExp("[" + unicodePunctuationRe + "]", "g");
