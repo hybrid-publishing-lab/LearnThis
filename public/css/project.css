@@ -6,9 +6,23 @@ body {
     margin-bottom: 50px;
 }
 
+body.lernContainer {
+	    margin-top: 0px;
+    margin-bottom: 0px;
+}	
+
+input[type=checkbox],
+label,
 a {
 	cursor: pointer;
 }
+
+.thumbnail div.textBg p.inline span.error{
+	color: #a94442;
+	font-style:italic;
+	font-size:13px;	
+}
+
 /*** FOOTER ***/
 .footer {
     background-color: #ffffff;
@@ -35,7 +49,7 @@ footer .navbar-nav{
 
 
 footer .navbar-nav > li > a{
-	padding: 10px 15px;
+	padding: 10px 0px 10px 30px;
 }
 
 footer .nav > li > a:hover,
@@ -50,7 +64,9 @@ footer .nav > li > a:focus {
 
 /*** Navigation ***/
 
-
+.navbar-brand{
+	font-weight: 700;
+}
 
 .navbar-default{
 	background-color: #fff;
@@ -68,7 +84,7 @@ footer .nav > li > a:focus {
 	    font-size: 14px;
 	    font-weight: normal;
 	    line-height: 1.42857;
-	    margin-top: 10px;
+	    margin-top: 8px;
 	    margin-right: 10px;
 	    padding: 6px 12px;
 	    text-align: center;
@@ -126,13 +142,17 @@ a.ownBtn {
   background-color: #e7e7e7;
 }
 
+.cardEdit ul.subNavi{
+	margin: 5px 0 10px;
+}
+
 ul.subNavi{
 	border-top: 1px solid #dddddd;	
-	margin: 5px 0 4px;
+	margin: 5px 0 0;
 }
 
 ul.subNavi li{
-	padding-top:4px;
+	padding:10px 15px 0 0 ;
 }
 
 /*** Übersicht ***/
@@ -151,7 +171,7 @@ a.extra{
 }
 
 .thumbnail div.svgBg  {
-   background-color: #f8f8f8;
+   background-color: #ededed;
    width: auto;
    overflow: hidden;
    position: relative;	
@@ -172,10 +192,14 @@ a.extra{
    width: 100%;
 }
 
-.thumbnail div.textBg div:nth-child(1)  {
-   float:left;
+.thumbnail div.textBg h1 {
+   margin-top: 10px;
 }
 
+.thumbnail div.textBg p.inline span{
+	color: #777777;
+	font-style:italic;
+}
 
 /*** Karte ***/
 .cardContent .thumbnail{
@@ -257,7 +281,7 @@ button.btnCombine.bottom {
 
 
 .allCard h3{
-	margin-top: 10px;
+	margin-top: 5px;
 }
 
 
@@ -284,6 +308,20 @@ button.btnCombine.bottom {
 }
 
 /*** Edit ***/
+
+h1.headlineEdit{
+	margin-bottom: 0;
+}
+.cardEdit .textBg .subNavi{
+	padding-bottom: 10px;
+	border-bottom: 1px solid #dddddd;	
+	margin: 5px 0 10px;
+}
+
+.cardEdit .textBg ul.subNavi li:first-child {
+	padding-left: 13px;
+}
+
 .cardEdit .thumbnail{
 	padding:  4px 10px;
 }
@@ -336,6 +374,9 @@ a.filter:hover{
 }
 
 /*** learnCard ***/
+
+
+
 .row.discription div{
 	text-align: center;
 }
@@ -408,9 +449,15 @@ button.btnChange{
     width: 20px;
     z-index: 10;
     margin-left: 10px;
+    margin-top: 5px;
 }
 
 @media (max-width: 767px) {	
+	
+	.nav li.right {
+		text-align: center;
+	}
+	
 	
 	.textBg .cardNr {
 		display: block;
@@ -447,12 +494,19 @@ button.btnChange{
 		top: 40%;
 	}
 	
+	.prev img,
+	.next img{
+		width:75%;
+	}
+	
 	.textFooter div:nth-child(1) {
 	    padding-top: 0px;
 	}
 	
 	footer .navbar-right{
 		float: right;
+		width: 40%;
+		min-width:140px; 
 	}
 	
 	footer .navbar-nav > li{
@@ -460,14 +514,16 @@ button.btnChange{
 	}
 	
 	footer .navbar-nav > li > a{
-		padding: 0px 15px;
+		padding: 0px 15px 0 0;
 	}
 
 }
 
 @media (min-width: 768px) {	
+
 	.nav li.right a{
 		color: #428bca;
+		margin-left: 20px;
 	}
 
 	.nav li.right a:hover{
@@ -492,6 +548,15 @@ button.btnChange{
 		position: absolute;
 		top: 40%;
 	}
+	
+	.prev img,
+	.next img{
+		width:40%;
+	}
+	
+	.thumbnail div.textBg p.inline {
+  		display: inline;
+	}
 }
 
 
@@ -507,6 +572,10 @@ button.btnChange{
 	right: 0;
 	top: 0;
 	width: 0;
+}
+
+.learning.card.cornerRight:before {
+		border-width: 0 75px 75px 0;
 }
 
 .learnCard .card.cornerRight:before {
@@ -528,16 +597,58 @@ button.btnChange{
 	width: 0;
 }
 
+.learning.card.cornerLeft:before {
+	border-width: 0px 0px 75px 75px;
+}
+
 .learnCard .card.cornerLeft:before {
 	background-color: #ffffff;
 	border-color: #ffffff #ffffa5 #ffffa5 #ffffff;
 }
 
+/* .bgCard { */
+/* 	background: -webkit-repeating-linear-gradient( 180deg, #FFFFA5 1.5rem, #FFFFA5 3.3rem, #FFFFA5 3.3rem, #D3D37B 3.5rem ); */
+/* 	background: -moz-repeating-linear-gradient( 180deg, #FFFFA5 1.5rem, #FFFFA5 3.3rem, #FFFFA5 3.3rem, #D3D37B 3.5rem ); */
+/* 	background: repeating-linear-gradient( 180deg, #FFFFA5 1.5rem, #FFFFA5 3.3rem, #FFFFA5 3.3rem, #D3D37B 3.5rem ); */
+/* 	    padding: 0; */
+/* } */
+
 .bgCard {
-	background: -webkit-repeating-linear-gradient( 180deg, #FFFFA5 1.5rem, #FFFFA5 3.3rem, #FFFFA5 3.3rem, #D3D37B 3.5rem );
-	background: -moz-repeating-linear-gradient( 180deg, #FFFFA5 1.5rem, #FFFFA5 3.3rem, #FFFFA5 3.3rem, #D3D37B 3.5rem );
-	background: repeating-linear-gradient( 180deg, #FFFFA5 1.5rem, #FFFFA5 3.3rem, #FFFFA5 3.3rem, #D3D37B 3.5rem );
-	    padding: 0;
+	background: url("../img/bgCard-kl.png") repeat scroll left top transparent;
+	line-height: 24px;
+}
+
+.bgCard textarea {
+	line-height: 24px;
+}
+
+h4.headlineLearn{
+	margin-bottom:20px;
+}
+
+
+.learning.bgCard {
+	background: url("../img/bgCard.png") repeat scroll left top transparent;
+
+}
+
+.learning .jumbotron{
+	line-height: 36px;
+	font-size: 22px;
+	padding-top: 37px;
+}
+
+.learning .jumbotron p {
+	line-height: 36px;
+}
+
+.learning .jumbotron label {
+	font-weight: normal;
+	margin-bottom: 0px;
+}
+
+.learning .jumbotron ul {
+	margin-top: -8px;
 }
 
 .card {	
@@ -553,7 +664,7 @@ button.btnChange{
 }
 
 .learnCard .card {
-	padding: 10px 30px;
+	padding: 25px 35px 23px
 }
 
 
@@ -577,15 +688,16 @@ button.btnChange{
 .prev{
     cursor: pointer;
     position: absolute;
-    left:0;
-    top:20%;
+    left:5%;
+    top:30%;
 }
 
 .next{
     cursor: pointer;
     position: absolute;
-    right:0;
-    top:20%;
+    right:5%;
+    text-align: right;
+    top:30%;
 }
 
 .jumbotron {
@@ -608,12 +720,12 @@ button.btnChange{
 
 .exportLink{
 	float:left;
-	margin: 5px 0;
+	margin: 10px 0 5px;
 }
 
 #exportNavi{
 	float:right;
-	padding-top:10px;
+	padding-top:14px;
 }
 
 

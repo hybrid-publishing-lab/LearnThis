@@ -7,12 +7,23 @@ function DocumentListController($scope, $http, saveService){
 	$scope.page = 0;
 	$scope.hasAll = false;
 	
+	$scope.stillloadmore = false;
+	
+	  
 	$scope.init = function(fetchAll){
 		if (!$scope.isInit) {
 			$scope.isInit = true;
 			$scope.fetchData(fetchAll);
 		}
 	}
+	
+	$scope.load = function(){
+		$scope.stillloadmore = true;
+		console.log("stillloadmore: " + $scope.stillloadmore);
+	}
+	
+	window.onload = $scope.load;
+	
 	
 	$scope.fetchData = function(fetchAll) {
 	  var url = '/json/document/random/5';
