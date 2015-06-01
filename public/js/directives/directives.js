@@ -9,7 +9,7 @@ lhpApp.directive('ngAutoExpand', ['$timeout', function($timeout) {
         restrict: 'A',
         link: function( $scope, elem, attrs) {
             var resize = function(element) {
-              $(element).height(0);
+//              $(element).height(0);
               var height = $(element)[0].scrollHeight;
 
               // 8 is for the padding
