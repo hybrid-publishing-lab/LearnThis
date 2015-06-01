@@ -20,7 +20,7 @@
 						<img src="@routes.Assets.at("img/icons/loader.gif")"/>
 					</div>
 					<div data-ng-if="!stillLoading">
-						<h4>Zum bearbeiten wird das Password benötigt.</h4>
+						<h4>Zum Bearbeiten wird das Password benötigt.</h4>
 						<form data-ng-submit="submitPw()">
 							<input type="text" data-ng-model="pwForm.pw">
 							<input type="submit" value="Submit">
@@ -52,7 +52,7 @@
 									<li data-ng-if="isPersisted()"><a class="btnShare" data-toggle="modal" data-target="#shareModal">Teilen</a></li>
 								</ul>
 								
-								<p class="inline"><span>{{isPersisted()}}Vorname:</span> <input type="text" value="{{document.givenname}}" class="hidden-form-element" data-ng-model="document.givenname" data-ng-change="change()" /></p>
+								<p class="inline"><span>Vorname:</span> <input type="text" value="{{document.givenname}}" class="hidden-form-element" data-ng-model="document.givenname" data-ng-change="change()" /></p>
 								<p class="inline"><span>Nachname:</span> <input type="text" value="{{document.surname}}" class="hidden-form-element" data-ng-model="document.surname" data-ng-change="change()" /></p>
 								<p class="inline"><span>Email:</span> <input type="email" value="{{document.email}}" class="hidden-form-element" data-ng-model="document.email" name="docEmail" id="docEmail" data-ng-change="$parent.formValid = !docForm.docEmail.$error.email; change();" />
 									<span class="error" ng-show="docForm.docEmail.$error.email">Dies ist keine valide E-Mail.</span>
