@@ -16,6 +16,9 @@ public class JpaFixer {
      * @param doc
      */
     public static void removeDuplicatesWorkaround(Document doc){
+        if (doc == null) {
+            return;
+        }
         List<Card> cards = doc.cards;
         Map<Long, Card> uniqueElements = new HashMap<Long, Card>();
         for(int i = 0 ; i < cards.size() ; i++){

@@ -40,6 +40,7 @@
     <body>
         @content
         
+        
         <footer class="footer">
 	      <div class="container">
 			<div class="textFooter">
@@ -50,7 +51,9 @@
 		      	<ul class="nav navbar-nav navbar-right">
 					<li><a href="/imprint">Impressum/Kontakt</a></li>
 					<li><a href="https://github.com/hybrid-publishing-lab/HybridDocs"target="_blank">Quellcode</a></li>
-					<li><a href="">Feedback</a></li>
+					<li>
+						@_feedback()
+					</li>
 				</ul>	
 			</div>	
 	      </div>
