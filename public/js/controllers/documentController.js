@@ -52,10 +52,11 @@ function DocumentController($scope, $http, $location, saveService, localStorageS
 		 var text = "Kartenset: " + $scope.document.title + "&body=" + $location.absUrl();
 		var sharer = "mailto:?subject="+text; 
 		document.location.href=sharer; 
-
-
 	}
 	
+	$scope.absoluteUrl = function() {
+	  return $location.absUrl();
+	}
 
 
 }

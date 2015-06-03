@@ -120,10 +120,11 @@
 		</div>
 		
 		<div ng-model="document.cards" 
-				ui-sortable="sortableOptions">
+				as-sortable="sortableOptions">
 			<div class="text-element"
 				data-ng-class="{'edit-mode-active': isActive(card)}"
-				data-ng-repeat="card in document.cards | filter:filterExpression | nonEmptyIntersection:search.hashtags | orderBy:sort">
+				data-ng-repeat="card in document.cards | filter:filterExpression | nonEmptyIntersection:search.hashtags | orderBy:sort"
+				as-sortable-item>
 				
 				<!-- Merge -->
 				<div class="row show-on-focus combineContent" data-ng-if="$index > 0">
@@ -163,7 +164,7 @@
 				<div class="row learnCardContainer">
 					<div class="col-xs-12">	
 						<div class="thumbnail">
-							<div class="circleLeft btnMove sort-handle"  title="Karte verschieben"></div>
+							<div class="circleLeft btnMove sort-handle" as-sortable-item-handle title="Karte verschieben"></div>
 							<div data-ng-click="deleteCard(card, $index)" class="circleRight btnDelete" title="Karte löschen"></div>
 							
 							
