@@ -302,12 +302,13 @@ function DocumentEditController ($scope, $http, $document, $timeout, saveService
   }
 
   $scope.sortableOptions = {
-    handle : '.sort-handle',
-    placeholder : "ui-state-highlight",
-    cursor : "move",
-    update : function (e, ui) {
-      $scope.change();
-    }
+      orderChanged: function(event) {$scope.change();}
+//    handle : '.sort-handle',
+//    placeholder : "ui-state-highlight",
+//    cursor : "move",
+//    update : function (e, ui) {
+//      $scope.change();
+//    }
   };
 
   $scope.filterNurRueckseite = function () {
