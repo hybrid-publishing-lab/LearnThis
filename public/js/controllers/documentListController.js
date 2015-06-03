@@ -7,7 +7,7 @@ function DocumentListController($scope, $http, saveService){
 	$scope.page = 0;
 	$scope.hasAll = false;
 	
-	$scope.stillloadmore = false;
+	$scope.stillLoading = true;
 	
 	  
 	$scope.init = function(fetchAll){
@@ -17,15 +17,9 @@ function DocumentListController($scope, $http, saveService){
 		}
 	}
 	
-	$scope.load = function(){
-		$scope.stillloadmore = true;
-		console.log("stillloadmore: " + $scope.stillloadmore);
-	}
-	
-	window.onload = $scope.load;
-	
 	
 	$scope.fetchData = function(fetchAll) {
+	  $scope.stillLoading = true;
 	  var url = '/json/document/random/5';
 	  if (fetchAll) {
 	    url = '/json/document/all/'+$scope.page;
@@ -53,6 +47,7 @@ function DocumentListController($scope, $http, saveService){
       } else {
         $scope.hasAll = true;
       }
+	  $scope.stillLoading = false;
 	  });
 	}
 
