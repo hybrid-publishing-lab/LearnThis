@@ -1,4 +1,4 @@
-play-spring-data-jpa
+LearnThis
 ====================
 
-A sample application demonstrating play-java using Spring Data JPA along with Spring Core.
+Digital FlashCard Enviroment
